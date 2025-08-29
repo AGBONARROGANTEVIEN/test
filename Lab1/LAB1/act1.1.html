@@ -7,54 +7,26 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: hsl(0, 80%, 35%);
-            overflow: hidden;
+            background-color: #f0f0f0;
         }
-        .message {
-            position: absolute;
-            font-size: 2em;
-            font-weight: bold; /* Make the font bold */
-            color: indigo; /* Set the color */
-            animation: floatText 10s infinite linear;
+        .container {
+            text-align: center;
         }
-        .message:nth-child(1) {
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-        .message:nth-child(2) {
-            top: 50%;
-            left: 30%;
-            animation-delay: 2s;
-        }
-        .message:nth-child(3) {
-            top: 70%;
-            left: 50%;
-            animation-delay: 4s;
-        }
-        @keyframes floatText {
-            0% {
-                transform: translate(0, 0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translate(100px, -50px);
-                opacity: 0;
-            }
+        h1 {
+            color: #333;
         }
     </style>
 </head>
 <body>
-    <div class="message">Hello!</div>
-    <div class="message">Welcome to my website</div>
-    <div class="message">Arrogante Princess</div>
+    <div class="container">
+        <h1>Hello!</h1>
+        <h1>Welcome to my website</h1>
+        <h1>Arrogante Princess</h1>
+    </div>
 </body>
 </html>
