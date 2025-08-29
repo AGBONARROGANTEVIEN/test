@@ -10,15 +10,15 @@
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
-            overflow: hidden; /* Hide scrollbars */
+            overflow: hidden;
         }
         .message {
             position: absolute;
             font-size: 2em;
-            color: #333;
+            font-weight: bold; /* Make the font bold */
+            color: indigo; /* Set the color */
             animation: floatText 10s infinite linear;
         }
-        /*specific positions for each message*/
         .message:nth-child(1) {
             top: 20%;
             left: 10%;
