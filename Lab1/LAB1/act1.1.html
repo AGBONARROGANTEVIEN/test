@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome My Website</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* para hindi lumampas sa screen */
+        }
+
+        .floating-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            font-weight: bold;
+            color: #2c3e50;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) translateY(0); }
+            50% { transform: translate(-50%, -50%) translateY(-30px); }
+            100% { transform: translate(-50%, -50%) translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-text">WELCOME MY WEBSITE</div>
+</body>
+</html>
