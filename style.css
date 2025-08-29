@@ -4,9 +4,9 @@ body {
 }
 
 header {
-  background: hsl(122, 100%, 40%);
-  color: white;
-  padding: 1px;
+  background: hsl(342, 100%, 40%);
+  color: hsl(0, 75%, 14%);
+  padding: 2px;
   text-align: center;
 }
 
@@ -45,12 +45,12 @@ header p{
 .sidebar li ul {
   margin-left: 15px;
   padding-left: 0px;
-  border-left: 2px solid #ddd;
+  border-left: 2px solid hsl(0, 87%, 41%);
 }
 
 .sidebar a {
   text-decoration: none;
-  color: #0077cc;
+  color: lab(35.16% 44.44 -67.48);
 }
 
 .sidebar a:hover {
@@ -75,11 +75,11 @@ iframe {
 }
 
 .custom-link:visited {
-    color: #ffffff; /* Same color for visited links */
+    color: hsl(140, 79%, 43%); /* Same color for visited links */
 }
 
 .custom-link:hover,
 .custom-link:active {
-    color: #06559e; /* Same color for hover and active states */
+    color: hwb(264 2% 38%); /* Same color for hover and active states */
     text-decoration: none; /* Ensure no underline on hover */
 }
