@@ -15,7 +15,7 @@
       color: #333;
     }
     header {
-      background: #c8102e; /* Japan red */
+      background: #c8102e;
       color: white;
       padding: 40px 20px;
       text-align: center;
@@ -82,15 +82,15 @@
   </style>
 
   <script>
-    // Simple Currency Conversion (Static Rate Example)
+    // Currency conversion (static rates)
     function convertPrices() {
-      const yenToPeso = 0.38; // 1 JPY ~ 0.38 PHP
-      const yenToCny = 0.048; // 1 JPY ~ 0.048 CNY
+      const yenToPeso = 0.38; // 1 JPY ≈ 0.38 PHP
+      const yenToCny = 0.048; // 1 JPY ≈ 0.048 CNY
       document.querySelectorAll(".price").forEach(cell => {
         let yen = parseFloat(cell.dataset.yen);
         let php = (yen * yenToPeso).toFixed(2);
         let cny = (yen * yenToCny).toFixed(2);
-        cell.innerHTML = `¥${yen} <br> ₱${php} <br> ¥CNY ${cny}`;
+        cell.innerHTML = `¥${yen}<br>₱${php}<br>¥CNY ${cny}`;
       });
     }
     window.onload = convertPrices;
@@ -115,30 +115,40 @@
     <h2>Major Cities in Japan</h2>
     <ul>
       <li><b>Tokyo</b> – The capital city, famous for Shibuya Crossing and Tokyo Tower.</li>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/76/Tokyo_Tower_and_around_Skyscrapers.jpg" alt="Tokyo">
+
       <li><b>Kyoto</b> – Home of traditional temples, geisha districts, and cherry blossoms.</li>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Kiyomizu-dera_in_Kyoto_20101127.jpg" alt="Kyoto">
+
       <li><b>Osaka</b> – Food capital of Japan, known for takoyaki and Osaka Castle.</li>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Osaka_Castle_02bs3200.jpg" alt="Osaka">
+
       <li><b>Hokkaido</b> – Winter paradise, skiing, and snow festivals.</li>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/47/Otaru_Canal_in_winter.jpg" alt="Hokkaido">
+
       <li><b>Hiroshima</b> – Historic city with Peace Memorial Park.</li>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/67/Hiroshima_Peace_Memorial_Park_13.jpg" alt="Hiroshima">
+
       <li><b>Nara</b> – City of friendly deer and the giant Buddha.</li>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/Nara_Park_Deer.jpg" alt="Nara">
     </ul>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Tokyo_Montage_2015.jpg" alt="Japan Cities">
   </section>
 
   <!-- ABOUT -->
   <section id="about">
     <h2>About Japan</h2>
     <p>Japan is an island nation in East Asia, blending modern technology with deep traditions. Known as the "Land of the Rising Sun", it is famous for sushi, cherry blossoms, bullet trains, and anime culture.</p>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Kyoto_-_Kiyomizu-dera_temple02.jpg" alt="Kyoto Temple">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Cherry_blossoms_in_Tokyo.jpg" alt="About Japan">
   </section>
 
   <!-- STORY -->
   <section id="story">
     <h2>My Travel Story</h2>
-    <p>My Japan vlog started in <b>Tokyo</b>, where I crossed the busy Shibuya intersection and ate ramen at Ichiran.  
-    Then I visited <b>Kyoto</b>, wore a kimono, and strolled through bamboo forests.  
-    In <b>Osaka</b>, I tried takoyaki and explored Universal Studios Japan.  
-    The highlight was seeing <b>Mt. Fuji</b> and enjoying an onsen (hot spring) in Hakone.</p>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Mount_Fuji_from_Hotel_Mt_Fuji_1994-11-29.jpg" alt="Mount Fuji">
+    <p>I started my vlog in <b>Tokyo</b>, crossing Shibuya and tasting authentic ramen.  
+       Then I went to <b>Kyoto</b> to wear a kimono and walk through bamboo forests.  
+       In <b>Osaka</b>, I enjoyed takoyaki and Universal Studios.  
+       Finally, I visited <b>Mt. Fuji</b> and relaxed in a hot spring (onsen).</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Mount_Fuji_from_Lake_Kawaguchi.jpg" alt="Mount Fuji">
   </section>
 
   <!-- CONTACT -->
