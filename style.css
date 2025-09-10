@@ -5,14 +5,14 @@ body {
 
 header {
   background: hsl(250, 76%, 29%);
-  color: hsl(256, 55%, 37%);
+  color: hsl(69, 69%, 46%);
   padding: 5px;
   text-align: center;
 }
 
 header p{
   font-size: 0.9em;
-  color: #c01cbd;  
+  color: #c7bac7;  
 }
 
 .container {
@@ -80,6 +80,6 @@ iframe {
 
 .custom-link:hover,
 .custom-link:active {
-    color: hwb(354 4% 57%); /* Same color for hover and active states */
+    color: hwb(234 9% 21%); /* Same color for hover and active states */
     text-decoration: none; /* Ensure no underline on hover */
 }
