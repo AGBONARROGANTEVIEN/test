@@ -1,35 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bean & Brew Café</title>
-    <link rel="stylesheet" href="wireframe-style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Princess Café</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f6f0;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      background: #6b4226;
+      color: white;
+      padding: 30px 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 42px;
+    }
+
+    header p {
+      font-style: italic;
+      margin-top: 8px;
+      font-size: 16px;
+    }
+
+    nav {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      color: #6b4226;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #a66d4f;
+    }
+
+    /* Box style for sections */
+    .box {
+      width: 46%;
+      background: white;
+      padding: 20px;
+      margin: 2%;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      float: left;
+      box-sizing: border-box;
+    }
+
+    .box h2 {
+      color: #6b4226;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      padding: 8px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .price {
+      float: right;
+      font-weight: bold;
+      color: #6b4226;
+    }
+
+    footer {
+      clear: both;
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+      font-size: 14px;
+      background: #6b4226;
+      color: white;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Princess Cafe</h1>
-            <p>"A Cup of Sunshine in Every Brew."These taglines can help your mini cafe stand out and attract customers</p>
-        </header>
+  <div class="container">
 
-        <section class="our-story">
-            <h2>Our Story</h2>
-            <p>Taste the Timelessness: Where History and Freshness Blend</p>
+    <header>
+      <h1>Princess Café</h1>
+      <p>"A Cup of Sunshine in Every Brew."</p>
+    </header>
 
-        <section class="menu-preview">
-            <h2>Our Menu Preview</h2>
-            <ul>
-                <li>Espresso</li>
-                <li>Iced Latte</li>
-                <li>Caramel Macchiato</li>
-                <li>Grilled Panini</li>
-            </ul>
-        </section>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#menu">Menu</a>
+      <a href="#contact">Contact</a>
+    </nav>
 
-        <footer>
-            <p>© 2025 Princess Café. All rights reserved.</p>
-        </footer>
-    </div>
+    <!-- Home / Story -->
+    <section id="home" class="box">
+      <h2>Our Story</h2>
+      <p>
+        Princess Café started as a small dream in 2024, bringing together coffee lovers from all walks of life. 
+        With every cup, we want to deliver comfort, joy, and inspiration. Our café is not just about drinks—it's about creating memories.
+      </p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="box">
+      <h2>About Us</h2>
+      <p>
+        Our mini café was founded with a simple mission: to brew happiness. 
+        From sourcing locally roasted beans to baking pastries fresh every morning, 
+        we focus on quality and heart in everything we do.
+      </p>
+      <p>
+        Whether you're here to study, chat with friends, or just take a break, 
+        Princess Café is your second home. 
+      </p>
+    </section>
+
+    <!-- Menu with Prices -->
+    <section id="menu" class="box">
+      <h2>Our Menu Preview</h2>
+      <ul>
+        <li>Espresso <span class="price">₱120 / ¥20</span></li>
+        <li>Iced Latte <span class="price">₱150 / ¥25</span></li>
+        <li>Caramel Macchiato <span class="price">₱180 / ¥30</span></li>
+        <li>Grilled Panini <span class="price">₱220 / ¥37</span></li>
+      </ul>
+      <p style="font-size: 14px; color: #666;">
+        *Prices shown in Philippine Peso with approximate conversion to Chinese Yuan.
+      </p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="box">
+      <h2>Contact & Emergencies</h2>
+      <p><strong>Café Hotline:</strong> +63 912 345 6789</p>
+      <p><strong>Email:</strong> princesscafe@gmail.com</p>
+      <br>
+      <h3>Nearby Essentials</h3>
+      <ul>
+        <li>St. Lukes Hospital  2km away</li>
+        <li>Grand Hotel Manila ₱3500 / ¥600 per night</li>
+        <li>Police Station  1km away</li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>© 2025 Princess Café. All rights reserved.</p>
+    </footer>
+
+  </div>
 </body>
 </html>
+
