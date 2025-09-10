@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">  
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Styled Website</title>
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #f6f0e4, #e3d7c9); 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    /* ===== Header & Navbar ===== */
+    header {
+      background-color: #6b4226;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 5px solid #c09228;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      background: #c09228;
+      padding: 12px 0;
+      text-align: center;
+      border-bottom: 3px solid #6b4226;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      margin: 0 20px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #6b4226;
+    }
+
+    /* ===== Content ===== */
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    section {
+      margin-bottom: 50px;
+    }
+
+    h2 {
+      color: #6b4226; 
+      margin: 20px 0 15px;
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    p {
+      color: #4a3b2f; 
+      background: #f1e4d3;
+      font-size: 20px;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    p:hover {
+      transform: scale(1.02);
+    }
+
+    .my-btn {
+      background: linear-gradient(135deg, #4a5d23, #7a9e3e); 
+      color: #fff;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: all 0.3s ease;
+      box-shadow: 4px 4px 12px rgba(0,0,0,0.2);
+      margin-top: 20px;
+    }
+
+    .my-btn:hover {
+      background: linear-gradient(135deg, #6b4226, #c09228); 
+      transform: translateY(-3px);
+      box-shadow: 6px 6px 14px rgba(0,0,0,0.3);
+    }
+
+    .my-btn:active {
+      background: #a68a64; 
+      transform: translateY(0);
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #6b4226;
+      color: #fff;
+      margin-top: 40px;
+      font-size: 0.9rem;
+    }
+
+    footer i {
+      margin: 0 8px;
+      color: #c09228;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  
+  <header>
+    <h1>🌸 Welcome to My Styled Website 🌸</h1>
+    <p>Made with love and creativity</p>
+  </header>
+
+  <nav>
+    <a href="#home"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="#about"><i class="fa-solid fa-circle-info"></i> About</a>
+    <a href="#contact"><i class="fa-solid fa-phone"></i> Contact</a>
+  </nav>
+
+  <main>
+    <section id="home">
+      <h2>Home</h2>
+      <p>
+        This is the Home section 🏠.  
+        Here you can welcome visitors to your page and introduce what your website is all about.
+      </p>
+    </section>
+
+    <section id="about">
+      <h2>About</h2>
+      <p>
+        This section tells something about you 🌸.  
+        You can write your story, hobbies, and goals here.
+      </p>
+      <button class="my-btn"><i class="fa-solid fa-star"></i> Learn More</button>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>
+        Need to get in touch? 📞  
+        You can list your socials and contact info here.
+      </p>
+      <p>
+        <i class="fa-brands fa-facebook"></i> Facebook: Princess Arrogante <br>
+        <i class="fa-brands fa-github"></i> GitHub: @agbonarrogantevien <br>
+        <i class="fa-solid fa-envelope"></i> Email: sample@email.com
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 | Designed by Princess Arrogante</p>
+    <i class="fa-brands fa-facebook"></i>
+    <i class="fa-brands fa-github"></i>
+    <i class="fa-brands fa-instagram"></i>
+  </footer>
+
+</body>
+</html>
