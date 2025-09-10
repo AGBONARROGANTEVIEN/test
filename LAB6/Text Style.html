@@ -13,22 +13,31 @@
             color: #333;
         }
 
-        h1 {
+        /* Floating header box */
+        .title-box {
+            background: #5c2c06;
+            color: #fff;
+            padding: 25px 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 0 auto 40px;
+            max-width: 800px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
+        .title-box h1 {
             font-family: Georgia, serif; 
             font-size: 50px; 
             font-weight: bold; 
-            color: #5c2c06;
-            text-align: center;
-            margin-bottom: 10px;
+            margin: 0;
         }
 
-        h2 {
+        .title-box h2 {
             font-family: 'Courier New', Courier, monospace; 
-            font-size: 28px; 
+            font-size: 24px; 
             font-weight: normal;
-            color: #8a4b08;
-            text-align: center;
-            margin-bottom: 30px;
+            margin: 10px 0 0;
+            color: #f2d8b3;
         }
 
         p {
@@ -48,16 +57,27 @@
         }
 
         ul {
-            font-size: 18px;
-            font-weight: 500; 
-            color: #444; 
-            max-width: 500px;
+            max-width: 600px;
             margin: 20px auto;
-            line-height: 1.6;
+            padding: 0;
+            list-style: none;
         }
 
         ul li {
-            margin-bottom: 10px;
+            background: #fff;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            font-size: 18px;
+            font-weight: 500;
+            color: #444;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        ul li:hover {
+            transform: translateY(-3px);
+            background: #f2e4d5;
         }
 
         footer {
@@ -74,8 +94,11 @@
     </style>
 </head>
 <body>
-    <h1>Travel Photography</h1>
-    <h2>Freezing Moments Around the World</h2>
+    <!-- Floating header -->
+    <div class="title-box">
+        <h1>Travel Photography</h1>
+        <h2>Freezing Moments Around the World</h2>
+    </div>
 
     <p>
         Travel photography is about more than just taking pictures—it’s about telling stories. 
@@ -86,8 +109,6 @@
         From the bustling streets of Tokyo to the serene landscapes of Iceland, travel photographers use their craft 
         to inspire others to explore, wander, and connect with the world.
     </p>
-
-    <br>
 
     <h3>My Interests & Skills</h3>
     <ul>
