@@ -6,90 +6,71 @@
   <title>Flexbox Cards</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: rgb(250, 250, 76);
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      margin: 0;
-      padding: 20px;
     }
 
     .card-container {
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
-      gap: 30px;
+      justify-content: center; /* Center the cards horizontally */
+      gap: 20px; /* Add some space between the cards */
+      padding: 20px;
     }
 
     .card {
-      background-color: #edfcfe;
-      border: 2px solid #00796b;
-      border-radius: 12px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      padding: 25px;
-      text-align: center;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
       width: 300px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    }
-
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+      text-align: center;
     }
 
     .card img {
-      border-radius: 50%;
-      border: 5px solid #00bfa5;
-      margin-bottom: 20px;
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 15px;
     }
 
-    .card img:hover {
-      transform: scale(1.1);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* ayusin box-shadow */
-    }
-
-    .card h3 {
-      margin: 0 0 10px;
-      color: #011d18;
-      font-size: 1.2rem;
-      font-weight: bold;
+    .card h2 {
+      margin-bottom: 10px;
+      color: #333;
     }
 
     .card p {
-      color: #021e1b;
+      color: #666;
       line-height: 1.6;
     }
   </style>
 </head>
 <body>
+
   <div class="card-container">
     <div class="card">
-      <img src="images/encantadia.jpg" alt="Encantadia">
-      <h3>ENCANTADIA</h3>
-      <p>A Filipino fantasy television series about the mystical kingdom of Encantadia and the four elemental gems.</p>
+      <img src="https://via.placeholder.com/300x200" alt="Card Image">
+      <h2>Card Title 1</h2>
+      <p>This is a sample card using flexbox. You can add any content you want inside the card.</p>
     </div>
 
     <div class="card">
-      <img src="images/conjuring.jpg" alt="The Conjuring">
-      <h3>THE CONJURING</h3>
-      <p>A supernatural horror film based on the real-life cases of paranormal investigators Ed and Lorraine Warren.</p>
+      <img src="https://via.placeholder.com/300x200" alt="Card Image">
+      <h2>Card Title 2</h2>
+      <p>Another example of a card layout using flexbox.  Flexbox makes it easy to create responsive layouts.</p>
     </div>
 
     <div class="card">
-      <img src="images/moana.jpg" alt="Moana">
-      <h3>MOANA</h3>
-      <p>A Disney animated adventure about a spirited Polynesian girl who sails out to save her island.</p>
+      <img src="https://via.placeholder.com/300x200" alt="Card Image">
+      <h2>Card Title 3</h2>
+      <p>A third card to demonstrate the flexbox card layout.  The cards will wrap to the next line on smaller screens.</p>
     </div>
   </div>
+
 </body>
 </html>
