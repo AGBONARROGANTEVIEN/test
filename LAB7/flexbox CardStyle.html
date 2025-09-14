@@ -1,96 +1,96 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flexbox Cards</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: rgb(250, 250, 76);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flexbox Cards</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: rgb(250, 250, 76);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
 
-        .card-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
+    .card-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
 
-        .card {
-            background-color: #edfcfe;
-            border: 2px solid #00796b;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            padding: 25px;
-            text-align: center;
-            width: 300px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
+    .card {
+      background-color: #edfcfe;
+      border: 2px solid #00796b;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      padding: 25px;
+      text-align: center;
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
-        }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+    }
 
-        .card img {
-            border-radius: 50%;
-            border: 5px solid #00bfa5; /* mas bright na teal */
-            margin-bottom: 20px;
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* soft shadow sa picture */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+    /* movie-poster style images */
+    .card img {
+      border-radius: 8px;
+      border: 4px solid #00bfa5;
+      margin-bottom: 20px;
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-        .card img:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* mas malalim shadow kapag hover */
-        }
+    .card img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
 
-        .card h3 {
-            margin: 0 0 10px;
-            color: #011d18;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
+    .card h3 {
+      margin: 0 0 10px;
+      color: #011d18;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
 
-        .card p {
-            color: #021e1b;
-            line-height: 1.6;
-        }
-    </style>
+    .card p {
+      color: #021e1b;
+      line-height: 1.6;
+    }
+  </style>
 </head>
 <body>
-    <div class="card-container">
-        <div class="card">
-            <img src="images/spongeb.jpg" alt="Spongebob Squarepants">
-            <h3>SPONGEBOB SQUAREPANTS</h3>
-            <p>Hi, I'm Spongebob! an energetic and optimistic yellow sea sponge who lives in a submerged pineapple.</p>
-        </div>
-
-        <div class="card">
-            <img src="images/sandy.jpeg" alt="Sandy">
-            <h3>SANDY</h3>
-            <p>Hi, I'm Sandy! an intelligent anthropomorphic flying squirrel who wears an astronaut-like diving suit and lives underwater.</p>
-        </div>
-
-        <div class="card">
-            <img src="images/star.jpg" alt="Patrick Star">
-            <h3>PATRICK STAR</h3>
-            <p>Hi, I'm Patrick! the humorous best friend of SpongeBob!</p>
-        </div>
+  <div class="card-container">
+    <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/en/4/48/Encantadia_2016_logo.png" alt="Encantadia">
+      <h3>ENCANTADIA</h3>
+      <p>A Filipino fantasy television series about the mystical kingdom of Encantadia and the four elemental gems.</p>
     </div>
+
+    <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/en/1/1f/The_Conjuring_poster.jpg" alt="The Conjuring">
+      <h3>THE CONJURING</h3>
+      <p>A supernatural horror film based on the real-life cases of paranormal investigators Ed and Lorraine Warren.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/en/2/26/Moana_Teaser_poster.jpg" alt="Moana">
+      <h3>MOANA</h3>
+      <p>A Disney animated adventure about a spirited Polynesian girl who sails out to save her island.</p>
+    </div>
+  </div>
 </body>
 </html>
