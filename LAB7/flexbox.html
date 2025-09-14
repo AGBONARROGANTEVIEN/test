@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flexbox Layout</title>
+
+  <!-- Google Font Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif; /* bagong font */
+      margin: 0;
+      padding: 40px;
+      background: #fee6e6;
+    }
+
+    h1 {
+      text-align: center;
+      color: #d33f84;
+      font-weight: 600;
+    }
+
+    .flex-container {
+      display: flex;
+      justify-content: center; 
+      gap: 50px; 
+      flex-wrap: wrap; /* para responsive */
+    }
+
+    .box {
+      background-color: #d33f84;
+      color: white;
+      padding: 40px;
+      text-align: center;
+      border-radius: 15px;
+      flex: 0 0 150px; 
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Flexbox</h1> 
+  <div class="flex-container">
+    <div class="box">1</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+  </div>
+
+</body>
+</html>
