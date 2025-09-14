@@ -5,49 +5,79 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flexbox Layout</title>
 
-  <!-- Google Font Poppins -->
+  <!-- Google Font (Poppins) -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
+    /* Global styles */
     body {
-      font-family: 'Poppins', sans-serif; /* bagong font */
+      font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 40px;
-      background: #fee6e6;
+      background: linear-gradient(135deg, #fee6e6, #fbcfe8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
     }
 
     h1 {
-      text-align: center;
       color: #d33f84;
+      margin-bottom: 30px;
+      font-size: 2.5rem;
       font-weight: 600;
+      text-align: center;
     }
 
+    /* Flex container */
     .flex-container {
       display: flex;
       justify-content: center; 
-      gap: 50px; 
-      flex-wrap: wrap; /* para responsive */
+      gap: 40px; 
+      flex-wrap: wrap; /* responsive */
+      width: 100%;
+      max-width: 1000px;
     }
 
+    /* Boxes */
     .box {
       background-color: #d33f84;
       color: white;
-      padding: 40px;
+      padding: 40px 20px;
       text-align: center;
       border-radius: 15px;
-      flex: 0 0 150px; 
-      font-size: 1.5rem;
+      flex: 0 1 180px; /* flexible width */
+      font-size: 1.2rem;
       font-weight: 600;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    /* Hover effect */
+    .box:hover {
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      background-color: #b72f6a;
+      cursor: pointer;
+    }
+
+    /* Responsive font size */
+    @media (max-width: 600px) {
+      .box {
+        font-size: 1rem;
+        padding: 30px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <h1>Flexbox</h1> 
+  <h1>Flexbox Layout</h1> 
   <div class="flex-container">
-    <div class="box">1</div>
-    <div class="box">2</div>
-    <div class="box">3</div>
+    <div class="box">Avengers: Endgame</div>
+    <div class="box">Frozen II</div>
+    <div class="box">Spider-Man: No Way Home</div>
+    <div class="box">Top Gun: Maverick</div>
   </div>
 
 </body>
