@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>BMI Tracker — Responsive Web App</title>
+  <meta name="description" content="Personalized BMI tracking and health recommendations. Works offline (localStorage) and mobile-friendly.">
+  <style>
+    :root{
+      --bg:#f7fafc; --card:#ffffff; --accent:#0ea5a4; --muted:#6b7280; --danger:#ef4444;
+      --radius:12px; font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#eef2ff 0%,var(--bg) 100%);color:#0f172a}
+    .container{max-width:920px;margin:28px auto;padding:18px}
+    header{display:flex;gap:12px;align-items:center;margin-bottom:18px}
+    header h1{font-size:20px;margin:0}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:16px}
+    @media (max-width:860px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card);border-radius:var(--radius);padding:14px;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+    input[type=number],select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef6;font-size:15px}
+    .row{display:flex;gap:8px}
+    .row > *{flex:1}
+    button{cursor:pointer;background:var(--accent);color:white;border:none;padding:10px 12px;border-radius:10px;font-weight:600}
+    .muted{color:var(--muted);font-size:13px}
+    .result {display:flex;flex-direction:column;gap:6px}
+    .bmi-big{font-size:28px;font-weight:700}
+    .category{font-weight:600}
+    .history-list{max-height:320px;overflow:auto;padding:4px}
+    .entry{display:flex;justify-content:space-between;align-items:center;padding:8px;border-radius:8px}
+    .pill{background:#f1f5f9;padding:6px 8px;border-radius:999px;font-size:13px}
+    .small{font-size:13px}
+    .danger{color:var(--danger)}
+    footer{margin-top:20px;text-align:center;color:var(--muted);font-size:13px}
+    .controls{display:flex;gap:8px}
+    .ghost{background:transparent;border:1px solid #e6eef6;color:var(--muted);padding:8px;border-radius:8px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 24 24' fill='none' stroke='%230ea5a4' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'></circle><path d='M8 14s1.5-2 4-2 4 2 4 2'></path><path d='M9 9a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM15 9a1 1 0 1 1 2 0 1 1 0 0 1-2 0z'></path></svg>" alt="logo" style="width:36px;height:36px;">
+      <div style="flex:1">
+        <h1>BMI Tracker</h1>
+        <div class="muted">Personalized BMI tracking & health recommendations — works on mobile</div>
+      </div>
+      <div class="controls">
+        <button id="exportCsv" title="Export CSV">Export</button>
+        <button id="clearAll" class="ghost">Clear</button>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section>
+        <div class="card">
+          <form id="bmiForm" autocomplete="off">
+            <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:12px">
+              <div style="flex:1">
+                <label for="age">Age (years, optional)</label>
+                <input type="number" id="age" min="1" placeholder="e.g. 28">
+              </div>
+              <div style="width:140px">
+                <label for="gender">Gender</label>
+                <select id="gender">
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+              <div>
+                <label for="weight">Weight (kg)</label>
+                <input type="number" id="weight" step="0.1" required placeholder="e.g. 64.5">
+              </div>
+              <div>
+                <label for="height">Height (cm)</label>
+                <input type="number" id="height" step="0.1" required placeholder="e.g. 170">
+              </div>
+            </div>
+
+            <div style="display:flex;gap:10px;margin-top:6px">
+              <button type="submit">Calculate BMI</button>
+              <button type="button" id="fillExample" class="ghost">Example</button>
+            </div>
+          </form>
+
+          <hr style="margin:14px 0;border:none;border-top:1px solid #eef2ff">
+
+          <div id="resultCard" class="result" aria-live="polite">
+            <div id="resultEmpty" class="muted">No calculation yet — enter weight and height and press Calculate.</div>
+            <div id="resultView" style="display:none">
+              <div class="bmi-big" id="bmiValue">--</div>
+              <div class="category" id="bmiCategory">--</div>
+              <div id="recommendation" class="small"></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div style="font-weight:700">Tips</div>
+            <div class="muted small">Use weekly for trends</div>
+          </div>
+          <ul style="margin:0;padding-left:18px" class="muted small">
+            <li>Combine balanced diet with regular physical activity.</li>
+            <li>Monitor trends — single BMI values don't tell the whole story.</li>
+            <li>Consult a healthcare professional for diagnoses and personalized plans.</li>
+          </ul>
+        </div>
+      </section>
+
+      <aside>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div style="font-weight:700">History</div>
+            <div class="muted small">Tap entry to delete</div>
+          </div>
+
+          <div class="history-list" id="historyList">
+            <div class="muted">No records yet.</div>
+          </div>
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div class="card">
+          <div style="font-weight:700;margin-bottom:8px">Quick Reference</div>
+          <div class="small">
+            <div><strong>Underweight:</strong> BMI &lt; 18.5</div>
+            <div><strong>Normal:</strong> 18.5 — 24.9</div>
+            <div><strong>Overweight:</strong> 25 — 29.9</div>
+            <div><strong>Obesity:</strong> ≥ 30</div>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      Built with plain HTML/JS — stores history locally in your browser.
+    </footer>
+  </div>
+
+  <script>
+    (() => {
+      const form = document.getElementById('bmiForm');
+      const weightInput = document.getElementById('weight');
+      const heightInput = document.getElementById('height');
+      const ageInput = document.getElementById('age');
+      const genderSelect = document.getElementById('gender');
+
+      const resultView = document.getElementById('resultView');
+      const resultEmpty = document.getElementById('resultEmpty');
+      const bmiValueEl = document.getElementById('bmiValue');
+      const bmiCategoryEl = document.getElementById('bmiCategory');
+      const recommendationEl = document.getElementById('recommendation');
+
+      const historyList = document.getElementById('historyList');
+      const EXPORT_BTN = document.getElementById('exportCsv');
+      const CLEAR_BTN = document.getElementById('clearAll');
+      const FILL_EX = document.getElementById('fillExample');
+
+      const STORAGE_KEY = 'bmi_tracker_history_v1';
+
+      function loadHistory(){
+        try{
+          const raw = localStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : [];
+        }catch(e){
+          console.error('load error', e); return [];
+        }
+      }
+
+      function saveHistory(arr){
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+      }
+
+      function formatDate(iso){
+        const d = new Date(iso);
+        return d.toLocaleString();
+      }
+
+      function bmiCategory(bmi){
+        if(bmi < 18.5) return 'Underweight';
+        if(bmi < 25) return 'Normal weight';
+        if(bmi < 30) return 'Overweight';
+        return 'Obesity';
+      }
+
+      function recommendation(bmi, age){
+        if(bmi < 18.5) return 'Underweight — consider a nutrient-dense diet and strength training; consult a professional if concerned.';
+        if(bmi < 25) return 'Normal — keep up a balanced diet and regular activity to maintain your health.';
+        if(bmi < 30) return 'Overweight — aim for gradual weight loss with calorie control and exercise; prioritize sustainable changes.';
+        return 'Obesity — seek medical advice for a personalized plan; focus on safe, gradual lifestyle changes.';
+      }
+
+      function renderHistory(){
+        const items = loadHistory();
+        historyList.innerHTML = '';
+        if(items.length === 0){
+          historyList.innerHTML = '<div class="muted">No records yet.</div>';
+          return;
+        }
+        items.forEach((it, idx) =>{
+          const el = document.createElement('div');
+          el.className = 'entry';
+          el.innerHTML = `
+            <div>
+              <div style="font-weight:600">BMI ${it.bmi} — ${it.category}</div>
+              <div class="small muted">${it.weight}kg • ${it.heightCm}cm ${it.age? '• Age:'+it.age : ''} • ${it.gender}</div>
+            </div>
+            <div style="text-align:right">
+              <div class="pill small">${formatDate(it.timestamp)}</div>
+            </div>
+          `;
+          el.addEventListener('click', ()=>{
+            if(!confirm('Delete this entry?')) return;
+            const arr = loadHistory();
+            arr.splice(idx,1);
+            saveHistory(arr);
+            renderHistory();
+          });
+          historyList.appendChild(el);
+        });
+      }
+
+      form.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        const w = parseFloat(weightInput.value);
+        const h = parseFloat(heightInput.value);
+        if(!w || !h || w<=0 || h<=0){
+          alert('Please enter valid weight and height.'); return;
+        }
+        const age = ageInput.value? parseInt(ageInput.value) : null;
+        const gender = genderSelect.value;
+        const hM = h/100;
+        const bmi = +(w / (hM*hM)).toFixed(2);
+        const category = bmiCategory(bmi);
+        const rec = recommendation(bmi, age);
+
+        bmiValueEl.textContent = bmi;
+        bmiCategoryEl.textContent = category;
+        recommendationEl.textContent = rec;
+        resultEmpty.style.display = 'none'; resultView.style.display = 'block';
+
+        const arr = loadHistory();
+        arr.unshift({timestamp: new Date().toISOString(), weight:w, heightCm:h, bmi:bmi, category:category, gender:gender, age: age});
+        if(arr.length>100) arr.pop();
+        saveHistory(arr);
+        renderHistory();
+      });
+
+      EXPORT_BTN.addEventListener('click', ()=>{
+        const items = loadHistory();
+        if(items.length===0){ alert('No data to export'); return; }
+        const rows = [['timestamp','weight','heightCm','bmi','category','gender','age']];
+        items.forEach(it=> rows.push([it.timestamp,it.weight,it.heightCm,it.bmi,it.category,it.gender,it.age??'']));
+        const csv = rows.map(r=> r.map(cell=> '"'+String(cell).replace(/"/g,'""')+'"').join(',')).join('\n');
+        const blob = new Blob([csv],{type:'text/csv'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href=url; a.download = 'bmi_history.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+      });
+
+      CLEAR_BTN.addEventListener('click', ()=>{
+        if(!confirm('Clear all history? This cannot be undone.')) return;
+        localStorage.removeItem(STORAGE_KEY); renderHistory();
+        resultEmpty.style.display = 'block'; resultView.style.display = 'none';
+      });
+
+      FILL_EX.addEventListener('click', ()=>{ weightInput.value='64.5'; heightInput.value='170'; ageInput.value='28'; genderSelect.value='Female'; });
+
+      // initial render
+      renderHistory();
+
+      // show last entry in result if exists
+      const hist = loadHistory();
+      if(hist.length>0){
+        const latest = hist[0];
+        bmiValueEl.textContent = latest.bmi;
+        bmiCategoryEl.textContent = latest.category;
+        recommendationEl.textContent = recommendation(latest.bmi, latest.age);
+        resultEmpty.style.display = 'none'; resultView.style.display = 'block';
+      }
+
+    })();
+  </script>
+</body>
+</html>
