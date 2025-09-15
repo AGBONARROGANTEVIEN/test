@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zodiac Card Picker</title>
+  <title>Zodiac Roulette</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -23,7 +23,11 @@
       gap: 15px;
       width: 400px;
       margin: 0 auto;
-      animation: spin 10s linear infinite; /* umiikot */
+      animation: spin 10s linear infinite;
+    }
+
+    .wheel.stopped {
+      animation-play-state: paused; /* titigil pag stop */
     }
 
     .card {
@@ -39,11 +43,18 @@
       font-weight: bold;
       cursor: pointer;
       box-shadow: 0 3px 5px rgba(0,0,0,0.2);
-      transition: transform 0.3s;
+      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
     }
 
     .card:hover {
       transform: scale(1.1);
+    }
+
+    /* highlight effect */
+    .card.highlight {
+      background: gold;
+      transform: scale(1.2);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
     }
 
     #meaning {
@@ -53,6 +64,22 @@
       min-height: 50px;
     }
 
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #555;
+    }
+
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
@@ -60,8 +87,9 @@
   </style>
 </head>
 <body>
-  <h1>Pick Your Zodiac</h1>
+  <h1>Zodiac Roulette</h1>
   <div class="wheel" id="zodiacWheel"></div>
+  <button id="stopBtn">Stop</button>
 
   <div id="meaning"></div>
 
@@ -84,19 +112,48 @@
 
     const wheel = document.getElementById('zodiacWheel');
 
+    // Create cards
     zodiacs.forEach(z => {
       const card = document.createElement('div');
       card.className = 'card';
       card.style.borderTop = `5px solid ${z.color}`;
       card.innerHTML = `<span>${z.sign}</span>`;
-      card.addEventListener('click', () => {
-        document.getElementById('meaning').innerHTML = `
-          <strong>${z.sign}</strong><br>
-          Lucky Color: <span style="color:${z.color};font-weight:bold">${z.color}</span><br>
-          ${z.meaning}
-        `;
-      });
       wheel.appendChild(card);
+    });
+
+    const stopBtn = document.getElementById('stopBtn');
+    const meaningDiv = document.getElementById('meaning');
+    let stopped = false;
+
+    stopBtn.addEventListener('click', () => {
+      const cards = document.querySelectorAll('.card');
+      // remove previous highlight
+      cards.forEach(c => c.classList.remove('highlight'));
+
+      if (!stopped) {
+        wheel.classList.add('stopped'); // pause animation
+        stopped = true;
+
+        // pick random zodiac
+        const randomIndex = Math.floor(Math.random() * zodiacs.length);
+        const randomZodiac = zodiacs[randomIndex];
+
+        // highlight selected card
+        cards[randomIndex].classList.add('highlight');
+
+        meaningDiv.innerHTML = `
+          <strong>${randomZodiac.sign}</strong><br>
+          Lucky Color: <span style="color:${randomZodiac.color};font-weight:bold">${randomZodiac.color}</span><br>
+          ${randomZodiac.meaning}
+        `;
+        stopBtn.textContent = "Spin Again";
+      } else {
+        // reset for another spin
+        wheel.classList.remove('stopped');
+        meaningDiv.innerHTML = "";
+        stopped = false;
+        stopBtn.textContent = "Stop";
+      }
     });
   </script>
 </body>
