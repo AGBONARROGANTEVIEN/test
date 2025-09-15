@@ -3,74 +3,101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flexbox Cards</title>
+  <title>Zodiac Card Picker</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      background: linear-gradient(135deg,#f0f0f0,#dcdcdc);
+      text-align: center;
+      padding: 40px;
     }
 
-    .card-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center; /* Center the cards horizontally */
-      gap: 20px; /* Add some space between the cards */
-      padding: 20px;
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .wheel {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      width: 400px;
+      margin: 0 auto;
+      animation: spin 10s linear infinite; /* umiikot */
     }
 
     .card {
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      width: 300px;
-      text-align: center;
+      width: 90px;
+      height: 120px;
+      background: #fff;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.9rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
     }
 
-    .card img {
-      max-width: 100%;
-      height: auto;
-      margin-bottom: 15px;
+    .card:hover {
+      transform: scale(1.1);
     }
 
-    .card h2 {
-      margin-bottom: 10px;
-      color: #333;
+    #meaning {
+      margin-top: 30px;
+      font-size: 1.2rem;
+      color: #555;
+      min-height: 50px;
     }
 
-    .card p {
-      color: #666;
-      line-height: 1.6;
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
+  <h1>Pick Your Zodiac</h1>
+  <div class="wheel" id="zodiacWheel"></div>
 
-  <div class="card-container">
-    <div class="card">
-      <img src="https://via.placeholder.com/300x200" alt="Card Image">
-      <h2>Card Title 1</h2>
-      <p>This is a sample card using flexbox. You can add any content you want inside the card.</p>
-    </div>
+  <div id="meaning"></div>
 
-    <div class="card">
-      <img src="https://via.placeholder.com/300x200" alt="Card Image">
-      <h2>Card Title 2</h2>
-      <p>Another example of a card layout using flexbox.  Flexbox makes it easy to create responsive layouts.</p>
-    </div>
+  <script>
+    // Zodiac data
+    const zodiacs = [
+      {sign:"Aries", color:"Red", meaning:"Courageous, energetic, confident."},
+      {sign:"Taurus", color:"Green", meaning:"Patient, reliable, warm-hearted."},
+      {sign:"Gemini", color:"Yellow", meaning:"Adaptable, witty, communicative."},
+      {sign:"Cancer", color:"Silver", meaning:"Emotional, intuitive, nurturing."},
+      {sign:"Leo", color:"Gold", meaning:"Generous, creative, enthusiastic."},
+      {sign:"Virgo", color:"Brown", meaning:"Practical, diligent, analytical."},
+      {sign:"Libra", color:"Pink", meaning:"Diplomatic, charming, fair-minded."},
+      {sign:"Scorpio", color:"Maroon", meaning:"Passionate, resourceful, brave."},
+      {sign:"Sagittarius", color:"Purple", meaning:"Optimistic, adventurous, honest."},
+      {sign:"Capricorn", color:"Black", meaning:"Disciplined, ambitious, prudent."},
+      {sign:"Aquarius", color:"Blue", meaning:"Progressive, original, humanitarian."},
+      {sign:"Pisces", color:"Sea Green", meaning:"Compassionate, artistic, gentle."}
+    ];
 
-    <div class="card">
-      <img src="https://via.placeholder.com/300x200" alt="Card Image">
-      <h2>Card Title 3</h2>
-      <p>A third card to demonstrate the flexbox card layout.  The cards will wrap to the next line on smaller screens.</p>
-    </div>
-  </div>
+    const wheel = document.getElementById('zodiacWheel');
 
+    zodiacs.forEach(z => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.style.borderTop = `5px solid ${z.color}`;
+      card.innerHTML = `<span>${z.sign}</span>`;
+      card.addEventListener('click', () => {
+        document.getElementById('meaning').innerHTML = `
+          <strong>${z.sign}</strong><br>
+          Lucky Color: <span style="color:${z.color};font-weight:bold">${z.color}</span><br>
+          ${z.meaning}
+        `;
+      });
+      wheel.appendChild(card);
+    });
+  </script>
 </body>
 </html>
