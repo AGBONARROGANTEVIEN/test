@@ -46,6 +46,24 @@
       max-width: 100%;
       height: auto;
     }
+    ul.food {
+      list-style: disc;
+      margin-left: 2rem;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.5rem;
+      text-align: left;
+    }
+    th {
+      background-color: #0066cc;
+      color: white;
+    }
     #backToTop {
       position: fixed;
       bottom: 20px;
@@ -67,7 +85,7 @@
     <h1>Budget Travel Planning</h1>
     <nav>
       <ul>
-        <li><a href="#home">Home</a></li>
+        <li><a href="#welcome">Welcome</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#flights">Flights</a></li>
         <li><a href="#accommodation">Accommodation</a></li>
@@ -81,10 +99,10 @@
     </nav>
   </header>
 
-  <!-- HOME -->
-  <section id="home">
-    <h2>Welcome to Budget Travel Planning</h2>
-    <p>Discover tips, tricks, and resources to make your travels more affordable without sacrificing fun and comfort.</p>
+  <!-- WELCOME -->
+  <section id="welcome">
+    <h2>Welcome</h2>
+    <p>Welcome to Budget Travel Planning! Click the sections above to explore our guides.</p>
     <img src="images/travel.jpg" alt="A scenic travel destination">
   </section>
 
@@ -92,18 +110,42 @@
   <section id="about">
     <h2>About</h2>
     <p>This website helps travelers plan affordable trips, with sections on flights, accommodation, packing, transportation, and more.</p>
+    <h3>Luxury Food Sample Prices</h3>
+    <ul class="food">
+      <li>Steak Dinner – $45 USD</li>
+      <li>Seafood Platter – $60 USD</li>
+      <li>Tasting Menu – $80 USD</li>
+    </ul>
+    <h3>Currency Conversion Table</h3>
+    <table>
+      <tr><th>Currency</th><th>≈ $1 USD</th></tr>
+      <tr><td>Philippine Peso (₱)</td><td>₱56</td></tr>
+      <tr><td>Euro (€)</td><td>€0.92</td></tr>
+      <tr><td>Japanese Yen (¥)</td><td>¥150</td></tr>
+      <tr><td>British Pound (£)</td><td>£0.80</td></tr>
+    </table>
   </section>
 
   <!-- FLIGHTS -->
   <section id="flights">
     <h2>Flights</h2>
-    <p>Learn how to find the cheapest flights using flexible dates, budget airlines, and hidden city ticketing tips.</p>
+    <p>Find cheap flights by using flexible dates, budget airlines, and reward programs.</p>
+    <h3>Sample Airline Meal Prices</h3>
+    <ul class="food">
+      <li>Premium Meal – $15 USD</li>
+      <li>Champagne – $12 USD</li>
+    </ul>
   </section>
 
   <!-- ACCOMMODATION -->
   <section id="accommodation">
     <h2>Accommodation</h2>
-    <p>Discover hostels, guesthouses, and affordable hotels. Use reward points and booking hacks to save.</p>
+    <p>Stay in hostels, guesthouses, and affordable hotels. Use reward points and booking hacks to save.</p>
+    <h3>Sample Hotel Restaurant Prices</h3>
+    <ul class="food">
+      <li>Breakfast Buffet – $25 USD</li>
+      <li>Room Service Dinner – $50 USD</li>
+    </ul>
   </section>
 
   <!-- DESTINATIONS -->
@@ -122,6 +164,11 @@
   <section id="transport">
     <h2>Transport</h2>
     <p>Find the cheapest ways to get around locally: buses, trains, ridesharing, and walking tours.</p>
+    <h3>Sample Transport Costs</h3>
+    <ul class="food">
+      <li>City Metro Day Pass – $5 USD</li>
+      <li>Taxi from Airport – $30 USD</li>
+    </ul>
   </section>
 
   <!-- ACTIVITIES -->
