@@ -11,13 +11,16 @@
       margin: 0;
       padding: 0;
       line-height: 1.6;
-      background-color: #1ac63a;
-      color: #63eb97;
+      background-color: #1ac63a;   /* bright green */
+      color: #ffffff;              /* white text for contrast */
     }
     header, footer {
       background-color: #0066cc;
       color: white;
       padding: 1rem;
+      position: sticky;  /* header stays visible on scroll */
+      top: 0;
+      z-index: 1000;
     }
     header h1 {
       margin: 0;
@@ -27,12 +30,13 @@
       padding: 0;
       display: flex;
       flex-wrap: wrap;
+      margin: 0;
     }
     nav li {
       margin-right: 1rem;
     }
     nav a {
-      color: rgb(22, 110, 11);
+      color: #ffffff; /* white links for contrast */
       text-decoration: none;
     }
     nav a:hover {
@@ -41,6 +45,7 @@
     section {
       padding: 2rem 1rem;
       border-bottom: 1px solid #ddd;
+      background-color: #1ac63a; /* keep same background */
     }
     img {
       max-width: 100%;
@@ -56,7 +61,7 @@
       margin-top: 1rem;
     }
     th, td {
-      border: 1px solid #ddd;
+      border: 1px solid #ccc;
       padding: 0.5rem;
       text-align: left;
     }
@@ -103,7 +108,6 @@
   <section id="welcome">
     <h2>Welcome</h2>
     <p>Welcome to Budget Travel Planning! Click the sections above to explore our guides.</p>
-   
   </section>
 
   <!-- ABOUT -->
@@ -132,8 +136,8 @@
     <p>Find cheap flights by using flexible dates, budget airlines, and reward programs.</p>
     <h3>Sample Airline Meal Prices</h3>
     <ul class="food">
-      <li>Premium Meal  $15 USD</li>
-      <li>Champagne  $12 USD</li>
+      <li>Premium Meal $15 USD</li>
+      <li>Champagne $12 USD</li>
     </ul>
   </section>
 
@@ -144,7 +148,7 @@
     <h3>Sample Hotel Restaurant Prices</h3>
     <ul class="food">
       <li>Breakfast Buffet $25 USD</li>
-      <li>Room Service Dinner  $50 USD</li>
+      <li>Room Service Dinner $50 USD</li>
     </ul>
   </section>
 
