@@ -1,215 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Budget Travel Planning - Tips and guides for affordable travel.">
-  <title>Budget Travel Planning</title>
-  <style>
-    :root {
-      --primary:#0066cc;
-      --accent:#1ac63a;
-      --light:#ffffff;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      background-color: var(--accent);
-      color: var(--light);
-    }
-    header, footer {
-      background-color: var(--primary);
-      color: var(--light);
-      padding: 1rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      text-align:center;
-    }
-    nav ul {
-      list-style: none;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content:center;
-      margin: 0;
-    }
-    nav li {
-      margin:0 .5rem;
-    }
-    nav a {
-      color: var(--light);
-      text-decoration: none;
-      padding:0.25rem 0.5rem;
-      border-radius:4px;
-      transition:background-color .3s;
-    }
-    nav a:hover {
-      background-color: rgba(255,255,255,0.2);
-    }
-    section {
-      padding: 2rem 1rem;
-    }
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin-top: 1rem;
-    }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 0.5rem;
-      text-align: left;
-      color:#000;
-      background:#fff;
-    }
-    th {
-      background-color: var(--primary);
-      color: var(--light);
-    }
-    details {
-      background: rgba(255,255,255,0.2);
-      padding:0.5rem;
-      border-radius:5px;
-      margin-top:.5rem;
-    }
-    summary {
-      cursor: pointer;
-      font-weight:bold;
-    }
-    ol,ul {
-      background:rgba(255,255,255,0.1);
-      padding:1rem;
-      border-radius:5px;
-    }
-    #backToTop {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      padding: 0.5rem 1rem;
-      background-color: var(--primary);
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    #backToTop:hover {
-      background-color: #004c99;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Budget Travel Planning</title>
+<style>
+  body {font-family: Arial, sans-serif; margin:0; padding:0; background:#1ac63a; color:#fff; line-height:1.6;}
+  header, footer {background:#0066cc; color:#fff; padding:1rem; text-align:center;}
+  nav ul {list-style:none; display:flex; justify-content:center; padding:0; margin:0; flex-wrap:wrap;}
+  nav li {margin:0 .5rem;}
+  nav a {color:#fff; text-decoration:none; padding:.25rem .5rem; border-radius:4px;}
+  nav a:hover {background:rgba(255,255,255,0.2);}
+  section {padding:2rem 1rem;}
+  table {width:100%; border-collapse:collapse; margin-top:1rem;}
+  th,td {border:1px solid #ccc; padding:.5rem; background:#fff; color:#000;}
+  th {background:#0066cc; color:#fff;}
+  details {background:rgba(255,255,255,0.2); padding:.5rem; border-radius:5px; margin-top:.5rem;}
+  summary {cursor:pointer; font-weight:bold;}
+  #converter input,#converter select{padding:.25rem;margin:.25rem;}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Budget Travel Planning</h1>
-    <nav>
-      <ul>
-        <li><a href="#welcome">Welcome</a></li>
-        <li><a href="#flights">Flights</a></li>
-        <li><a href="#accommodation">Accommodation</a></li>
-        <li><a href="#transport">Transport</a></li>
-        <li><a href="#activities">Activities</a></li>
-        <li><a href="#safety">Safety</a></li>
-        <li><a href="#credits">Credits</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- WELCOME -->
-  <section id="welcome">
-    <h2>Budget Travel Planning</h2>
-    <p>Plan your next trip on a budget. Explore affordable flights, accommodation, transport, activities, and safety tips.</p>
-  </section>
-
-  <!-- FLIGHTS -->
-  <section id="flights">
-    <h2>Flights</h2>
-    <p>Find cheap flights by using flexible dates, budget airlines, and reward programs.</p>
-    <h3>Sample Flight Prices & Airport Transport</h3>
-    <table>
-      <tr><th>Destination</th><th>Airline</th><th>Price (USD)</th><th>Airport Transport</th></tr>
-      <tr><td>Manila → Cebu</td><td>Cebu Pacific</td><td>$40</td><td>Taxi/Bus</td></tr>
-      <tr><td>Manila → Hong Kong</td><td>AirAsia</td><td>$60</td><td>Airport Express Train</td></tr>
-      <tr><td>Manila → Tokyo</td><td>Jetstar</td><td>$150</td><td>Airport Limousine Bus</td></tr>
-    </table>
-  </section>
-
-  <!-- ACCOMMODATION -->
-  <section id="accommodation">
-    <h2>Accommodation</h2>
-    <p>Choose from budget-friendly stays like hostels, homestays, or budget hotels.</p>
-    <h3>Examples & Prices</h3>
-    <table>
-      <tr><th>Type</th><th>Example</th><th>Price/Night (USD)</th></tr>
-      <tr><td>Hostel</td><td>Backpackers Inn</td><td>$10</td></tr>
-      <tr><td>Budget Hotel</td><td>Travelers Lodge</td><td>$25</td></tr>
-      <tr><td>Homestay</td><td>Local Family House</td><td>$15</td></tr>
-    </table>
-  </section>
-
-  <!-- TRANSPORT -->
-  <section id="transport">
-    <h2>Transport</h2>
-    <p>Find the cheapest ways to get around locally:</p>
-    <table>
-      <tr><th>Vehicle Type</th><th>Example</th><th>Price</th></tr>
-      <tr><td>Bus</td><td>City Bus Day Pass</td><td>$5</td></tr>
-      <tr><td>Train/Metro</td><td>Metro Line Pass</td><td>$3</td></tr>
-      <tr><td>Taxi</td><td>Airport to Hotel</td><td>$30</td></tr>
-      <tr><td>Bike Rental</td><td>City Bike</td><td>$2/hour</td></tr>
-    </table>
-  </section>
-
-  <!-- ACTIVITIES -->
-  <section id="activities">
-    <h2>Affordable Activities</h2>
-    <p>Enjoy free or low-cost activities at your destination:</p>
-    <ol>
-      <li>Free walking tour 
-        <details><summary>View Details</summary><p>Join city-organized free walking tours with guides.</p></details>
-      </li>
-      <li>Visit museums on free days 
-        <details><summary>View Details</summary><p>Check local museums for free entry schedules.</p></details>
-      </li>
-      <li>Community events & festivals 
-        <details><summary>View Details</summary><p>Look for local community fairs, parades, or concerts.</p></details>
-      </li>
-    </ol>
-  </section>
-
-  <!-- SAFETY -->
-  <section id="safety">
-    <h2>Safety Tips</h2>
+<header>
+  <h1>Budget Travel Planning</h1>
+  <nav>
     <ul>
-      <li>Keep valuables in a money belt.</li>
-      <li>Use official taxis or rideshares.</li>
-      <li>Make copies of your passport and documents.</li>
-      <li>Stay in well-lit areas at night.</li>
+      <li><a href="#welcome">Welcome</a></li>
+      <li><a href="#flights">Flights</a></li>
+      <li><a href="#accommodation">Accommodation</a></li>
+      <li><a href="#transport">Transport</a></li>
+      <li><a href="#food">Food</a></li>
+      <li><a href="#activities">Activities</a></li>
+      <li><a href="#safety">Safety</a></li>
+      <li><a href="#hotlines">Hotlines</a></li>
+      <li><a href="#converter">Currency</a></li>
+      <li><a href="#credits">Credits</a></li>
     </ul>
-  </section>
+  </nav>
+</header>
 
-  <!-- CREDITS -->
-  <section id="credits">
-    <h2>Credits</h2>
-    <p>Images and tips sourced from travel blogs and free photo libraries.</p>
-    <details>
-      <summary>Click here to see affordable room listings</summary>
-      <p>Example: <a href="#">Budget Hostel Rooms</a>, <a href="#">Homestay Rooms</a>, <a href="#">Cheap Hotel Rooms</a></p>
-    </details>
-  </section>
+<section id="welcome">
+  <h2>Budget Travel Planning</h2>
+  <p>Plan your next trip on a budget. Explore affordable flights, accommodation, food, transport, activities, safety tips, hotlines and currency conversion.</p>
+</section>
 
-  <footer>
-    <p>&copy; 2025 Budget Travel Planning</p>
-  </footer>
+<section id="flights">
+  <h2>Flights</h2>
+  <table>
+    <tr><th>Destination</th><th>Airline</th><th>Price (USD)</th><th>Airport Transport</th></tr>
+    <tr><td>Manila → Cebu</td><td>Cebu Pacific</td><td>$40</td><td>Taxi/Bus</td></tr>
+    <tr><td>Manila → Hong Kong</td><td>AirAsia</td><td>$60</td><td>Airport Express</td></tr>
+    <tr><td>Manila → Tokyo</td><td>Jetstar</td><td>$150</td><td>Airport Bus</td></tr>
+  </table>
+</section>
 
-  <!-- Back-to-top button -->
-  <button id="backToTop">Back to Top</button>
+<section id="accommodation">
+  <h2>Accommodation</h2>
+  <table>
+    <tr><th>Type</th><th>Example</th><th>Price/Night (USD)</th></tr>
+    <tr><td>Hostel</td><td>Backpackers Inn</td><td>$10</td></tr>
+    <tr><td>Budget Hotel</td><td>Travelers Lodge</td><td>$25</td></tr>
+    <tr><td>Homestay</td><td>Local Family House</td><td>$15</td></tr>
+  </table>
+</section>
 
-  <script>
-    // Back to Top button functionality
-    const btn = document.getElementById('backToTop');
-    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-  </script>
+<section id="transport">
+  <h2>Transport</h2>
+  <table>
+    <tr><th>Vehicle Type</th><th>Example</th><th>Price</th></tr>
+    <tr><td>Bus</td><td>City Bus Day Pass</td><td>$5</td></tr>
+    <tr><td>Train/Metro</td><td>Metro Line Pass</td><td>$3</td></tr>
+    <tr><td>Taxi</td><td>Airport to Hotel</td><td>$30</td></tr>
+    <tr><td>Bike Rental</td><td>City Bike</td><td>$2/hour</td></tr>
+  </table>
+</section>
+
+<section id="food">
+  <h2>Budget Food</h2>
+  <table>
+    <tr><th>Meal</th><th>Description</th><th>Price (USD)</th></tr>
+    <tr><td>Street Food Combo</td><td>Local snacks + drink</td><td>$3</td></tr>
+    <tr><td>Budget Restaurant Meal</td><td>Main dish + rice</td><td>$5</td></tr>
+    <tr><td>Fast Food Value Meal</td><td>Burger + fries + drink</td><td>$4</td></tr>
+  </table>
+</section>
+
+<section id="activities">
+  <h2>Affordable Activities</h2>
+  <ol>
+    <li>Free walking tour 
+      <details><summary>View Details</summary><p>Join city-organized free walking tours with guides.</p></details>
+    </li>
+    <li>Visit museums on free days 
+      <details><summary>View Details</summary><p>Check local museums for free entry schedules.</p></details>
+    </li>
+    <li>Community events & festivals 
+      <details><summary>View Details</summary><p>Look for local community fairs, parades, or concerts.</p></details>
+    </li>
+  </ol>
+</section>
+
+<section id="safety">
+  <h2>Safety Tips</h2>
+  <ul>
+    <li>Keep valuables in a money belt.</li>
+    <li>Use official taxis or rideshares.</li>
+    <li>Make copies of your passport and documents.</li>
+    <li>Stay in well-lit areas at night.</li>
+  </ul>
+</section>
+
+<section id="hotlines">
+  <h2>Important Hotlines</h2>
+  <table>
+    <tr><th>Service</th><th>Hotline Number</th></tr>
+    <tr><td>Emergency</td><td>911</td></tr>
+    <tr><td>Tourist Assistance (Philippines)</td><td>+63 2 524 1728</td></tr>
+    <tr><td>Airline Customer Service</td><td>+63 2 8702 0888</td></tr>
+  </table>
+</section>
+
+<section id="converter">
+  <h2>Currency Conversion</h2>
+  <p>Sample static converter (USD, PHP, EUR):</p>
+  <label>Amount:</label><input type="number" id="amount" value="1">
+  <label>From:</label>
+  <select id="from">
+    <option value="USD">USD</option>
+    <option value="PHP">PHP</option>
+    <option value="EUR">EUR</option>
+  </select>
+  <label>To:</label>
+  <select id="to">
+    <option value="USD">USD</option>
+    <option value="PHP">PHP</option>
+    <option value="EUR">EUR</option>
+  </select>
+  <button onclick="convert()">Convert</button>
+  <p id="result"></p>
+</section>
+
+<section id="credits">
+  <h2>Credits</h2>
+  <details>
+    <summary>Click here to see affordable room listings</summary>
+    <p>Example: <a href="#">Budget Hostel Rooms</a>, <a href="#">Homestay Rooms</a>, <a href="#">Cheap Hotel Rooms</a></p>
+  </details>
+</section>
+
+<footer>
+  <p>&copy; 2025 Budget Travel Planning</p>
+</footer>
+
+<script>
+// sample static rates – dagdagan mo lang para sa ibang currencies
+const rates = {
+  USD: {USD:1, PHP:58, EUR:0.9},
+  PHP: {USD:0.017, PHP:1, EUR:0.015},
+  EUR: {USD:1.1, PHP:65, EUR:1}
+};
+
+function convert(){
+  const amt=parseFloat(document.getElementById('amount').value);
+  const from=document.getElementById('from').value;
+  const to=document.getElementById('to').value;
+  const rate=rates[from][to];
+  document.getElementById('result').textContent=`${amt} ${from} = ${(amt*rate).toFixed(2)} ${to}`;
+}
+</script>
+
 </body>
 </html>
+
 
