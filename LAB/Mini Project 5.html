@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity 7 - Responsive Menu Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+    }
+
+    header {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    /* ✅ MENU GRID CONTAINER */
+    .menu {
+      display: grid;
+      grid-template-columns: 1fr; /* Mobile: 1 column */
+      gap: 15px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    /* ✅ MENU ITEM CARD */
+    .menu-item {
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .menu-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .menu-item h3 {
+      margin: 0 0 5px 0;
+      font-size: 20px;
+      color: #333;
+    }
+
+    .menu-item p {
+      margin: 0 0 8px 0;
+      color: #555;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #2ecc71;
+      font-size: 18px;
+    }
+
+    /* ✅ For tablets: 2 columns */
+    @media (min-width: 600px) {
+      .menu {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* ✅ For desktops: 3 columns */
+    @media (min-width: 992px) {
+      .menu {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Activity 7: Responsive Menu Page</h1>
+    <p>Mini Project Part 5</p>
+  </header>
+
+  <section class="menu">
+    <div class="menu-item">
+      <h3>Coffee</h3>
+      <p>Freshly brewed coffee with a rich aroma.</p>
+      <div class="price">₱50</div>
+    </div>
+
+    <div class="menu-item">
+      <h3>Milk Tea</h3>
+      <p>Sweet and creamy milk tea with chewy pearls.</p>
+      <div class="price">₱70</div>
+    </div>
+
+    <div class="menu-item">
+      <h3>Sandwich</h3>
+      <p>Freshly made sandwich with organic ingredients.</p>
+      <div class="price">₱60</div>
+    </div>
+
+    <div class="menu-item">
+      <h3>Pastries</h3>
+      <p>Delicious baked treats to pair with your drink.</p>
+      <div class="price">₱35</div>
+    </div>
+
+    <div class="menu-item">
+      <h3>Hot Chocolate</h3>
+      <p>Rich and creamy chocolate drink topped with foam.</p>
+      <div class="price">₱55</div>
+    </div>
+
+    <div class="menu-item">
+      <h3>Tea</h3>
+      <p>Relaxing herbal tea blends served hot or cold.</p>
+      <div class="price">₱45</div>
+    </div>
+  </section>
+
+</body>
+</html>
