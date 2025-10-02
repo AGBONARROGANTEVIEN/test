@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity 6 - Responsive Grid Gallery (No Images)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+    }
+
+    h1 {
+      text-align: center;
+      background: #333;
+      color: white;
+      padding: 15px;
+      margin: 0;
+    }
+
+    /* ✅ GALLERY GRID CONTAINER */
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr; /* Mobile: 1 column */
+      gap: 10px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    /* ✅ GALLERY BOX ITEMS */
+    .item {
+      background: #3498db; /* default color */
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 150px;
+      font-size: 20px;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: transform 0.3s;
+    }
+
+    .item:nth-child(2) { background: #e74c3c; } /* red */
+    .item:nth-child(3) { background: #2ecc71; } /* green */
+    .item:nth-child(4) { background: #9b59b6; } /* purple */
+    .item:nth-child(5) { background: #f1c40f; } /* yellow */
+    .item:nth-child(6) { background: #e67e22; } /* orange */
+
+    .item:hover {
+      transform: scale(1.05);
+    }
+
+    /* ✅ For tablets: 2 columns */
+    @media (min-width: 600px) {
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* ✅ For desktops: 3 columns */
+    @media (min-width: 992px) {
+      .gallery {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Activity 6: Responsive Grid Gallery</h1>
+
+  <div class="gallery">
+    <div class="item">Box 1</div>
+    <div class="item">Box 2</div>
+    <div class="item">Box 3</div>
+    <div class="item">Box 4</div>
+    <div class="item">Box 5</div>
+    <div class="item">Box 6</div>
+  </div>
+
+</body>
+</html>
