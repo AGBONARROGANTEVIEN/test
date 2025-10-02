@@ -3,8 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Café Contact Page</title>
+  <title>Café Contact Page with Map Search</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    iframe {
+      border: 0;
+    }
+  </style>
 </head>
 <body>
 
@@ -12,7 +20,8 @@
   <h2 class="text-center mb-4">Contact Us</h2>
 
   <div class="row">
-    <div class="col-md-6">
+    <!-- Contact Form -->
+    <div class="col-md-6 mb-4">
       <form>
         <div class="mb-3">
           <label for="name" class="form-label">Name</label>
@@ -30,16 +39,44 @@
       </form>
     </div>
 
+    <!-- Map Section -->
     <div class="col-md-6">
+      <div class="mb-3">
+        <label for="searchLocation" class="form-label">Search Location</label>
+        <div class="input-group">
+          <input type="text" id="searchLocation" class="form-control" placeholder="Enter a location (e.g. Manila)">
+          <button class="btn btn-success" onclick="searchMap()">Search</button>
+        </div>
+      </div>
+      
       <div class="ratio ratio-16x9">
-        <!-- Example Google Map embed -->
         <iframe 
+          id="mapFrame"
           src="https://maps.google.com/maps?q=Manila&t=&z=13&ie=UTF8&iwloc=&output=embed"
-          allowfullscreen></iframe>
+          allowfullscreen>
+        </iframe>
       </div>
     </div>
   </div>
 </div>
+
+<!-- JavaScript -->
+<script>
+  function searchMap() {
+    const location = document.getElementById('searchLocation').value;
+    const mapFrame = document.getElementById('mapFrame');
+
+    if (location.trim() === '') {
+      alert('Please enter a location.');
+      return;
+    }
+
+    // Encode the location for URL
+    const encodedLocation = encodeURIComponent(location);
+    const newSrc = `https://maps.google.com/maps?q=${encodedLocation}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+    mapFrame.src = newSrc;
+  }
+</script>
 
 </body>
 </html>
