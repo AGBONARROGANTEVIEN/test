@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Activity 7 - Responsive Menu Page (With Images)</title>
+  <title>Activity 7 - Responsive Menu Page (Clickable Images)</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -23,17 +23,15 @@
       margin: 0;
     }
 
-    /* ✅ MENU GRID CONTAINER */
     .menu {
       display: grid;
-      grid-template-columns: 1fr; /* Mobile: 1 column */
+      grid-template-columns: 1fr;
       gap: 15px;
       padding: 20px;
       max-width: 1200px;
       margin: auto;
     }
 
-    /* ✅ MENU ITEM CARD */
     .menu-item {
       background: white;
       border: 1px solid #ccc;
@@ -48,7 +46,6 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
 
-    /* ✅ MENU ITEM IMAGE */
     .menu-item img {
       width: 100%;
       height: 180px;
@@ -68,24 +65,22 @@
 
     .menu-item p {
       margin: 0 0 8px 0;
-      color: #555;
+      color: #8f0e0e;
       font-size: 14px;
     }
 
     .price {
       font-weight: bold;
-      color: #2ecc71;
+      color: #6011af;
       font-size: 18px;
     }
 
-    /* ✅ For tablets: 2 columns */
     @media (min-width: 600px) {
       .menu {
         grid-template-columns: repeat(2, 1fr);
       }
     }
 
-    /* ✅ For desktops: 3 columns */
     @media (min-width: 992px) {
       .menu {
         grid-template-columns: repeat(3, 1fr);
@@ -102,7 +97,9 @@
 
   <section class="menu">
     <div class="menu-item">
-      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80" alt="Coffee">
+      <a href="https://images.unsplash.com/photo-1509042239860-f550ce710b93" target="_blank">
+        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80" alt="Coffee">
+      </a>
       <div class="menu-content">
         <h3>Coffee</h3>
         <p>Freshly brewed coffee with a rich aroma.</p>
@@ -111,7 +108,9 @@
     </div>
 
     <div class="menu-item">
-      <img src="https://images.unsplash.com/photo-1580717735369-06b8a6f67bf4?auto=format&fit=crop&w=800&q=80" alt="Milk Tea">
+      <a href="https://images.unsplash.com/photo-1580717735369-06b8a6f67bf4" target="_blank">
+        <img src="https://images.unsplash.com/photo-1580717735369-06b8a6f67bf4?auto=format&fit=crop&w=800&q=80" alt="Milk Tea">
+      </a>
       <div class="menu-content">
         <h3>Milk Tea</h3>
         <p>Sweet and creamy milk tea with chewy pearls.</p>
@@ -120,7 +119,9 @@
     </div>
 
     <div class="menu-item">
-      <img src="https://images.unsplash.com/photo-1601050690597-3e3b9c74a8a2?auto=format&fit=crop&w=800&q=80" alt="Sandwich">
+      <a href="https://images.unsplash.com/photo-1601050690597-3e3b9c74a8a2" target="_blank">
+        <img src="https://images.unsplash.com/photo-1601050690597-3e3b9c74a8a2?auto=format&fit=crop&w=800&q=80" alt="Sandwich">
+      </a>
       <div class="menu-content">
         <h3>Sandwich</h3>
         <p>Freshly made sandwich with organic ingredients.</p>
@@ -129,7 +130,9 @@
     </div>
 
     <div class="menu-item">
-      <img src="https://images.unsplash.com/photo-1606813902916-1237b2b4c36a?auto=format&fit=crop&w=800&q=80" alt="Pastries">
+      <a href="https://images.unsplash.com/photo-1606813902916-1237b2b4c36a" target="_blank">
+        <img src="https://images.unsplash.com/photo-1606813902916-1237b2b4c36a?auto=format&fit=crop&w=800&q=80" alt="Pastries">
+      </a>
       <div class="menu-content">
         <h3>Pastries</h3>
         <p>Delicious baked treats to pair with your drink.</p>
@@ -138,7 +141,9 @@
     </div>
 
     <div class="menu-item">
-      <img src="https://images.unsplash.com/photo-1601972599720-5d4e62f8f5de?auto=format&fit=crop&w=800&q=80" alt="Hot Chocolate">
+      <a href="https://images.unsplash.com/photo-1601972599720-5d4e62f8f5de" target="_blank">
+        <img src="https://images.unsplash.com/photo-1601972599720-5d4e62f8f5de?auto=format&fit=crop&w=800&q=80" alt="Hot Chocolate">
+      </a>
       <div class="menu-content">
         <h3>Hot Chocolate</h3>
         <p>Rich and creamy chocolate drink topped with foam.</p>
@@ -147,7 +152,9 @@
     </div>
 
     <div class="menu-item">
-      <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=800&q=80" alt="Tea">
+      <a href="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9" target="_blank">
+        <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=800&q=80" alt="Tea">
+      </a>
       <div class="menu-content">
         <h3>Tea</h3>
         <p>Relaxing herbal tea blends served hot or cold.</p>
