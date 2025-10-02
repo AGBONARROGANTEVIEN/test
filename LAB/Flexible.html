@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity 5 - Flexible Two-Column Layout</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      background: #333;
+      color: white;
+      padding: 15px;
+      margin: 0;
+    }
+
+    /* Container for the two columns */
+    .two-column {
+      display: flex;
+      flex-direction: column;   /* ✅ Default: stacked on small screens */
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .text {
+      flex: 1;
+    }
+
+    .text p {
+      line-height: 1.6;
+    }
+
+    .image {
+      flex: 1;
+    }
+
+    .image img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+    }
+
+    /* ✅ For screens ≥768px: arrange side by side */
+    @media (min-width: 768px) {
+      .two-column {
+        flex-direction: row;   /* side by side */
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Activity 5: Flexible Two-Column Layout</h1>
+
+  <div class="two-column">
+    <div class="text">
+      <h2>Welcome to Our Website</h2>
+      <p>
+        This layout demonstrates how to use Flexbox to create a two-column
+        design that adapts to different screen sizes. On mobile, the text appears
+        above the image. On larger screens, they are displayed side by side.
+      </p>
+    </div>
+
+    <div class="image">
+      <img src="https://via.placeholder.com/500x300" alt="Sample Image">
+    </div>
+  </div>
+
+</body>
+</html>
