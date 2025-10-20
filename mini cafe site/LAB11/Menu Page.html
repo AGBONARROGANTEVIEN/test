@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity 7 - Responsive Menu Page</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f7fa;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      background-color: #ff7b00;
+      color: white;
+      padding: 20px 0;
+      font-size: 28px;
+      font-weight: bold;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+
+    .menu-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 40px;
+    }
+
+    .menu-item {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 280px;
+      padding: 20px;
+      transition: transform 0.2s;
+    }
+
+    .menu-item:hover {
+      transform: scale(1.05);
+    }
+
+    .menu-item img {
+      width: 100%;
+      height: 180px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .menu-item h3 {
+      margin-top: 10px;
+      color: #333;
+    }
+
+    .menu-item p {
+      color: #555;
+      font-size: 15px;
+    }
+
+    .price {
+      color: #ff7b00;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    button {
+      margin-top: 10px;
+      background-color: #ff7b00;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #e56f00;
+    }
+
+    #orderSummary {
+      background-color: #fff;
+      padding: 20px;
+      margin: 20px auto;
+      border-radius: 12px;
+      width: 80%;
+      max-width: 500px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    @media (max-width: 768px) {
+      .menu-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>🍔 TUP Canteen Menu</header>
+
+  <div class="menu-container">
+    <div class="menu-item">
+      <img src="https://images.unsplash.com/photo-1606755962773-0c9e2c22da59" alt="Burger">
+      <h3>Classic Beef Burger</h3>
+      <p>Juicy grilled beef patty with lettuce, tomato, and cheese.</p>
+      <div class="price">₱120</div>
+      <button onclick="orderItem('Classic Beef Burger')">Order Now</button>
+    </div>
+
+    <div class="menu-item">
+      <img src="https://images.unsplash.com/photo-1617196031653-366bb9dbfc7a" alt="Pasta">
+      <h3>Carbonara Pasta</h3>
+      <p>Delicious creamy pasta topped with crispy bacon bits.</p>
+      <div class="price">₱95</div>
+      <button onclick="orderItem('Carbonara Pasta')">Order Now</button>
+    </div>
+
+    <div class="menu-item">
+      <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add" alt="Milk Tea">
+      <h3>Wintermelon Milk Tea</h3>
+      <p>Sweet and refreshing milk tea with chewy pearls.</p>
+      <div class="price">₱85</div>
+      <button onclick="orderItem('Wintermelon Milk Tea')">Order Now</button>
+    </div>
+  </div>
+
+  <div id="orderSummary">
+    <h3>Your Orders:</h3>
+    <ul id="orderList" style="list-style-type:none; padding:0; color:#444;"></ul>
+  </div>
+
+  <script>
+    function orderItem(itemName) {
+      alert("You ordered " + itemName + "!");
+      let orderList = document.getElementById('orderList');
+      let li = document.createElement('li');
+      li.textContent = "• " + itemName;
+      orderList.appendChild(li);
+    }
+  </script>
+
+</body>
+</html>
