@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity 1 - Step-by-Step JS Syntax</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f8f9fa;
+    }
+    h1 { color: #2c3e50; }
+    button {
+      padding: 10px 15px;
+      margin-top: 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover { background-color: #0056b3; }
+    .output-box {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      background-color: #e9ecef;
+      border: 1px solid #ced4da;
+      display: none;
+    }
+    .output-box p {
+      margin: 5px 0;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Activity 1: Step-by-Step JS Syntax and Console</h1>
+  <p>Click the button below to display the result.</p>
+
+  <button onclick="showOutput()">Show Output</button>
+
+  <div class="output-box" id="outputBox">
+    <p id="message1"></p>
+    <p id="message2"></p>
+  </div>
+
+  <script>
+    function showOutput() {
+      let num1 = 10;
+      let num2 = 5;
+      let message1 = "JavaScript Syntax and Console Test";
+      let message2 = "The sum of " + num1 + " and " + num2 + " is " + (num1 + num2);
+
+      document.getElementById("message1").textContent = message1;
+      document.getElementById("message2").textContent = message2;
+
+      document.getElementById("outputBox").style.display = "block";
+      alert(" Output displayed successfully!");
+    }
+  </script>
+</body>
+</html>
