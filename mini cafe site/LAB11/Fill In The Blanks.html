@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity 3 - Fill in the Blanks</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f8f9fa;
+    }
+    h1 { color: #2c3e50; }
+    button {
+      padding: 10px 15px;
+      margin-top: 15px;
+      background-color: #ffc107;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover { background-color: #e0a800; }
+    .output-box {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      background-color: #fff3cd;
+      border: 1px solid #ffeeba;
+      display: none;
+    }
+    .output-box p {
+      margin: 5px 0;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Activity 3: Fill in the Blanks</h1>
+  <p>Click the button below to display your introduction.</p>
+
+  <button onclick="showIntro()">Show Introduction</button>
+
+  <div class="output-box" id="outputBox">
+    <p id="intro"></p>
+  </div>
+
+  <script>
+    function showIntro() {
+      let name = "Princess Vien";
+      let age = 21;
+      let introMessage = "Hi, my name is " + name + " and I am " + age + " years old.";
+
+      document.getElementById("intro").textContent = introMessage;
+      document.getElementById("outputBox").style.display = "block";
+
+      alert("👋 Nice to meet you, " + name + "!");
+    }
+  </script>
+</body>
+</html>
