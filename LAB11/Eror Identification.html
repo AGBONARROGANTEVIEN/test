@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Activity 1 - Step-by-Step JS Syntax</title>
+  <title>Activity 2 - Error Identification</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,14 +14,14 @@
     button {
       padding: 10px 15px;
       margin-top: 15px;
-      background-color: #007bff;
+      background-color: #28a745;
       color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       font-size: 16px;
     }
-    button:hover { background-color: #0056b3; }
+    button:hover { background-color: #1e7e34; }
     .output-box {
       margin-top: 20px;
       padding: 15px;
@@ -39,10 +39,10 @@
 </head>
 <body>
 
-  <h1>Activity 1: Step-by-Step JS Syntax and Console</h1>
-  <p>Click the button below to display the result.</p>
+  <h1>Activity 2: Error Identification (Fixed)</h1>
+  <p>Click the button below to display the corrected output.</p>
 
-  <button onclick="showOutput()">Show Output</button>
+  <button onclick="showFixedOutput()">Show Corrected Output</button>
 
   <div class="output-box" id="outputBox">
     <p id="message1"></p>
@@ -50,17 +50,16 @@
   </div>
 
   <script>
-    function showOutput() {
-      let num1 = 10;
-      let num2 = 5;
-      let message1 = "JavaScript Syntax and Console Test";
-      let message2 = "The sum of " + num1 + " and " + num2 + " is " + (num1 + num2);
+    function showFixedOutput() {
+      let layout = "p5 by 4 layout";
+      let message = "This is a text with " + layout + ".";
+      let boxInfo = "Box has multiple entities and 5 classes.";
 
-      document.getElementById("message1").textContent = message1;
-      document.getElementById("message2").textContent = message2;
+      document.getElementById("message1").textContent = message;
+      document.getElementById("message2").textContent = boxInfo;
 
       document.getElementById("outputBox").style.display = "block";
-      alert(" Output displayed successfully!");
+      alert(" Errors fixed successfully!");
     }
   </script>
 </body>
