@@ -6,64 +6,143 @@
   <title>Activity 5 - Simple Calculator</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
-      text-align: center;
-      margin-top: 50px;
+      background-color: #f4f7fa;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
-    input {
-      padding: 8px;
-      margin: 5px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      width: 80px;
-      text-align: center;
+
+    .calculator {
+      background-color: #222;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      padding: 20px;
+      width: 320px;
     }
+
+    .display {
+      background-color: #111;
+      color: #0ff;
+      font-size: 2em;
+      text-align: right;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      height: 60px;
+      overflow-x: auto;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
     button {
-      background-color: #28a745;
+      background-color: #333;
       color: white;
       border: none;
-      padding: 10px 20px;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #1e7e34;
-    }
-    #resultBox {
-      margin-top: 20px;
+      padding: 20px;
+      border-radius: 10px;
       font-size: 18px;
-      font-weight: bold;
-      color: #333;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background-color: #444;
+    }
+
+    .operator {
+      background-color: #ff7b00;
+    }
+
+    .operator:hover {
+      background-color: #e56f00;
+    }
+
+    .equal {
+      background-color: #00b894;
+      grid-column: span 2;
+    }
+
+    .equal:hover {
+      background-color: #019170;
+    }
+
+    .clear {
+      background-color: #d63031;
+      grid-column: span 2;
+    }
+
+    .clear:hover {
+      background-color: #b32021;
     }
   </style>
 </head>
 <body>
+  <div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+      <button onclick="appendNumber('7')">7</button>
+      <button onclick="appendNumber('8')">8</button>
+      <button onclick="appendNumber('9')">9</button>
+      <button class="operator" onclick="appendOperator('/')">÷</button>
 
-  <h1>Activity 5: Simple Calculator</h1>
-  <p>Enter two numbers and click "Add" to see the sum.</p>
+      <button onclick="appendNumber('4')">4</button>
+      <button onclick="appendNumber('5')">5</button>
+      <button onclick="appendNumber('6')">6</button>
+      <button class="operator" onclick="appendOperator('*')">×</button>
 
-  <input type="number" id="num1" placeholder="Number 1">
-  <input type="number" id="num2" placeholder="Number 2">
-  <button onclick="calculateSum()">Add</button>
+      <button onclick="appendNumber('1')">1</button>
+      <button onclick="appendNumber('2')">2</button>
+      <button onclick="appendNumber('3')">3</button>
+      <button class="operator" onclick="appendOperator('-')">−</button>
 
-  <div id="resultBox"></div>
+      <button onclick="appendNumber('0')">0</button>
+      <button onclick="appendDot()">.</button>
+      <button class="equal" onclick="calculateResult()">=</button>
+      <button class="operator" onclick="appendOperator('+')">+</button>
+
+      <button class="clear" onclick="clearDisplay()">C</button>
+    </div>
+  </div>
 
   <script>
-    function calculateSum() {
-      let n1 = parseFloat(document.getElementById('num1').value);
-      let n2 = parseFloat(document.getElementById('num2').value);
+    let display = document.getElementById('display');
+    let currentInput = '';
 
-      if (isNaN(n1) || isNaN(n2)) {
-        alert(" Please enter both numbers!");
-        return;
+    function appendNumber(num) {
+      if (currentInput === '0') currentInput = '';
+      currentInput += num;
+      display.textContent = currentInput;
+    }
+
+    function appendOperator(op) {
+      if (currentInput === '') return;
+      currentInput += ' ' + op + ' ';
+      display.textContent = currentInput;
+    }
+
+    function appendDot() {
+      currentInput += '.';
+      display.textContent = currentInput;
+    }
+
+    function clearDisplay() {
+      currentInput = '';
+      display.textContent = '0';
+    }
+
+    function calculateResult() {
+      try {
+        currentInput = eval(currentInput).toString();
+        display.textContent = currentInput;
+      } catch (error) {
+        display.textContent = 'Error';
       }
-
-      let sum = n1 + n2;
-      document.getElementById('resultBox').innerText = "The sum is: " + sum;
-      alert(" Calculation successful!");
     }
   </script>
 </body>
