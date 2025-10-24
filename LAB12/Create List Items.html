@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create List Items with Loops</title>
+<style>
+    body { font-family: Arial, sans-serif; text-align: center; background: #f4f7fc; padding: 40px; }
+    h1 { color: #1976d2; }
+    ul { list-style: square; text-align: left; display: inline-block; margin-top: 20px; }
+    button { padding: 10px 20px; border: none; border-radius: 8px; background: #1976d2; color: white; cursor: pointer; }
+    button:hover { background: #145ea8; }
+</style>
+</head>
+<body>
+
+<h1>Activity 4: Create List Items with Loops</h1>
+<button onclick="generateList()">Generate Fruits</button>
+<ul id="fruitList"></ul>
+
+<script>
+function generateList() {
+    const fruits = ["Apple", "Banana", "Mango", "Grapes", "Orange"];
+    const list = document.getElementById("fruitList");
+    list.innerHTML = "";
+    for (let i = 0; i < fruits.length; i++) {
+        const li = document.createElement("li");
+        li.textContent = fruits[i];
+        list.appendChild(li);
+    }
+}
+</script>
+
+</body>
+</html>
