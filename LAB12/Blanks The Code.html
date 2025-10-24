@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fill-in-the-Blanks Loop</title>
+<style>
+    body { font-family: Arial, sans-serif; text-align: center; background: #f9f9f9; padding: 40px; }
+    h1 { color: #1976d2; }
+    button { padding: 10px 20px; border: none; border-radius: 6px; background: #1976d2; color: white; cursor: pointer; }
+    button:hover { background: #145ea8; }
+    #output { margin-top: 20px; font-size: 18px; }
+</style>
+</head>
+<body>
+
+<h1>Activity 3: Fill-in-the-Blanks Loop (Display Numbers)</h1>
+<button onclick="showNumbers()">Display Numbers</button>
+<div id="output"></div>
+
+<script>
+function showNumbers() {
+    let result = "";
+    for (let i = 1; i <= 5; i++) {
+        result += "Number: " + i + "<br>";
+    }
+    document.getElementById("output").innerHTML = result;
+}
+</script>
+
+</body>
+</html>
