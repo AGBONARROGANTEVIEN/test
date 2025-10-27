@@ -56,8 +56,6 @@
     transition:background .3s;
   }
   #go-btn:hover {background:#004999;}
-
-  /* COUNTDOWN */
   #countdown {
     font-size:3rem;
     font-weight:bold;
@@ -103,7 +101,17 @@
   nav li:nth-child(10) a {background:#54a0ff;}
   nav a:hover {opacity:0.8;}
 
-  section {padding:2rem 1rem;}
+  section {
+    padding:2rem 1rem;
+    display:none; /* hidden by default */
+    opacity:0;
+    transition:opacity 0.8s ease;
+  }
+  section.active {
+    display:block;
+    opacity:1;
+  }
+
   table {width:100%; border-collapse:collapse; margin-top:1rem;}
   th,td {border:1px solid #ccc; padding:.5rem; background:#fff; color:#000;}
   th {background:#0066cc; color:#fff;}
@@ -134,7 +142,7 @@
   <div id="countdown"></div>
 </div>
 
-<!-- WHOLE WEBSITE (hidden by default) -->
+<!-- MAIN CONTENT -->
 <div id="main-content" style="display:none;">
 
 <header>
@@ -155,6 +163,7 @@
   </nav>
 </header>
 
+<!-- ALL YOUR ORIGINAL SECTIONS (unchanged) -->
 <section id="welcome">
   <h2>Budget Travel Planning</h2>
   <p>Plan your next trip on a budget. Explore affordable flights, accommodation, food, transport, activities, safety tips, hotlines, and currency conversion.</p>
@@ -279,14 +288,14 @@ const translations = {
   kr: ["예산 여행 계획에 오신 것을 환영합니다","현명하게 계획하고 더 멀리 여행하세요 — 저렴한 여행, 식사 및 숙박을 발견하세요!"]
 };
 
-// Handle language change
+// Change language
 document.getElementById("lang").addEventListener("change", (e)=>{
   const lang = e.target.value;
   document.getElementById("welcome-text").textContent = translations[lang][0];
   document.getElementById("welcome-desc").textContent = translations[lang][1];
 });
 
-// Go button + countdown animation
+// Go countdown
 document.getElementById("go-btn").addEventListener("click", ()=>{
   const countdown = document.getElementById("countdown");
   const welcome = document.getElementById("welcome-screen");
@@ -306,6 +315,20 @@ document.getElementById("go-btn").addEventListener("click", ()=>{
       }, 1000);
     }
   }, 800);
+});
+
+// Show one section at a time
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll("nav a");
+
+navLinks.forEach(link=>{
+  link.addEventListener("click", e=>{
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute("href"));
+    sections.forEach(sec=>sec.classList.remove("active"));
+    target.classList.add("active");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 });
 
 // Currency converter
