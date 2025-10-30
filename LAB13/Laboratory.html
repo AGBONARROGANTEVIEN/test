@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Input Display</title>
+</head>
+<body>
+    <form id="myForm" onsubmit="handleSubmit(event)">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    <div id="displayArea"></div>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent page refresh
+
+            var name = document.getElementById('name').value;
+            document.getElementById('displayArea').innerText = "You entered: " + name;
+        }
+    </script>
+</body>
+</html>
