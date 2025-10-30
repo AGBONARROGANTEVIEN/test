@@ -1,23 +1,137 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Form Input Display</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Feedback Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f3f3;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2, h3 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      margin-top: 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .success {
+      color: green;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 15px;
+    }
+
+    li {
+      background: #f9f9f9;
+      padding: 8px;
+      border-radius: 5px;
+      margin-bottom: 8px;
+      border: 1px solid #ddd;
+    }
+
+    li strong {
+      color: #333;
+    }
+  </style>
 </head>
 <body>
-    <form id="myForm" onsubmit="handleSubmit(event)">
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name"><br><br>
-        <input type="submit" value="Submit">
+
+  <div class="container">
+    <h2>Feedback Form</h2>
+
+    <form id="feedbackForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Enter your name">
+
+      <label for="message">Message:</label>
+      <textarea id="message" rows="3" placeholder="Write your feedback..."></textarea>
+
+      <button type="submit">Submit</button>
+      <p class="success" id="successMsg"></p>
     </form>
-    <div id="displayArea"></div>
 
-    <script>
-        function handleSubmit(event) {
-            event.preventDefault(); // Prevent page refresh
+    <h3>Feedback List</h3>
+    <ul id="feedbackList"></ul>
+  </div>
 
-            var name = document.getElementById('name').value;
-            document.getElementById('displayArea').innerText = "You entered: " + name;
-        }
-    </script>
+  <script>
+    const form = document.getElementById('feedbackForm');
+    const successMsg = document.getElementById('successMsg');
+    const feedbackList = document.getElementById('feedbackList');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (name === '' || message === '') {
+        alert('Please fill out all fields!');
+        return;
+      }
+
+      // Create list item
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>${name}</strong>: ${message}`;
+      feedbackList.appendChild(li);
+
+      // Show success message
+      successMsg.textContent = 'Feedback submitted successfully!';
+
+      // Clear fields
+      form.reset();
+
+      // Remove success message after 3 seconds
+      setTimeout(() => {
+        successMsg.textContent = '';
+      }, 3000);
+    });
+  </script>
+
 </body>
 </html>
