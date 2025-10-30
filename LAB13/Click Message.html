@@ -3,16 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Activity 4 - Button Click</title>
+  <title>Activity 1 - Click a Message  Laboratory Exercise</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 40px 30px;
+      width: 420px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .container:hover {
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 25px;
+    }
+
+    button {
+      background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #fad0c4, #ff9a9e);
+      transform: scale(1.05);
+    }
+
+    #message {
+      margin-top: 25px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #2d3436;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    #message.show {
+      opacity: 1;
+    }
+  </style>
 </head>
 <body>
-  <h2>Activity 4: Button Click Message</h2>
-  <button onclick="showMessage()">Click Me</button>
+
+  <div class="container">
+    <h2>Activity 1: Click a Message</h2>
+    <button onclick="showMessage()">Click Me!</button>
+    <p id="message"></p>
+  </div>
 
   <script>
     function showMessage() {
-      alert("Thanks for clicking!");
+      const message = document.getElementById("message");
+      message.textContent = "🌸 Hello! Welcome to my beautiful webpage!";
+      message.classList.add("show");
     }
   </script>
+
 </body>
 </html>

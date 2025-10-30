@@ -3,24 +3,149 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Activity 5 - Calculator</title>
+  <title>Activity 4 - Simple Calculator Laboratory Exercise</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .calculator {
+      background: #fff;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      width: 320px;
+      transition: transform 0.3s ease;
+    }
+
+    .calculator:hover {
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      height: 60px;
+      text-align: right;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+      font-size: 22px;
+      margin-bottom: 20px;
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      padding: 18px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #fad0c4, #ff9a9e);
+      transform: scale(1.05);
+    }
+
+    button.equal {
+      grid-column: span 2;
+      background: linear-gradient(90deg, #84fab0, #8fd3f4);
+    }
+
+    button.equal:hover {
+      background: linear-gradient(90deg, #8fd3f4, #84fab0);
+    }
+
+    button.clear {
+      background: linear-gradient(90deg, #ffb199, #ff0844);
+    }
+
+    button.clear:hover {
+      background: linear-gradient(90deg, #ff0844, #ffb199);
+    }
+  </style>
 </head>
 <body>
-  <h2>Activity 5: Simple Calculator</h2>
 
-  <input type="number" id="num1" placeholder="Enter first number">
-  <input type="number" id="num2" placeholder="Enter second number">
-  <button onclick="addNumbers()">Add</button>
+  <div class="calculator">
+    <h2>Activity 4: Simple Calculator</h2>
+    <input type="text" id="display" readonly>
 
-  <h3>Result: <span id="result">0</span></h3>
+    <div class="buttons">
+      <button onclick="appendNumber('7')">7</button>
+      <button onclick="appendNumber('8')">8</button>
+      <button onclick="appendNumber('9')">9</button>
+      <button onclick="appendOperator('/')">÷</button>
+
+      <button onclick="appendNumber('4')">4</button>
+      <button onclick="appendNumber('5')">5</button>
+      <button onclick="appendNumber('6')">6</button>
+      <button onclick="appendOperator('*')">×</button>
+
+      <button onclick="appendNumber('1')">1</button>
+      <button onclick="appendNumber('2')">2</button>
+      <button onclick="appendNumber('3')">3</button>
+      <button onclick="appendOperator('-')">−</button>
+
+      <button onclick="appendNumber('0')">0</button>
+      <button onclick="appendOperator('.')">.</button>
+      <button onclick="calculate()" class="equal">=</button>
+      <button onclick="appendOperator('+')">+</button>
+
+      <button onclick="clearDisplay()" class="clear">C</button>
+    </div>
+  </div>
 
   <script>
-    function addNumbers() {
-      let n1 = parseFloat(document.getElementById("num1").value);
-      let n2 = parseFloat(document.getElementById("num2").value);
-      let sum = n1 + n2;
-      document.getElementById("result").innerText = sum;
+    const display = document.getElementById("display");
+
+    function appendNumber(num) {
+      display.value += num;
+    }
+
+    function appendOperator(op) {
+      display.value += op;
+    }
+
+    function clearDisplay() {
+      display.value = "";
+    }
+
+    function calculate() {
+      try {
+        display.value = eval(display.value);
+      } catch {
+        display.value = "Error";
+      }
     }
   </script>
+
 </body>
 </html>
