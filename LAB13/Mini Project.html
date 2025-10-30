@@ -1,71 +1,162 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Feedback Form</title>
+  <title>Customer Feedback</title>
   <style>
+    /* General Page Styling */
     body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      background: #fafafa;
+      font-family: "Poppins", Arial, sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #acb6e5);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      padding: 40px 20px;
     }
-    form {
+
+    /* Feedback Card */
+    .container {
       background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      max-width: 400px;
-    }
-    input, textarea {
+      padding: 30px 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      max-width: 450px;
       width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+      transition: transform 0.3s ease;
     }
+
+    .container:hover {
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #555;
+      display: block;
+      margin-top: 10px;
+    }
+
+    /* Inputs & Textarea */
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border: 2px solid #eee;
+      border-radius: 10px;
+      font-size: 15px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      resize: none;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #74b9ff;
+      box-shadow: 0 0 5px rgba(116, 185, 255, 0.5);
+      outline: none;
+    }
+
+    /* Submit Button */
     button {
       background: #4CAF50;
       color: white;
       border: none;
-      padding: 10px 15px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 16px;
       cursor: pointer;
-      border-radius: 5px;
+      margin-top: 15px;
+      width: 100%;
+      transition: background 0.3s ease, transform 0.2s ease;
     }
+
+    button:hover {
+      background: #43a047;
+      transform: scale(1.03);
+    }
+
+    /* Success Message */
     .success {
-      color: green;
+      color: #2e7d32;
       margin-top: 10px;
+      font-weight: 500;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
     }
+
+    /* Feedback List */
+    h3 {
+      margin-top: 40px;
+      color: #222;
+      text-align: center;
+    }
+
     ul {
-      margin-top: 20px;
+      list-style: none;
+      padding: 0;
+      margin-top: 15px;
     }
+
     li {
       background: #f1f1f1;
-      margin-bottom: 5px;
-      padding: 8px;
-      border-radius: 5px;
+      margin-bottom: 8px;
+      padding: 10px;
+      border-radius: 8px;
+      line-height: 1.5;
+    }
+
+    li strong {
+      color: #2c3e50;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .container {
+        padding: 25px;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <h2>Customer Feedback</h2>
-  <form id="feedbackForm">
-    <label>Name:</label>
-    <input type="text" id="name" placeholder="Enter your name" />
+  <div class="container">
+    <h2>Customer Feedback</h2>
+    <form id="feedbackForm">
+      <label>Name:</label>
+      <input type="text" id="name" placeholder="Enter your name" />
 
-    <label>Email:</label>
-    <input type="email" id="email" placeholder="Enter your email" />
+      <label>Email:</label>
+      <input type="email" id="email" placeholder="Enter your email" />
 
-    <label>Feedback Message:</label>
-    <textarea id="message" rows="4" placeholder="Write your feedback..."></textarea>
+      <label>Feedback Message:</label>
+      <textarea id="message" rows="4" placeholder="Write your feedback..."></textarea>
 
-    <button type="submit">Submit</button>
-    <p id="successMsg" class="success"></p>
-  </form>
+      <button type="submit">Submit Feedback</button>
+      <p id="successMsg" class="success"></p>
+    </form>
 
-  <h3>Previous Feedback</h3>
-  <ul id="feedbackList"></ul>
+    <h3>Previous Feedback</h3>
+    <ul id="feedbackList"></ul>
+  </div>
 
   <script>
     const form = document.getElementById('feedbackForm');
@@ -81,27 +172,27 @@
 
       // Validation rules
       if (name === '') {
-        alert('Name cannot be empty!');
+        alert('Please enter your name!');
         return;
       }
 
-      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,}$/;
       if (!email.match(emailPattern)) {
-        alert('Please enter a valid email!');
+        alert('Please enter a valid email address!');
         return;
       }
 
       if (message.length <= 5) {
-        alert('Message must be more than 5 characters!');
+        alert('Your feedback must be at least 6 characters long!');
         return;
       }
 
-      // If all validations pass
-      successMsg.textContent = "Feedback submitted successfully!";
+      // Success message
+      successMsg.textContent = " Feedback submitted successfully!";
 
       // Append feedback to list
       const li = document.createElement('li');
-      li.innerHTML = `<strong>${name}</strong> (${email}): ${message}`;
+      li.innerHTML = `<strong>${name}</strong> (${email})<br>${message}`;
       feedbackList.appendChild(li);
 
       // Clear form
@@ -113,5 +204,6 @@
       }, 3000);
     });
   </script>
+
 </body>
 </html>
