@@ -3,71 +3,118 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple Form</title>
+  <title>Simple Form | Laboratory Exercise</title>
   <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-      margin: 40px;
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
     }
-    form {
+
+    .container {
       background-color: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      max-width: 400px;
+      width: 400px;
+      padding: 30px 25px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      transition: transform 0.3s ease;
     }
+
+    .container:hover {
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
     label {
       display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
+      text-align: left;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #555;
     }
+
     input {
       width: 100%;
-      padding: 8px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+      padding: 10px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      transition: border 0.3s ease;
     }
+
+    input:focus {
+      border-color: #ff85a2;
+      outline: none;
+    }
+
     button {
-      background-color: #007bff;
+      background: linear-gradient(90deg, #ff9a9e, #fad0c4);
       color: white;
       border: none;
-      padding: 10px 15px;
-      border-radius: 5px;
+      padding: 12px 25px;
+      border-radius: 10px;
       cursor: pointer;
+      font-weight: bold;
+      letter-spacing: 1px;
+      transition: background 0.3s ease, transform 0.2s;
     }
+
     button:hover {
-      background-color: #0056b3;
+      background: linear-gradient(90deg, #fad0c4, #ff9a9e);
+      transform: scale(1.05);
+    }
+
+    .message {
+      margin-top: 15px;
+      font-weight: 600;
+      color: #2d3436;
     }
   </style>
 </head>
 <body>
 
-  <h2>Laboratory Exercise: Simple Form</h2>
-  <form id="contactForm" onsubmit="return submitForm()">
-    <label for="name">Full Name:</label>
-    <input type="text" id="name" placeholder="Enter your name" required>
+  <div class="container">
+    <h2>Simple Form</h2>
+    <form id="contactForm" onsubmit="return submitForm()">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Enter your full name" required>
 
-    <label for="email">Email Address:</label>
-    <input type="email" id="email" placeholder="Enter your email" required>
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
 
-    <button type="submit">Submit</button>
-  </form>
+      <button type="submit">Submit</button>
+    </form>
+    <p class="message" id="message"></p>
+  </div>
 
   <script>
     function submitForm() {
-      const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value;
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message");
 
       if (name && email) {
-        alert("Thank you, " + name + "! Your email (" + email + ") has been recorded.");
-        return false; // Prevents actual page reload
+        message.textContent = `🌸 Thank you, ${name}! Your email (${email}) has been recorded successfully.`;
+        message.style.color = "#2ecc71";
+      } else {
+        message.textContent = "⚠️ Please fill in all required fields.";
+        message.style.color = "#e74c3c";
       }
-      else {
-        alert("Please fill in all fields.");
-        return false;
-      }
+      return false; // Prevent form from reloading page
     }
   </script>
 
