@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Activity 6 - Reservation Form</title>
+<style>
+body{font-family:Arial;background:#eef2ff;padding:25px;}
+.container{background:white;padding:20px;width:350px;margin:auto;border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);}
+input{width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:5px;}
+button{background:#6a5acd;color:white;border:none;padding:10px;width:100%;border-radius:5px;cursor:pointer;}
+#output{margin-top:15px;background:#fff;padding:10px;border-radius:5px;}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>Reservation Form</h2>
+
+<input type="text" id="name" placeholder="Name">
+<input type="date" id="date">
+<input type="time" id="time">
+<input type="number" id="guests" placeholder="Guests">
+
+<button onclick="reserve()">Submit</button>
+
+<div id="output"></div>
+</div>
+
+<script>
+function reserve(){
+  let name = document.getElementById("name").value;
+  let date = document.getElementById("date").value;
+  let time = document.getElementById("time").value;
+  let guests = document.getElementById("guests").value;
+
+  if(!name || !date || !time || !guests){
+    alert("Please fill in all fields!");
+    return;
+  }
+
+  document.getElementById("output").innerHTML =
+  `<b>Reservation Details:</b><br>
+   Name: ${name}<br>
+   Date: ${date}<br>
+   Time: ${time}<br>
+   Guests: ${guests}`;
+}
+</script>
+
+</body>
+</html>
