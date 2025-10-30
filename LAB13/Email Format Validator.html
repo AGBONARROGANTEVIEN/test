@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Activity 5 - Email Validator</title>
+<style>
+body{font-family:Arial;background:#fafafa;padding:30px;}
+.container{background:white;padding:20px;width:330px;margin:auto;border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);}
+input{width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:5px;}
+button{background:#007bff;color:white;border:none;padding:10px;width:100%;border-radius:5px;cursor:pointer;}
+#msg{margin-top:10px;font-weight:bold;}
+.error{color:red;}
+.success{color:green;}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>Email Check</h2>
+
+<input type="text" id="email" placeholder="Enter email">
+<button onclick="validateEmail()">Submit</button>
+
+<p id="msg"></p>
+</div>
+
+<script>
+function validateEmail(){
+  let email = document.getElementById("email").value;
+  let msg = document.getElementById("msg");
+
+  if(email.includes("@") && email.includes(".")){
+    msg.innerHTML = "✅ Email accepted!";
+    msg.className = "success";
+  } else {
+    msg.innerHTML = "❌ Invalid email format";
+    msg.className = "error";
+  }
+}
+</script>
+
+</body>
+</html>
