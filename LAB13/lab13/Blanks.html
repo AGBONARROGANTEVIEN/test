@@ -3,18 +3,112 @@
 <head>
   <meta charset="UTF-8">
   <title>Feedback Array</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .feedback-container {
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      background: #e9ecef;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    li:hover {
+      background: #dfe6ed;
+    }
+
+    button {
+      margin-top: 15px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
   <h2>Feedback Array Test</h2>
 
-  <script>
-    let feedbacks = [];
-    feedbacks.push("Great coffee");
-    feedbacks.push("Nice ambiance");
+  <div class="feedback-container">
+    <ul id="feedbackList"></ul>
 
-    for (let i = 0; i < feedbacks.length; i++) {
-      console.log(feedbacks[i]);
+    <input type="text" id="newFeedback" placeholder="Add new feedback...">
+    <button onclick="addFeedback()">Add Feedback</button>
+  </div>
+
+  <script>
+    // Initialize array with default feedbacks
+    let feedbacks = ["Great coffee", "Nice ambiance"];
+
+    // Function to show feedbacks on page
+    function displayFeedbacks() {
+      const list = document.getElementById("feedbackList");
+      list.innerHTML = ""; // clear old list
+      for (let i = 0; i < feedbacks.length; i++) {
+        const li = document.createElement("li");
+        li.textContent = feedbacks[i];
+        list.appendChild(li);
+      }
+      console.log(feedbacks); // still shows in console
     }
+
+    // Function to add new feedback
+    function addFeedback() {
+      const newFeedback = document.getElementById("newFeedback").value.trim();
+      if (newFeedback === "") {
+        alert("Please enter your feedback before adding!");
+        return;
+      }
+      feedbacks.push(newFeedback);
+      document.getElementById("newFeedback").value = ""; // clear input
+      displayFeedbacks(); // refresh list
+    }
+
+    // Show initial feedbacks on load
+    displayFeedbacks();
   </script>
 </body>
 </html>
+
