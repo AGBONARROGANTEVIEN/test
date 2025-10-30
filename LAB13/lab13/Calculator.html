@@ -1,118 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple Calculator</title>
+<title>Simple Calculator</title>
+<style>
+  .calculator {
+    width: 250px;
+    margin: 50px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+  }
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f2f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+  .display {
+    width: 94%;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    text-align: right;
+    font-size: 20px;
+  }
 
-    .calculator {
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      width: 280px;
-      text-align: center;
-    }
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 5px;
+  }
 
-    h2 {
-      margin-bottom: 20px;
-      color: #333;
-    }
+  button {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #eee;
+    cursor: pointer;
+  }
 
-    input[type="number"] {
-      width: 80%;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      text-align: center;
-    }
+  button:hover {
+    background-color: #ddd;
+  }
 
-    button {
-      width: 45%;
-      padding: 10px;
-      margin: 5px;
-      border: none;
-      border-radius: 8px;
-      background-color: #007BFF;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+  .operator {
+    background-color: #f0ad4e;
+    color: white;
+  }
 
-    button:hover {
-      background-color: #0056b3;
-    }
-
-    #result {
-      margin-top: 20px;
-      font-size: 18px;
-      font-weight: bold;
-      color: #333;
-    }
-  </style>
+  .operator:hover {
+    background-color: #eea236;
+  }
+</style>
 </head>
 <body>
 
-  <div class="calculator">
-    <h2>Simple Calculator</h2>
+<div class="calculator">
+  <input type="text" class="display" id="display" disabled>
+  <div class="buttons">
+    <button onclick="appendToDisplay('7')">7</button>
+    <button onclick="appendToDisplay('8')">8</button>
+    <button onclick="appendToDisplay('9')">9</button>
+    <button onclick="clearDisplay()" class="operator">C</button>
 
-    <input type="number" id="num1" placeholder="Enter first number">
-    <input type="number" id="num2" placeholder="Enter second number">
+    <button onclick="appendToDisplay('4')">4</button>
+    <button onclick="appendToDisplay('5')">5</button>
+    <button onclick="appendToDisplay('6')">6</button>
+    <button onclick="appendToDisplay('+')" class="operator">+</button>
 
-    <div>
-      <button onclick="calculate('add')">+</button>
-      <button onclick="calculate('subtract')">−</button>
-      <button onclick="calculate('multiply')">×</button>
-      <button onclick="calculate('divide')">÷</button>
-    </div>
+    <button onclick="appendToDisplay('1')">1</button>
+    <button onclick="appendToDisplay('2')">2</button>
+    <button onclick="appendToDisplay('3')">3</button>
+    <button onclick="appendToDisplay('-')" class="operator">-</button>
 
-    <p id="result">Result: </p>
+    <button onclick="appendToDisplay('0')">0</button>
+    <button onclick="appendToDisplay('.')">.</button>
+    <button onclick="calculate()" class="operator">=</button>
+    <button onclick="appendToDisplay('*')" class="operator">*</button>
   </div>
+</div>
 
-  <script>
-    function calculate(operation) {
-      const num1 = parseFloat(document.getElementById('num1').value);
-      const num2 = parseFloat(document.getElementById('num2').value);
-      const resultDisplay = document.getElementById('result');
+<script>
+  function appendToDisplay(value) {
+    document.getElementById('display').value += value;
+  }
 
-      // Check for valid numbers
-      if (isNaN(num1) || isNaN(num2)) {
-        resultDisplay.textContent = "⚠️ Please enter valid numbers.";
-        return;
-      }
+  function clearDisplay() {
+    document.getElementById('display').value = '';
+  }
 
-      let result;
-      switch (operation) {
-        case 'add':
-          result = num1 + num2;
-          break;
-        case 'subtract':
-          result = num1 - num2;
-          break;
-        case 'multiply':
-          result = num1 * num2;
-          break;
-        case 'divide':
-          result = num2 !== 0 ? num1 / num2 : "Cannot divide by zero!";
-          break;
-      }
-
-      resultDisplay.textContent = `Result: ${result}`;
+  function calculate() {
+    try {
+      document.getElementById('display').value = eval(document.getElementById('display').value);
+    } catch (error) {
+      document.getElementById('display').value = 'Error';
     }
-  </script>
+  }
+</script>
 
 </body>
 </html>
