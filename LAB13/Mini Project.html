@@ -1,190 +1,116 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mini Project | Interactive Form</title>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback Form</title>
   <style>
-    * {
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
-
     body {
-      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      margin: 0;
-      padding: 40px 10px;
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background: #fafafa;
     }
-
-    .container {
-      background: #ffffff;
-      width: 100%;
-      max-width: 600px;
-      padding: 30px 25px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-      transition: transform 0.3s ease;
-      animation: fadeIn 0.7s ease-in-out;
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
     }
-
-    .container:hover {
-      transform: translateY(-5px);
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
-    h2 {
-      text-align: center;
-      color: #2d3436;
-      margin-bottom: 10px;
-    }
-
-    p.subtitle {
-      text-align: center;
-      color: #636e72;
-      margin-bottom: 20px;
-      font-size: 15px;
-    }
-
-    label {
-      font-weight: 600;
-      color: #555;
-      display: block;
-      margin-bottom: 6px;
-    }
-
     input, textarea {
       width: 100%;
       padding: 10px;
-      border: 2px solid #ddd;
-      border-radius: 10px;
-      margin-bottom: 15px;
-      font-size: 14px;
-      transition: border-color 0.3s ease, box-shadow 0.3s;
+      margin: 8px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
-
-    input:focus, textarea:focus {
-      border-color: #74b9ff;
-      box-shadow: 0 0 8px rgba(116, 185, 255, 0.5);
-      outline: none;
-    }
-
     button {
-      width: 100%;
-      background: linear-gradient(90deg, #74b9ff, #a29bfe);
+      background: #4CAF50;
       color: white;
       border: none;
-      padding: 12px;
-      border-radius: 10px;
+      padding: 10px 15px;
       cursor: pointer;
-      font-weight: bold;
-      letter-spacing: 1px;
-      transition: transform 0.2s, background 0.3s;
+      border-radius: 5px;
     }
-
-    button:hover {
-      transform: scale(1.05);
-      background: linear-gradient(90deg, #a29bfe, #74b9ff);
-    }
-
-    .list-container {
-      margin-top: 30px;
-    }
-
-    .entry {
-      background: #f1f2f6;
-      padding: 15px;
-      border-radius: 12px;
-      margin-bottom: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      animation: pop 0.4s ease;
-    }
-
-    @keyframes pop {
-      from {transform: scale(0.9); opacity: 0;}
-      to {transform: scale(1); opacity: 1;}
-    }
-
-    .entry strong {
-      color: #0984e3;
-    }
-
-    .no-entries {
-      text-align: center;
-      color: #b2bec3;
-      font-style: italic;
+    .success {
+      color: green;
       margin-top: 10px;
+    }
+    ul {
+      margin-top: 20px;
+    }
+    li {
+      background: #f1f1f1;
+      margin-bottom: 5px;
+      padding: 8px;
+      border-radius: 5px;
     }
   </style>
 </head>
-
 <body>
-  <div class="container">
-    <h2> Mini Project: Interactive Form</h2>
-    <p class="subtitle">Fill in your details below and see your entry appear instantly!</p>
 
-    <form id="infoForm">
-      <label for="name">Full Name:</label>
-      <input type="text" id="name" placeholder="Enter your name" required>
+  <h2>Customer Feedback</h2>
+  <form id="feedbackForm">
+    <label>Name:</label>
+    <input type="text" id="name" placeholder="Enter your name" />
 
-      <label for="age">Age:</label>
-      <input type="number" id="age" placeholder="Enter your age" required>
+    <label>Email:</label>
+    <input type="email" id="email" placeholder="Enter your email" />
 
-      <label for="email">Email Address:</label>
-      <input type="email" id="email" placeholder="Enter your email" required>
+    <label>Feedback Message:</label>
+    <textarea id="message" rows="4" placeholder="Write your feedback..."></textarea>
 
-      <label for="message">Short Message:</label>
-      <textarea id="message" rows="3" placeholder="Type something nice..." required></textarea>
+    <button type="submit">Submit</button>
+    <p id="successMsg" class="success"></p>
+  </form>
 
-      <button type="submit">Submit</button>
-    </form>
-
-    <div class="list-container" id="listContainer">
-      <p class="no-entries">No entries yet — be the first to fill out the form!</p>
-    </div>
-  </div>
+  <h3>Previous Feedback</h3>
+  <ul id="feedbackList"></ul>
 
   <script>
-    const form = document.getElementById("infoForm");
-    const listContainer = document.getElementById("listContainer");
+    const form = document.getElementById('feedbackForm');
+    const successMsg = document.getElementById('successMsg');
+    const feedbackList = document.getElementById('feedbackList');
 
-    form.addEventListener("submit", function(event) {
-      event.preventDefault();
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
 
-      const name = document.getElementById("name").value.trim();
-      const age = document.getElementById("age").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const message = document.getElementById("message").value.trim();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
 
-      if (name && age && email && message) {
-        const entry = document.createElement("div");
-        entry.classList.add("entry");
-        entry.innerHTML = `
-          <strong>${name}</strong> (${age} years old)<br>
-           ${email}<br>
-           "${message}"
-        `;
-        listContainer.prepend(entry);
-
-        form.reset();
-
-        const noEntriesMsg = document.querySelector(".no-entries");
-        if (noEntriesMsg) noEntriesMsg.remove();
-
-        alert(` Thank you, ${name}! Your entry has been added.`);
-      } else {
-        alert(" Please complete all fields before submitting!");
+      // Validation rules
+      if (name === '') {
+        alert('Name cannot be empty!');
+        return;
       }
+
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (!email.match(emailPattern)) {
+        alert('Please enter a valid email!');
+        return;
+      }
+
+      if (message.length <= 5) {
+        alert('Message must be more than 5 characters!');
+        return;
+      }
+
+      // If all validations pass
+      successMsg.textContent = "Feedback submitted successfully!";
+
+      // Append feedback to list
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>${name}</strong> (${email}): ${message}`;
+      feedbackList.appendChild(li);
+
+      // Clear form
+      form.reset();
+
+      // Hide success message after a few seconds
+      setTimeout(() => {
+        successMsg.textContent = '';
+      }, 3000);
     });
   </script>
 </body>
