@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity 6 - Form Event</title>
+</head>
+<body>
+  <h2>Activity 6: Form Event</h2>
+  <label for="name">Enter your name:</label>
+  <input type="text" id="name" placeholder="Your name">
+  <button onclick="showAlert()">Submit</button>
+
+  <script>
+    function showAlert() {
+      const name = document.getElementById("name").value;
+      if (name) {
+        alert("Thank you, " + name + "!");
+      } else {
+        alert("Please enter your name first!");
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity 7 - Menu Page</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .menu-item { margin-bottom: 15px; }
+    button { background: green; color: white; padding: 8px 16px; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: darkgreen; }
+  </style>
+</head>
+<body>
+  <h2>Activity 7: Responsive Menu Page</h2>
+
+  <div class="menu-item">
+    <h3>Burger</h3>
+    <p>₱120 - Juicy beef patty with cheese and lettuce</p>
+    <button onclick="order('Burger')">Order Now</button>
+  </div>
+
+  <div class="menu-item">
+    <h3>Fries</h3>
+    <p>₱60 - Crispy golden potato fries</p>
+    <button onclick="order('Fries')">Order Now</button>
+  </div>
+
+  <div id="order-summary"></div>
+
+  <script>
+    function order(item) {
+      alert("You ordered: " + item);
+      document.getElementById("order-summary").innerText = "Current order: " + item;
+    }
+  </script>
+</body>
+</html>

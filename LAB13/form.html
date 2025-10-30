@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 40px;
+    }
+    form {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Laboratory Exercise: Simple Form</h2>
+  <form id="contactForm" onsubmit="return submitForm()">
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" placeholder="Enter your name" required>
+
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" placeholder="Enter your email" required>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    function submitForm() {
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+
+      if (name && email) {
+        alert("Thank you, " + name + "! Your email (" + email + ") has been recorded.");
+        return false; // Prevents actual page reload
+      }
+      else {
+        alert("Please fill in all fields.");
+        return false;
+      }
+    }
+  </script>
+
+</body>
+</html>
