@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Activity 4 - Contact Form with Array</title>
+<style>
+body{font-family:Arial;background:#f6f6f6;padding:30px;}
+.container{background:white;padding:20px;width:350px;margin:auto;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.1);}
+input,textarea{width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:5px;}
+button{background:#4CAF50;color:white;border:none;padding:10px;width:100%;border-radius:5px;cursor:pointer;}
+ul{background:#fff;padding:10px;border-radius:5px;}
+li{background:#eee;padding:6px;margin:5px 0;border-radius:5px;}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>Contact Form</h2>
+
+<label>Name:</label>
+<input type="text" id="name">
+
+<label>Message:</label>
+<textarea id="message"></textarea>
+
+<button onclick="submitData()">Submit</button>
+
+<h3>Submissions:</h3>
+<ul id="list"></ul>
+</div>
+
+<script>
+const data = [];
+
+function submitData(){
+  let name = document.getElementById("name").value;
+  let msg = document.getElementById("message").value;
+
+  if(name==="" || msg===""){
+    alert("Please fill in all fields!");
+    return;
+  }
+
+  data.push({name, msg});
+
+  let list = document.getElementById("list");
+  list.innerHTML = "";
+  data.forEach(item=>{
+    list.innerHTML += `<li><b>${item.name}:</b> ${item.msg}</li>`;
+  });
+
+  document.getElementById("name").value="";
+  document.getElementById("message").value="";
+}
+</script>
+
+</body>
+</html>
