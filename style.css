@@ -4,15 +4,15 @@ body {
 }
 
 header {
-  background: hsl(250, 76%, 29%);
-  color: hsl(69, 69%, 46%);
+  background: hsl(112, 71%, 16%);
+  color: hsl(44, 90%, 32%);
   padding: 5px;
   text-align: center;
 }
 
 header p{
   font-size: 0.9em;
-  color: #c7bac7;  
+  color: #506eae;  
 }
 
 .container {
@@ -22,7 +22,7 @@ header p{
 
 .sidebar {
   width: 20%;
-  background: #c42b2b;
+  background: #9b9b3c;
   padding: 15px;
   box-sizing: border-box;
   border-right: 1px solid #30c947;
@@ -45,7 +45,7 @@ header p{
 .sidebar li ul {
   margin-left: 15px;
   padding-left: 0px;
-  border-left: 2px solid hsl(0, 87%, 41%);
+  border-left: 2px solid hsl(348, 68%, 31%);
 }
 
 .sidebar a {
