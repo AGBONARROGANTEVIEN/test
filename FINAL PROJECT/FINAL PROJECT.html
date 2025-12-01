@@ -113,7 +113,47 @@
     <div class="card" style="margin-top:18px">
       <h3>1-2-3 Start: Types of Cyberbullying</h3>
       <p class="muted small">Reference content section requested.</p>
-      <ol>
+      <div id="cyberTypes">
+        <div class="ct-item" data-open="0" style="padding:10px;border:1px solid #e5e7eb;border-radius:8px;margin-bottom:8px;cursor:pointer;background:white">
+          <strong>Harassment</strong>
+          <div class="ct-content muted small" style="display:none;margin-top:6px">Repeated hostile messages meant to intimidate.</div>
+        </div>
+        <div class="ct-item" data-open="0" style="padding:10px;border:1px solid #e5e7eb;border-radius:8px;margin-bottom:8px;cursor:pointer;background:white">
+          <strong>Impersonation</strong>
+          <div class="ct-content muted small" style="display:none;margin-top:6px">Pretending to be someone else online to cause harm.</div>
+        </div>
+        <div class="ct-item" data-open="0" style="padding:10px;border:1px solid #e5e7eb;border-radius:8px;margin-bottom:8px;cursor:pointer;background:white">
+          <strong>Threats</strong>
+          <div class="ct-content muted small" style="display:none;margin-top:6px">Sending harmful or violent statements digitally.</div>
+        </div>
+        <div class="ct-item" data-open="0" style="padding:10px;border:1px solid #e5e7eb;border-radius:8px;margin-bottom:8px;cursor:pointer;background:white">
+          <strong>Public Shaming</strong>
+          <div class="ct-content muted small" style="display:none;margin-top:6px">Posting embarrassing content to humiliate someone.</div>
+        </div>
+        <div class="ct-item" data-open="0" style="padding:10px;border:1px solid #e5e7eb;border-radius:8px;margin-bottom:8px;cursor:pointer;background:white">
+          <strong>Exclusion</strong>
+          <div class="ct-content muted small" style="display:none;margin-top:6px">Deliberately leaving someone out of online groups.</div>
+        </div>
+        <div class="ct-item" data-open="0" style="padding:10px;border:1px solid #e5e7eb;border-radius:8px;margin-bottom:8px;cursor:pointer;background:white">
+          <strong>Outing / Doxxing</strong>
+          <div class="ct-content muted small" style="display:none;margin-top:6px">Releasing private or personal information.</div>
+        </div>
+        <div class="ct-item" data-open="0" style="padding:10px;border:1px solid #e5e7eb;border-radius:8px;margin-bottom:8px;cursor:pointer;background:white">
+          <strong>Cyberstalking</strong>
+          <div class="ct-content muted small" style="display:none;margin-top:6px">Persistent online monitoring or harassment.</div>
+        </div>
+      </div>
+
+      <script>
+        document.querySelectorAll('.ct-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const content = item.querySelector('.ct-content');
+            const isOpen = item.getAttribute('data-open') === '1';
+            content.style.display = isOpen ? 'none' : 'block';
+            item.setAttribute('data-open', isOpen ? '0' : '1');
+          });
+        });
+      </script>
         <li><strong>Harassment</strong> – Repeated hostile messages meant to intimidate.</li>
         <li><strong>Impersonation</strong> – Pretending to be someone else online to cause harm.</li>
         <li><strong>Threats</strong> – Sending harmful or violent statements digitally.</li>
