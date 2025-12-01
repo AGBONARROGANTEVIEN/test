@@ -1,91 +1,242 @@
 <!doctype html>
-const file=document.getElementById('guideFile').files[0];
-const link=document.getElementById('guideLink').value.trim();
-let payload={id:Date.now(),title,link:null,fileName:null,fileData:null};
-if(file){payload.fileName=file.name; payload.fileData = await fileToBase64(file);} else if(link){payload.link=link}
-DB.guides.push(payload); saveDB(); guideForm.reset(); renderGuides();
-});
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Incident Reporting — Cyberbullying (TUP Manila) Prototype</title>
+  <meta name="description" content="Web-based incident reporting system for cyberbullying cases among ICT students (prototype)." />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Minimal, modern styling (TUP-ish color palette) */
+    :root{--tup:#0b5cff;--accent:#06b6d4;--muted:#6b7280;--bg:#f4f7fb}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:#0f172a}
+    header{background:linear-gradient(90deg,var(--tup),#2b6cb0);color:white;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+    header h1{font-size:1rem;margin:0}
+    .container{max-width:1100px;margin:22px auto;padding:0 18px}
+    .grid{display:grid;grid-template-columns:360px 1fr;gap:18px}
+    .card{background:white;padding:16px;border-radius:12px;box-shadow:0 6px 20px rgba(11,92,255,0.06)}
+    label{display:block;font-weight:600;margin-top:8px}
+    input,textarea,select{width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid #e6eef8;font-size:14px}
+    button{background:var(--tup);color:white;border:0;padding:10px 14px;border-radius:8px;cursor:pointer}
+    .muted{color:var(--muted);font-size:13px}
+    .small{font-size:13px}
+    .list{list-style:none;padding:0;margin:0}
+    .incident-item{display:flex;justify-content:space-between;align-items:flex-start;padding:10px;border-radius:8px;border:1px solid #f1f5f9;margin-bottom:8px}
+    .pill{padding:6px 10px;border-radius:999px;font-weight:600;font-size:12px}
+    .open{background:#e6f7ff;color:#075985}
+    .resolved{background:#ecfdf5;color:#065f46}
+    .svg-ico{width:18px;height:18px;vertical-align:middle;margin-right:6px}
+    .topbar{display:flex;gap:8px;align-items:center}
+    .controls{display:flex;gap:8px}
+    @media(max-width:980px){.grid{grid-template-columns:1fr}.topbar{flex-direction:column;align-items:flex-start}}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Incident Reporting System — Cyberbullying (Prototype)</h1>
+    <div class="muted small">Technological University of the Philippines — Manila</div>
+  </header>
 
+  <div class="container">
+    <div class="topbar" style="margin-bottom:12px">
+      <div class="muted small">Prototype for ICT students — local demo. For production, integrate secure backend & authentication.</div>
+      <div style="margin-left:auto" class="controls">
+        <button id="btn-toggle-admin">Admin: Login</button>
+        <button id="btn-export">Export CSV</button>
+      </div>
+    </div>
 
-function renderGuides(){
-const ul = document.getElementById('guideList'); ul.innerHTML='';
-DB.guides.forEach(g=>{
-const li=document.createElement('li'); li.className='card';
-li.innerHTML = `<strong>${escapeHtml(g.title)}</strong> <div class="muted small">${g.fileName?escapeHtml(g.fileName):g.link||''}</div>`;
-if(g.fileData){const a=document.createElement('a'); a.href=g.fileData; a.target='_blank'; a.textContent=' Open PDF'; li.appendChild(a);} else if(g.link){const a=document.createElement('a'); a.href=g.link; a.target='_blank'; a.textContent=' Open link'; li.appendChild(a);}
-const del=document.createElement('button'); del.textContent='Delete'; del.addEventListener('click',()=>{DB.guides=DB.guides.filter(x=>x.id!==g.id);saveDB();renderGuides();}); li.appendChild(del);
-ul.appendChild(li);
-})
-}
+    <div class="grid">
+      <!-- Left column: Report form + quick stats -->
+      <div>
+        <div class="card">
+          <h2 style="margin:0">Report an Incident</h2>
+          <p class="muted small">Submit details. Reports are stored locally in this prototype.</p>
+          <form id="reportForm">
+            <label>Reporter (optional)</label>
+            <input id="reporter" placeholder="Your name or 'Anonymous'" />
 
+            <label>Victim (required)</label>
+            <input id="victim" placeholder="Student name / handle" required />
 
-// --- Pomodoro ---
-let pomInterval=null; let pomRemaining=0; let pomMode='work';
-const pomLabel=document.getElementById('pomLabel'); const pomTime=document.getElementById('pomTime'); const pomCount=document.getElementById('pomCount');
-document.getElementById('startPom').addEventListener('click',()=>{
-if(pomInterval) return; const w=Number(document.getElementById('workMin').value)||25; pomMode='work'; pomRemaining=w*60; updatePomUI(); pomInterval=setInterval(tickPom,1000);
-});
-document.getElementById('stopPom').addEventListener('click',()=>{clearInterval(pomInterval); pomInterval=null; pomLabel.textContent='Stopped';});
-function tickPom(){ if(pomRemaining<=0){
-// mode switch
-if(pomMode==='work'){ DB.pom.count = (DB.pom.count||0)+1; saveDB(); pomCount.textContent=DB.pom.count; notify('Pomodoro','Work session finished. Take a break!');
-const short=Number(document.getElementById('shortMin').value)||5; pomMode='break'; pomRemaining=short*60;
-} else { notify('Pomodoro','Break over. Back to work!'); const w=Number(document.getElementById('workMin').value)||25; pomMode='work'; pomRemaining=w*60; }
-updatePomUI();
-} else { pomRemaining--; updatePomUI(); }}
-function updatePomUI(){ pomLabel.textContent = pomMode==='work'? 'Work':'Break'; pomTime.textContent = formatTime(pomRemaining); pomCount.textContent = DB.pom.count||0; }
+            <label>Incident Type</label>
+            <select id="type">
+              <option>Harassment</option>
+              <option>Impersonation</option>
+              <option>Threats</option>
+              <option>Public Shaming</option>
+              <option>Others</option>
+            </select>
 
+            <label>Date of incident</label>
+            <input type="date" id="date" required />
 
-// --- Sleep tracker ---
-document.getElementById('sleepForm').addEventListener('submit',e=>{
-e.preventDefault(); const entry = {id:Date.now(), date:document.getElementById('sleepDate').value, hours: Number(document.getElementById('sleepHours').value), quality: Number(document.getElementById('sleepQuality').value)};
-DB.sleep.push(entry); saveDB(); renderSleep(); renderDashboard();
-});
-function renderSleep(){ const ul=document.getElementById('sleepList'); ul.innerHTML=''; DB.sleep.sort((a,b)=> new Date(b.date)-new Date(a.date)); DB.sleep.forEach(s=>{const li=document.createElement('li');li.className='task-item'; li.innerHTML = `<div><strong>${s.date}</strong><div class="muted small">${s.hours} hrs — quality ${s.quality}</div></div>`; const del=document.createElement('button'); del.textContent='Delete'; del.addEventListener('click',()=>{DB.sleep=DB.sleep.filter(x=>x.id!==s.id);saveDB();renderSleep();renderDashboard();}); li.appendChild(del); ul.appendChild(li);}) }
+            <label>Details / Description</label>
+            <textarea id="desc" rows="5" placeholder="Describe what happened (who, where, how)." required></textarea>
 
+            <label>Evidence (optional)</label>
+            <input type="file" id="evidence" accept="image/*,.pdf,.txt" />
 
-// --- Dashboard charts ---
-let tasksChart=null, sleepChart=null;
-function renderDashboard(){
-// tasks stats
-const completed = DB.tasks.filter(t=>t.completed).length;
-const overdue = DB.tasks.filter(t=> t.deadline && !t.completed && new Date(t.deadline) < new Date()).length;
-const pending = DB.tasks.length - completed - overdue;
-document.getElementById('prod-summary').textContent = `${DB.tasks.length} tasks — ${completed} completed, ${pending} pending, ${overdue} overdue.`;
-// tasks chart
-const ctx=document.getElementById('tasksChart'); if(tasksChart) tasksChart.destroy(); tasksChart = new Chart(ctx,{type:'doughnut',data:{labels:['Completed','Pending','Overdue'],datasets:[{data:[completed,pending,overdue]}]}});
+            <div style="margin-top:10px;display:flex;gap:8px">
+              <button type="submit">Submit Report</button>
+              <button type="button" id="btn-clear">Clear</button>
+            </div>
+          </form>
+        </div>
 
+        <div class="card" style="margin-top:12px">
+          <h3 style="margin:0">Quick Stats</h3>
+          <p class="muted small" id="stats">Loading...</p>
+          <canvas id="chartIncidents" height="120"></canvas>
+        </div>
+      </div>
 
-// sleep chart (last 7 days)
-const last7 = DB.sleep.slice(-7);
-const labels = last7.map(s=>s.date);
-const data = last7.map(s=>s.hours);
-const ctx2=document.getElementById('sleepChart'); if(sleepChart) sleepChart.destroy(); sleepChart = new Chart(ctx2,{type:'line',data:{labels, datasets:[{label:'Hours slept',data,fill:false}]}});
-}
+      <!-- Right column: Incident list / admin -->
+      <div>
+        <div class="card" id="listCard">
+          <h2 style="margin:0">Recent Reports</h2>
+          <p class="muted small">Click a report to view details and change status (admin only).</p>
+          <ul id="incidentList" class="list" style="margin-top:12px"></ul>
+        </div>
 
+        <div class="card" id="detailCard" style="margin-top:12px;display:none">
+          <h3 id="detailTitle">Report details</h3>
+          <div id="detailBody"></div>
+          <div style="margin-top:8px;display:flex;gap:8px">
+            <button id="btn-mark-resolved">Mark Resolved</button>
+            <button id="btn-delete">Delete</button>
+            <button id="btn-close-detail">Close</button>
+          </div>
+        </div>
 
-function renderAll(){ renderTasks(); renderGuides(); renderSleep(); renderDashboard(); }
-renderAll();
+        <div class="card" id="adminCard" style="margin-top:12px;display:none">
+          <h3>Admin Panel</h3>
+          <p class="muted small">Simple demo login (no backend). Use password: <strong>tupdmin</strong></p>
+          <div style="display:flex;gap:8px;align-items:center">
+            <input id="adminPass" placeholder="Admin password" type="password" />
+            <button id="btn-admin-login">Login</button>
+            <button id="btn-admin-logout" style="display:none">Logout</button>
+          </div>
+          <hr />
+          <div>
+            <label>Filter by type</label>
+            <select id="filterType"><option value="all">All</option><option>Harassment</option><option>Impersonation</option><option>Threats</option><option>Public Shaming</option><option>Others</option></select>
+            <label>Filter by status</label>
+            <select id="filterStatus"><option value="all">All</option><option>open</option><option>resolved</option></select>
+            <div style="margin-top:8px"><button id="btn-apply-filter">Apply</button></div>
+          </div>
+        </div>
 
+      </div>
+    </div>
 
-// Utilities
-function fileToBase64(file){return new Promise((res,rej)=>{const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(file);})}
-function formatTime(sec){ if(!sec) return '00:00'; const m=Math.floor(sec/60); const s=sec%60; return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0'); }
-function escapeHtml(s){ if(!s) return ''; return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+    <div class="card" style="margin-top:18px">
+      <h3 style="margin:0">Notes for Panel</h3>
+      <ul class="muted small">
+        <li>This is a client-side prototype. For real deployment you need a backend, database, secure auth, file storage, and privacy safeguards.</li>
+        <li>Suggested stack: Node/Express + MongoDB (or Firebase) + JWT auth + cloud storage for evidence files.</li>
+        <li>We can convert this prototype into a multi-page app or React/Vue project upon request.</li>
+      </ul>
+    </div>
 
+  </div>
 
-// Notifications (ask permission)
-function notify(title, body){ if(!('Notification' in window)) return; if(Notification.permission==='granted'){new Notification(title,{body});} else if(Notification.permission!=='denied'){ Notification.requestPermission().then(p=>{ if(p==='granted') new Notification(title,{body});}); }}
+  <script>
+    // Simple localStorage-backed prototype
+    const DB_KEY = 'cyber_incidents_v1';
+    let DB = JSON.parse(localStorage.getItem(DB_KEY) || '[]');
 
+    // UI refs
+    const form = document.getElementById('reportForm');
+    const listEl = document.getElementById('incidentList');
+    const statsEl = document.getElementById('stats');
+    const chartCtx = document.getElementById('chartIncidents');
+    const detailCard = document.getElementById('detailCard');
+    const adminCard = document.getElementById('adminCard');
+    const btnToggleAdmin = document.getElementById('btn-toggle-admin');
 
-// small safety: warn before leaving if there are unsaved timers
-window.addEventListener('beforeunload', (e)=>{ if(pomInterval) e.returnValue = 'Pomodoro running — are you sure you want to leave?'; });
+    // render list
+    function renderList(filter={}){
+      listEl.innerHTML='';
+      const items = DB.slice().reverse().filter(i=>{
+        if(filter.type && filter.type!=='all' && i.type!==filter.type) return false;
+        if(filter.status && filter.status!=='all' && i.status!==filter.status) return false;
+        return true;
+      });
+      if(items.length===0){ listEl.innerHTML='<div class="muted small">No reports yet.</div>'; return; }
+      items.forEach(it=>{
+        const li=document.createElement('li'); li.className='incident-item';
+        const left=document.createElement('div');
+        left.innerHTML = `<strong>${escapeHtml(it.victim)}</strong><div class="muted small">${escapeHtml(it.type)} — ${it.date}</div><div class="muted small">Reporter: ${escapeHtml(it.reporter||'Anonymous')}</div>`;
+        const right=document.createElement('div');
+        const pill=document.createElement('div'); pill.className='pill '+(it.status==='resolved'?'resolved':'open'); pill.textContent = it.status.toUpperCase();
+        const viewBtn = document.createElement('button'); viewBtn.textContent='View'; viewBtn.addEventListener('click',()=> openDetail(it.id));
+        right.appendChild(pill); right.appendChild(viewBtn);
+        li.appendChild(left); li.appendChild(right); listEl.appendChild(li);
+      });
+    }
 
+    function saveDB(){ localStorage.setItem(DB_KEY, JSON.stringify(DB)); renderStats(); renderChart(); renderList({type:document.getElementById('filterType')?.value||'all', status:document.getElementById('filterStatus')?.value||'all'}); }
 
-// initial values
-if(!DB.pom) DB.pom={count:0}; document.getElementById('pomCount').textContent = DB.pom.count || 0;
+    function renderStats(){ const total = DB.length; const open = DB.filter(x=>x.status==='open').length; const resolved = DB.filter(x=>x.status==='resolved').length; statsEl.textContent = `${total} total — ${open} open, ${resolved} resolved.`; }
 
+    // chart
+    let chart=null;
+    function renderChart(){ const byType = {}; DB.forEach(i=> byType[i.type] = (byType[i.type]||0)+1 ); const labels = Object.keys(byType); const data = Object.values(byType);
+      if(chart) chart.destroy(); chart = new Chart(chartCtx, { type:'bar', data:{labels, datasets:[{label:'Reports by type', data}]}, options:{plugins:{legend:{display:false}}}});
+    }
 
-</script>
+    // submit
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const reporter = document.getElementById('reporter').value.trim() || 'Anonymous';
+      const victim = document.getElementById('victim').value.trim();
+      const type = document.getElementById('type').value;
+      const date = document.getElementById('date').value;
+      const desc = document.getElementById('desc').value.trim();
+      const file = document.getElementById('evidence').files[0];
+      const id = Date.now() + '-' + Math.floor(Math.random()*9999);
+      let evidence = null; if(file){ evidence = await fileToBase64(file); }
+      const obj = {id, reporter, victim, type, date, desc, evidence, status:'open', createdAt: new Date().toISOString()};
+      DB.push(obj); saveDB(); form.reset(); alert('Report submitted (demo).');
+    });
+
+    document.getElementById('btn-clear').addEventListener('click', ()=> form.reset());
+
+    // detail view
+    function openDetail(id){ const it = DB.find(x=>x.id===id); if(!it) return; detailCard.style.display='block'; document.getElementById('detailTitle').textContent = `Report — ${it.victim}`;
+      const body = document.getElementById('detailBody'); body.innerHTML = `<p><strong>Type:</strong> ${escapeHtml(it.type)}</p><p><strong>Date:</strong> ${escapeHtml(it.date)}</p><p><strong>Reporter:</strong> ${escapeHtml(it.reporter)}</p><p><strong>Description:</strong><br>${escapeHtml(it.desc)}</p>`;
+      if(it.evidence) { const a = document.createElement('a'); a.href=it.evidence; a.target='_blank'; a.textContent='Open evidence'; body.appendChild(a); }
+      // attach buttons
+      document.getElementById('btn-mark-resolved').onclick = ()=>{ it.status='resolved'; saveDB(); alert('Marked resolved'); detailCard.style.display='none'; };
+      document.getElementById('btn-delete').onclick = ()=>{ if(confirm('Delete report?')){ DB = DB.filter(x=>x.id!==it.id); saveDB(); detailCard.style.display='none'; }};
+      document.getElementById('btn-close-detail').onclick = ()=> detailCard.style.display='none';
+    }
+
+    // admin toggle
+    btnToggleAdmin.addEventListener('click', ()=>{ adminCard.style.display = adminCard.style.display==='none'?'block':'none'; });
+
+    document.getElementById('btn-admin-login').addEventListener('click', ()=>{
+      const p = document.getElementById('adminPass').value; if(p==='tupdmin'){ document.getElementById('btn-admin-login').style.display='none'; document.getElementById('btn-admin-logout').style.display='inline-block'; document.getElementById('adminPass').style.display='none'; alert('Admin logged in (demo)'); } else { alert('Wrong password (demo: tupdmin)'); }
+    });
+    document.getElementById('btn-admin-logout').addEventListener('click', ()=>{ document.getElementById('btn-admin-login').style.display='inline-block'; document.getElementById('btn-admin-logout').style.display='none'; document.getElementById('adminPass').style.display='inline-block'; });
+
+    // filters
+    document.getElementById('btn-apply-filter').addEventListener('click', ()=>{ const ft = document.getElementById('filterType').value; const fs = document.getElementById('filterStatus').value; renderList({type:ft, status:fs}); });
+
+    // export CSV
+    document.getElementById('btn-export').addEventListener('click', ()=>{ if(DB.length===0){alert('No data');return;} const csv = toCSV(DB); const blob = new Blob([csv], {type:'text/csv'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='cyber_reports.csv'; a.click(); URL.revokeObjectURL(url); });
+
+    // utilities
+    function escapeHtml(s){ if(!s) return ''; return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('\n','<br>'); }
+    function fileToBase64(file){return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(file); }); }
+    function toCSV(arr){ const keys = ['id','victim','reporter','type','date','status','createdAt','desc']; const lines = [keys.join(',')]; arr.forEach(o=>{ lines.push(keys.map(k=>`"${String(o[k]||'').replaceAll('"','""')}"`).join(',')); }); return lines.join('\n'); }
+
+    // initial render
+    renderStats(); renderChart(); renderList();
+
+  </script>
 </body>
 </html>
