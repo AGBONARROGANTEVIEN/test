@@ -1,0 +1,91 @@
+<!doctype html>
+const file=document.getElementById('guideFile').files[0];
+const link=document.getElementById('guideLink').value.trim();
+let payload={id:Date.now(),title,link:null,fileName:null,fileData:null};
+if(file){payload.fileName=file.name; payload.fileData = await fileToBase64(file);} else if(link){payload.link=link}
+DB.guides.push(payload); saveDB(); guideForm.reset(); renderGuides();
+});
+
+
+function renderGuides(){
+const ul = document.getElementById('guideList'); ul.innerHTML='';
+DB.guides.forEach(g=>{
+const li=document.createElement('li'); li.className='card';
+li.innerHTML = `<strong>${escapeHtml(g.title)}</strong> <div class="muted small">${g.fileName?escapeHtml(g.fileName):g.link||''}</div>`;
+if(g.fileData){const a=document.createElement('a'); a.href=g.fileData; a.target='_blank'; a.textContent=' Open PDF'; li.appendChild(a);} else if(g.link){const a=document.createElement('a'); a.href=g.link; a.target='_blank'; a.textContent=' Open link'; li.appendChild(a);}
+const del=document.createElement('button'); del.textContent='Delete'; del.addEventListener('click',()=>{DB.guides=DB.guides.filter(x=>x.id!==g.id);saveDB();renderGuides();}); li.appendChild(del);
+ul.appendChild(li);
+})
+}
+
+
+// --- Pomodoro ---
+let pomInterval=null; let pomRemaining=0; let pomMode='work';
+const pomLabel=document.getElementById('pomLabel'); const pomTime=document.getElementById('pomTime'); const pomCount=document.getElementById('pomCount');
+document.getElementById('startPom').addEventListener('click',()=>{
+if(pomInterval) return; const w=Number(document.getElementById('workMin').value)||25; pomMode='work'; pomRemaining=w*60; updatePomUI(); pomInterval=setInterval(tickPom,1000);
+});
+document.getElementById('stopPom').addEventListener('click',()=>{clearInterval(pomInterval); pomInterval=null; pomLabel.textContent='Stopped';});
+function tickPom(){ if(pomRemaining<=0){
+// mode switch
+if(pomMode==='work'){ DB.pom.count = (DB.pom.count||0)+1; saveDB(); pomCount.textContent=DB.pom.count; notify('Pomodoro','Work session finished. Take a break!');
+const short=Number(document.getElementById('shortMin').value)||5; pomMode='break'; pomRemaining=short*60;
+} else { notify('Pomodoro','Break over. Back to work!'); const w=Number(document.getElementById('workMin').value)||25; pomMode='work'; pomRemaining=w*60; }
+updatePomUI();
+} else { pomRemaining--; updatePomUI(); }}
+function updatePomUI(){ pomLabel.textContent = pomMode==='work'? 'Work':'Break'; pomTime.textContent = formatTime(pomRemaining); pomCount.textContent = DB.pom.count||0; }
+
+
+// --- Sleep tracker ---
+document.getElementById('sleepForm').addEventListener('submit',e=>{
+e.preventDefault(); const entry = {id:Date.now(), date:document.getElementById('sleepDate').value, hours: Number(document.getElementById('sleepHours').value), quality: Number(document.getElementById('sleepQuality').value)};
+DB.sleep.push(entry); saveDB(); renderSleep(); renderDashboard();
+});
+function renderSleep(){ const ul=document.getElementById('sleepList'); ul.innerHTML=''; DB.sleep.sort((a,b)=> new Date(b.date)-new Date(a.date)); DB.sleep.forEach(s=>{const li=document.createElement('li');li.className='task-item'; li.innerHTML = `<div><strong>${s.date}</strong><div class="muted small">${s.hours} hrs — quality ${s.quality}</div></div>`; const del=document.createElement('button'); del.textContent='Delete'; del.addEventListener('click',()=>{DB.sleep=DB.sleep.filter(x=>x.id!==s.id);saveDB();renderSleep();renderDashboard();}); li.appendChild(del); ul.appendChild(li);}) }
+
+
+// --- Dashboard charts ---
+let tasksChart=null, sleepChart=null;
+function renderDashboard(){
+// tasks stats
+const completed = DB.tasks.filter(t=>t.completed).length;
+const overdue = DB.tasks.filter(t=> t.deadline && !t.completed && new Date(t.deadline) < new Date()).length;
+const pending = DB.tasks.length - completed - overdue;
+document.getElementById('prod-summary').textContent = `${DB.tasks.length} tasks — ${completed} completed, ${pending} pending, ${overdue} overdue.`;
+// tasks chart
+const ctx=document.getElementById('tasksChart'); if(tasksChart) tasksChart.destroy(); tasksChart = new Chart(ctx,{type:'doughnut',data:{labels:['Completed','Pending','Overdue'],datasets:[{data:[completed,pending,overdue]}]}});
+
+
+// sleep chart (last 7 days)
+const last7 = DB.sleep.slice(-7);
+const labels = last7.map(s=>s.date);
+const data = last7.map(s=>s.hours);
+const ctx2=document.getElementById('sleepChart'); if(sleepChart) sleepChart.destroy(); sleepChart = new Chart(ctx2,{type:'line',data:{labels, datasets:[{label:'Hours slept',data,fill:false}]}});
+}
+
+
+function renderAll(){ renderTasks(); renderGuides(); renderSleep(); renderDashboard(); }
+renderAll();
+
+
+// Utilities
+function fileToBase64(file){return new Promise((res,rej)=>{const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(file);})}
+function formatTime(sec){ if(!sec) return '00:00'; const m=Math.floor(sec/60); const s=sec%60; return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0'); }
+function escapeHtml(s){ if(!s) return ''; return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+
+
+// Notifications (ask permission)
+function notify(title, body){ if(!('Notification' in window)) return; if(Notification.permission==='granted'){new Notification(title,{body});} else if(Notification.permission!=='denied'){ Notification.requestPermission().then(p=>{ if(p==='granted') new Notification(title,{body});}); }}
+
+
+// small safety: warn before leaving if there are unsaved timers
+window.addEventListener('beforeunload', (e)=>{ if(pomInterval) e.returnValue = 'Pomodoro running — are you sure you want to leave?'; });
+
+
+// initial values
+if(!DB.pom) DB.pom={count:0}; document.getElementById('pomCount').textContent = DB.pom.count || 0;
+
+
+</script>
+</body>
+</html>
