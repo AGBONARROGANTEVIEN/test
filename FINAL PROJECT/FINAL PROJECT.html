@@ -1,132 +1,56 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Web-Based Study Guide System</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f4f4f4;
-        }
-        header {
-            background: #4a4aff;
-            padding: 15px;
-            text-align: center;
-            color: #fff;
-            font-size: 24px;
-        }
-        .container {
-            width: 90%;
-            margin: auto;
-            padding: 20px;
-        }
-        .card {
-            background: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-        button {
-            padding: 10px 20px;
-            border: none;
-            background: #4a4aff;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #3333cc;
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Input Meaning Display</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 30px;
+    background-color: #f0f2f5;
+  }
+  input, button {
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 16px;
+  }
+  #meaning {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border-left: 5px solid #4CAF50;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+</style>
 </head>
 <body>
 
-<header>Study Guide System</header>
+<h2>Enter a word to see its meaning</h2>
+<input type="text" id="userInput" placeholder="Type a word...">
+<button onclick="showMeaning()">Show Meaning</button>
 
-<div class="container">
-
-    <!-- LOGIN CARD -->
-    <div class="card" id="loginCard">
-        <h2>Login</h2>
-        <input type="email" id="email" placeholder="Email" /> <br /><br />
-        <input type="password" id="password" placeholder="Password" /> <br /><br />
-        <button onclick="login()">Login</button>
-    </div>
-
-    <!-- DASHBOARD CARD -->
-    <div class="card hidden" id="dashboard">
-        <h2>Dashboard</h2>
-        <p>Welcome to your personalized learning dashboard!</p>
-        <button onclick="showSection('tutorials')">Tutorials</button>
-        <button onclick="showSection('quizzes')">Quizzes</button>
-        <button onclick="downloadPDF()">Download Progress PDF</button>
-    </div>
-
-    <!-- TUTORIAL SECTION -->
-    <div class="card hidden" id="tutorials">
-        <h2>Programming Tutorials</h2>
-        <p>Here are sample tutorials:</p>
-        <ul>
-            <li>HTML Basics</li>
-            <li>CSS Styling</li>
-            <li>JavaScript Events</li>
-            <li>Variables, Loops, Functions</li>
-            <li>DOM Manipulation</li>
-        </ul>
-    </div>
-
-    <!-- QUIZ SECTION -->
-    <div class="card hidden" id="quizzes">
-        <h2>Quiz Time</h2>
-        <p id="questionText">Press start to begin.</p>
-        <button onclick="startQuiz()">Start Quiz</button>
-    </div>
-
-</div>
+<div id="meaning"></div>
 
 <script>
-// FIREBASE LOGIN PLACEHOLDER
-function login() {
-    const email = document.getElementById('email').value;
-    const pass = document.getElementById('password').value;
-    if(email === "student@test.com" && pass === "123456"){
-        document.getElementById('loginCard').classList.add('hidden');
-        document.getElementById('dashboard').classList.remove('hidden');
+  const dictionary = {
+    "apple": "A fruit that is round, usually red or green, and sweet.",
+    "computer": "An electronic device for storing and processing data.",
+    "education": "The process of receiving or giving systematic instruction.",
+    "procrastination": "The action of delaying or postponing tasks."
+  };
+
+  function showMeaning() {
+    const input = document.getElementById("userInput").value.toLowerCase();
+    const meaningDiv = document.getElementById("meaning");
+
+    if(dictionary[input]) {
+      meaningDiv.innerHTML = `<strong>${input}:</strong> ${dictionary[input]}`;
     } else {
-        alert("Invalid login!");
+      meaningDiv.innerHTML = "Sorry, meaning not found!";
     }
-}
-
-// SECTION SWITCHER
-function showSection(id) {
-    document.getElementById('tutorials').classList.add('hidden');
-    document.getElementById('quizzes').classList.add('hidden');
-    document.getElementById(id).classList.remove('hidden');
-}
-
-// QUIZ SYSTEM
-const quizData = [
-    { q: "What does HTML stand for?", a: "HyperText Markup Language" },
-    { q: "What does CSS control?", a: "Styling" },
-    { q: "Is JavaScript a programming language?", a: "Yes" }
-];
-
-function startQuiz(){
-    const random = quizData[Math.floor(Math.random()*quizData.length)];
-    document.getElementById('questionText').textContent = "Question: " + random.q;
-}
-
-// PDF DOWNLOAD SAMPLE
-function downloadPDF(){
-    alert("PDF download feature will generate progress report here!");
-}
+  }
 </script>
 
 </body>
