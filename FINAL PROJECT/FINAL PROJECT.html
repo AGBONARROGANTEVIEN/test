@@ -1,55 +1,164 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Input Meaning Display</title>
+<title>Web-Based Study Guide System</title>
 <style>
   body {
     font-family: Arial, sans-serif;
-    padding: 30px;
-    background-color: #f0f2f5;
+    margin: 0;
+    background-color: #f4f6f9;
   }
-  input, button {
-    padding: 10px;
-    margin: 5px 0;
+
+  header {
+    background-color: #1f3c88;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    background-color: #2a4da0;
+  }
+
+  nav button {
+    background-color: #2a4da0;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    cursor: pointer;
     font-size: 16px;
+    margin: 0 5px;
+    border-bottom: 3px solid transparent;
   }
-  #meaning {
+
+  nav button.active, nav button:hover {
+    border-bottom: 3px solid #f0ad4e;
+  }
+
+  main {
+    padding: 30px;
+    max-width: 900px;
+    margin: auto;
+    background-color: white;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
     margin-top: 20px;
-    padding: 15px;
-    background-color: #fff;
-    border-left: 5px solid #4CAF50;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+  }
+
+  h2 {
+    color: #1f3c88;
+  }
+
+  ul {
+    margin-top: 10px;
+    padding-left: 20px;
+  }
+
+  li {
+    margin: 5px 0;
+  }
+
+  .hidden {
+    display: none;
   }
 </style>
 </head>
 <body>
 
-<h2>Enter a word to see its meaning</h2>
-<input type="text" id="userInput" placeholder="Type a word...">
-<button onclick="showMeaning()">Show Meaning</button>
+<header>
+  <h1>Web-Based Study Guide System</h1>
+  <p>For Computer Programming 1 Lab</p>
+</header>
 
-<div id="meaning"></div>
+<nav>
+  <button class="tab-btn active" onclick="showTab('dashboard')">Dashboard</button>
+  <button class="tab-btn" onclick="showTab('tutorials')">Tutorials</button>
+  <button class="tab-btn" onclick="showTab('practice')">Practice Exercises</button>
+  <button class="tab-btn" onclick="showTab('lab')">Lab Assignments</button>
+  <button class="tab-btn" onclick="showTab('quizzes')">Quizzes</button>
+  <button class="tab-btn" onclick="showTab('progress')">Progress Tracker</button>
+  <button class="tab-btn" onclick="showTab('tips')">Tips & Guides</button>
+</nav>
+
+<main>
+  <div id="dashboard">
+    <h2>Dashboard</h2>
+    <ul>
+      <li>Welcome message</li>
+      <li>Quick links</li>
+      <li>Notifications</li>
+      <li>Motivational messages</li>
+    </ul>
+  </div>
+
+  <div id="tutorials" class="hidden">
+    <h2>Tutorials</h2>
+    <ul>
+      <li>Programming topics</li>
+      <li>Step-by-step instructions</li>
+      <li>Sample code</li>
+      <li><strong>Download:</strong> <a href="#">Tutorials</a></li>
+    </ul>
+  </div>
+
+  <div id="practice" class="hidden">
+    <h2>Practice Exercises</h2>
+    <ul>
+      <li>Interactive coding</li>
+      <li>Auto-feedback</li>
+      <li>Difficulty levels</li>
+      <li><strong>Download:</strong> <a href="#">Exercises</a></li>
+    </ul>
+  </div>
+
+  <div id="lab" class="hidden">
+    <h2>Lab Assignments Repository</h2>
+    <ul>
+      <li>Past assignments</li>
+      <li>Solutions</li>
+      <li><strong>Download:</strong> <a href="#">Guides</a></li>
+    </ul>
+  </div>
+
+  <div id="quizzes" class="hidden">
+    <h2>Quizzes</h2>
+    <ul>
+      <li>Multiple-choice</li>
+      <li>Coding quizzes</li>
+    </ul>
+  </div>
+
+  <div id="progress" class="hidden">
+    <h2>Progress Tracker</h2>
+    <ul>
+      <li>Completion status</li>
+      <li>Monthly milestones</li>
+    </ul>
+  </div>
+
+  <div id="tips" class="hidden">
+    <h2>Tips & Guides</h2>
+    <ul>
+      <li>Time management</li>
+      <li>Reducing procrastination</li>
+      <li>Sleep hygiene</li>
+    </ul>
+  </div>
+</main>
 
 <script>
-  const dictionary = {
-    "apple": "A fruit that is round, usually red or green, and sweet.",
-    "computer": "An electronic device for storing and processing data.",
-    "education": "The process of receiving or giving systematic instruction.",
-    "procrastination": "The action of delaying or postponing tasks."
-  };
+  function showTab(tabId) {
+    const tabs = document.querySelectorAll('main > div');
+    tabs.forEach(tab => tab.classList.add('hidden'));
+    document.getElementById(tabId).classList.remove('hidden');
 
-  function showMeaning() {
-    const input = document.getElementById("userInput").value.toLowerCase();
-    const meaningDiv = document.getElementById("meaning");
-
-    if(dictionary[input]) {
-      meaningDiv.innerHTML = `<strong>${input}:</strong> ${dictionary[input]}`;
-    } else {
-      meaningDiv.innerHTML = "Sorry, meaning not found!";
-    }
+    const buttons = document.querySelectorAll('nav button');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`button[onclick="showTab('${tabId}')"]`).classList.add('active');
   }
 </script>
 
