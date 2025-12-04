@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Web Dev LMS - Full 50 Topics</title>
+<title>Web Dev LMS - 10 Topics</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
 body { background:#f4f4f9; color:#333; }
 h1,h2,h3 { margin-bottom:10px; color:#222; }
 p { margin-bottom:10px; }
-.container { width:90%; max-width:1200px; margin:30px auto; }
+.container { width:90%; max-width:900px; margin:30px auto; }
 .tabs { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px; }
 .tab { padding:10px 20px; background:#fff; border-radius:8px; cursor:pointer; box-shadow:0 2px 5px rgba(0,0,0,0.1); transition:0.3s; }
 .tab.active { background:#4e73df; color:#fff; }
@@ -17,19 +17,19 @@ p { margin-bottom:10px; }
 .section.active { display:block; }
 pre { background:#f0f0f0; padding:10px; border-radius:5px; overflow-x:auto; }
 textarea { width:100%; margin-bottom:10px; padding:8px; border-radius:5px; border:1px solid #ccc; }
-.quiz-options button { margin-right:10px; margin-bottom:5px; padding:8px 12px; border:none; border-radius:5px; cursor:pointer; transition:0.3s; }
-.quiz-options button:hover { background:#ddd; }
+button.check-answer { margin-bottom:5px; }
+.correct-answer { color:green; font-weight:bold; margin-bottom:15px; display:block; }
 .progress-bar { background:#ddd; border-radius:10px; overflow:hidden; height:20px; margin-top:10px; }
 .progress-fill { height:100%; width:0%; background:#4e73df; text-align:center; color:#fff; line-height:20px; transition: width 0.5s; }
 .tip { background:#eef0ff; padding:10px 15px; border-radius:8px; margin-bottom:10px; }
-button.check-answer { margin-bottom:5px; }
-.correct-answer { color:green; font-weight:bold; margin-bottom:15px; display:block; }
+.quiz-options button { margin-right:10px; margin-bottom:5px; padding:8px 12px; border:none; border-radius:5px; cursor:pointer; transition:0.3s; }
+.quiz-options button:hover { background:#ddd; }
 </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Web Development LMS - 50 Topics</h1>
+    <h1>Web Development LMS - 10 Topics</h1>
 
     <div class="tabs">
         <div class="tab active" data-target="tutorials">Tutorials</div>
@@ -58,7 +58,6 @@ button.check-answer { margin-bottom:5px; }
         <ul>
             <li><a href="#" download="lab1.html">Lab 1 Starter File</a></li>
             <li><a href="#" download="lab2.html">Lab 2 Starter File</a></li>
-            <li><a href="#" download="lab3.html">Lab 3 Starter File</a></li>
         </ul>
     </div>
 
@@ -70,7 +69,6 @@ button.check-answer { margin-bottom:5px; }
             <div class="quiz-options">
                 <button onclick="checkQuiz(this,true)">p</button>
                 <button onclick="checkQuiz(this,false)">div</button>
-                <button onclick="checkQuiz(this,false)">span</button>
             </div>
         </div>
         <p id="quiz-feedback"></p>
@@ -92,65 +90,22 @@ button.check-answer { margin-bottom:5px; }
         <div class="tip">💤 Sleep 7–8 hours to focus.</div>
         <div class="tip">✅ Break tasks into small steps.</div>
         <div class="tip">📵 Avoid multitasking.</div>
-        <div class="tip">🍎 Healthy snacks & water for energy.</div>
     </div>
 </div>
 
 <script>
-// 50 topics with explanation & sample code
+// 10 topics with explanation & sample code
 const topics = [
-{title:"HTML Introduction", explanation:"HTML is HyperText Markup Language, used to structure web content.", code:"<!DOCTYPE html>\n<html>\n  <head></head>\n  <body></body>\n</html>"},
-{title:"HTML Basic Structure", explanation:"Basic HTML document has DOCTYPE, html, head, body tags.", code:"<!DOCTYPE html>\n<html>\n<head>\n<title>Page</title>\n</head>\n<body>\n</body>\n</html>"},
-{title:"Headings", explanation:"Headings define titles: h1-h6.", code:"<h1>Main Title</h1>\n<h2>Subtitle</h2>"},
-{title:"Paragraphs", explanation:"Paragraphs use <p> tag.", code:"<p>This is a paragraph.</p>"},
-{title:"Links", explanation:"Links use <a> tag with href.", code:'<a href="https://example.com">Visit</a>'},
-{title:"Images", explanation:"Images use <img> tag with src.", code:'<img src="image.jpg" alt="Sample">'}, 
-{title:"Lists", explanation:"Lists can be ordered <ol> or unordered <ul>.", code:"<ul><li>Item 1</li></ul>"},
-{title:"Tables", explanation:"Tables display tabular data using <table>, <tr>, <td>.", code:"<table><tr><td>Data</td></tr></table>"},
-{title:"Forms", explanation:"Forms collect input from users.", code:"<form><input type='text'></form>"},
-{title:"Buttons", explanation:"Buttons use <button> tag.", code:"<button>Click me</button>"},
-{title:"Semantic HTML", explanation:"Semantic tags describe meaning: header, footer, article.", code:"<header>Header</header>"},
-{title:"Audio/Video", explanation:"Use <audio> or <video> to embed media.", code:"<video src='video.mp4' controls></video>"},
-{title:"Iframes", explanation:"Iframes embed other HTML pages.", code:"<iframe src='page.html'></iframe>"},
-{title:"Meta Tags & SEO", explanation:"Meta tags provide info for search engines.", code:"<meta name='description' content='...'>"},
-{title:"HTML5 Elements", explanation:"New elements: section, article, nav, aside.", code:"<section>Content</section>"},
-// CSS 15
-{title:"CSS Introduction", explanation:"CSS styles HTML elements.", code:"p { color: blue; }"},
-{title:"Selectors", explanation:"Select elements using selectors: class, id, tag.", code:".class { color:red; } #id { color:green; }"},
-{title:"Colors & Background", explanation:"Set colors and backgrounds.", code:"body { background-color: #f0f0f0; color:#333; }"},
-{title:"Fonts & Text", explanation:"Style fonts and text.", code:"p { font-family: Arial; font-size:16px; }"},
-{title:"Box Model", explanation:"Content, padding, border, margin.", code:"div { padding:10px; border:1px solid #000; margin:5px; }"},
-{title:"Display", explanation:"Control layout: block, inline, inline-block.", code:"span { display:inline-block; }"},
-{title:"Positioning", explanation:"static, relative, absolute, fixed, sticky.", code:"div { position:absolute; top:10px; left:10px; }"},
-{title:"Flexbox", explanation:"Flexible layout using display:flex.", code:"div { display:flex; justify-content:center; }"},
-{title:"Grid Layout", explanation:"Grid layout using display:grid.", code:"div { display:grid; grid-template-columns:1fr 1fr; }"},
-{title:"Pseudo-classes", explanation:":hover, :focus, :active.", code:"a:hover { color:red; }"},
-{title:"Pseudo-elements", explanation:"::before, ::after.", code:"p::before { content:'*'; }"},
-{title:"Transitions & Animations", explanation:"Smooth effects on change.", code:"div { transition: all 0.3s; }"},
-{title:"Media Queries", explanation:"Responsive design for devices.", code:"@media (max-width:600px){ body { font-size:14px; } }"},
-{title:"CSS Variables", explanation:"Reusable values in CSS.", code:"--main-color: #333; body { color: var(--main-color); }"},
-{title:"Advanced Selectors", explanation:"nth-child, adjacent sibling etc.", code:"li:nth-child(2){ color:red; }"},
-// JS 20
-{title:"JS Introduction", explanation:"JavaScript adds interactivity.", code:"console.log('Hello');"},
-{title:"Variables", explanation:"Store data: let, const, var.", code:"let x=5; const y=10;"},
-{title:"Data Types", explanation:"String, Number, Boolean, Array, Object.", code:"let arr=[1,2]; let obj={name:'Bob'};"},
-{title:"Operators", explanation:"+,-,*,/,==,===", code:"let sum=2+3;"},
-{title:"Conditionals", explanation:"if, else if, else.", code:"if(x>5){console.log('Yes');} else {console.log('No');}"},
-{title:"Loops", explanation:"for, while, for...of", code:"for(let i=0;i<5;i++){console.log(i);}"},
-{title:"Functions", explanation:"Reusable code blocks.", code:"function add(a,b){return a+b;}"},
-{title:"Arrow Functions", explanation:"Shorter function syntax.", code:"const add=(a,b)=>a+b;"},
-{title:"DOM Manipulation", explanation:"Change HTML using JS.", code:"document.getElementById('id').textContent='Hello';"},
-{title:"Event Listeners", explanation:"React to events.", code:"button.addEventListener('click', ()=>{});"},
-{title:"Form Validation", explanation:"Check user input.", code:"if(input===''){ alert('Empty'); }"},
-{title:"Array Methods", explanation:"push, pop, map, filter.", code:"arr.push(3); arr.map(x=>x*2);"},
-{title:"Objects & Properties", explanation:"Store key-value pairs.", code:"let obj={name:'Bob'}; console.log(obj.name);"},
-{title:"JSON", explanation:"JavaScript Object Notation.", code:"let data=JSON.parse(jsonStr);"},
-{title:"LocalStorage/SessionStorage", explanation:"Store data in browser.", code:"localStorage.setItem('name','Bob');"},
-{title:"Fetch API", explanation:"Fetch data from server.", code:"fetch('url').then(res=>res.json());"},
-{title:"Error Handling", explanation:"try/catch to handle errors.", code:"try{ risky() } catch(e){ console.log(e); }"},
-{title:"Timers", explanation:"setTimeout, setInterval", code:"setTimeout(()=>{console.log('Hi');},1000);"},
-{title:"ES6 Modules", explanation:"import/export syntax.", code:"import {func} from './file.js';"},
-{title:"Debugging", explanation:"Use console.log or devtools.", code:"console.log('Debug info');"}
+{title:"HTML Introduction", explanation:"HTML is HyperText Markup Language used to structure web pages.", code:"<!DOCTYPE html>\n<html>\n  <head></head>\n  <body></body>\n</html>"},
+{title:"Headings", explanation:"Headings define titles using h1-h6.", code:"<h1>Main Title</h1>"},
+{title:"Paragraphs", explanation:"Paragraphs are defined using <p> tag.", code:"<p>This is a paragraph.</p>"},
+{title:"Links", explanation:"Links use <a> tag with href attribute.", code:'<a href="https://example.com">Visit</a>'},
+{title:"Images", explanation:"Images use <img> tag with src attribute.", code:'<img src="image.jpg" alt="Sample">'}, 
+{title:"CSS Basics", explanation:"CSS styles HTML elements.", code:"p { color: blue; }"},
+{title:"Box Model", explanation:"Content, padding, border, margin make the box model.", code:"div { padding:10px; border:1px solid #000; margin:5px; }"},
+{title:"Flexbox", explanation:"Flexible box layout using display:flex.", code:"div { display:flex; justify-content:center; }"},
+{title:"JavaScript Introduction", explanation:"JavaScript adds interactivity to web pages.", code:"console.log('Hello World');"},
+{title:"DOM Manipulation", explanation:"Change HTML elements using JS.", code:"document.getElementById('id').textContent='Hello';"}
 ];
 
 // Render Tutorials
@@ -206,7 +161,8 @@ function checkQuiz(button,correct){
 // Progress
 let progress=0;
 function updateProgress(){
-    progress+=16.66; if(progress>100) progress=100;
+    progress+=16.66;
+    if(progress>100) progress=100;
     const fill=document.getElementById('progress-fill');
     fill.style.width=progress+"%"; fill.textContent=Math.round(progress)+"%";
 }
