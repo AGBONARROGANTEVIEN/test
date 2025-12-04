@@ -3,34 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Web Dev LMS - 10 Topics</title>
+<title>Web Dev LMS</title>
 <style>
+/* Reset & basic */
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
 body { background:#f4f4f9; color:#333; }
 h1,h2,h3 { margin-bottom:10px; color:#222; }
 p { margin-bottom:10px; }
-.container { width:90%; max-width:900px; margin:30px auto; }
+
+/* Container */
+.container { width:90%; max-width:1200px; margin:30px auto; }
+
+/* Tabs */
 .tabs { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px; }
 .tab { padding:10px 20px; background:#fff; border-radius:8px; cursor:pointer; box-shadow:0 2px 5px rgba(0,0,0,0.1); transition:0.3s; }
 .tab.active { background:#4e73df; color:#fff; }
+
+/* Sections */
 .section { display:none; background:#fff; padding:20px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.05); margin-bottom:20px; }
 .section.active { display:block; }
+
+/* Code blocks */
 pre { background:#f0f0f0; padding:10px; border-radius:5px; overflow-x:auto; }
+
+/* Practice textarea */
 textarea { width:100%; margin-bottom:10px; padding:8px; border-radius:5px; border:1px solid #ccc; }
-button.check-answer { margin-bottom:5px; }
-.correct-answer { color:green; font-weight:bold; margin-bottom:15px; display:block; }
-.progress-bar { background:#ddd; border-radius:10px; overflow:hidden; height:20px; margin-top:10px; }
-.progress-fill { height:100%; width:0%; background:#4e73df; text-align:center; color:#fff; line-height:20px; transition: width 0.5s; }
-.tip { background:#eef0ff; padding:10px 15px; border-radius:8px; margin-bottom:10px; }
+
+/* Quiz buttons */
 .quiz-options button { margin-right:10px; margin-bottom:5px; padding:8px 12px; border:none; border-radius:5px; cursor:pointer; transition:0.3s; }
 .quiz-options button:hover { background:#ddd; }
+
+/* Progress Tracker */
+.progress-bar { background:#ddd; border-radius:10px; overflow:hidden; height:20px; margin-top:10px; }
+.progress-fill { height:100%; width:0%; background:#4e73df; text-align:center; color:#fff; line-height:20px; transition: width 0.5s; }
+
+/* Tips */
+.tip { background:#eef0ff; padding:10px 15px; border-radius:8px; margin-bottom:10px; }
 </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Web Development LMS - 10 Topics</h1>
+    <h1>Web Development LMS</h1>
 
+    <!-- Tabs -->
     <div class="tabs">
         <div class="tab active" data-target="tutorials">Tutorials</div>
         <div class="tab" data-target="practice">Practice Exercises</div>
@@ -58,6 +74,7 @@ button.check-answer { margin-bottom:5px; }
         <ul>
             <li><a href="#" download="lab1.html">Lab 1 Starter File</a></li>
             <li><a href="#" download="lab2.html">Lab 2 Starter File</a></li>
+            <li><a href="#" download="lab3.html">Lab 3 Starter File</a></li>
         </ul>
     </div>
 
@@ -65,10 +82,19 @@ button.check-answer { margin-bottom:5px; }
     <div class="section" id="quizzes">
         <h2>Quiz</h2>
         <div class="quiz-question">
-            <p>1. Which HTML tag is for a paragraph?</p>
+            <p>1. Which HTML tag is used for a paragraph?</p>
             <div class="quiz-options">
                 <button onclick="checkQuiz(this,true)">p</button>
                 <button onclick="checkQuiz(this,false)">div</button>
+                <button onclick="checkQuiz(this,false)">span</button>
+            </div>
+        </div>
+        <div class="quiz-question">
+            <p>2. What does CSS stand for?</p>
+            <div class="quiz-options">
+                <button onclick="checkQuiz(this,true)">Cascading Style Sheets</button>
+                <button onclick="checkQuiz(this,false)">Computer Style Syntax</button>
+                <button onclick="checkQuiz(this,false)">Creative Styling Script</button>
             </div>
         </div>
         <p id="quiz-feedback"></p>
@@ -86,55 +112,51 @@ button.check-answer { margin-bottom:5px; }
     <!-- Tips & Guides -->
     <div class="section" id="tips">
         <h2>Tips & Guides</h2>
-        <div class="tip">🕒 Pomodoro: 25min study, 5min break.</div>
-        <div class="tip">💤 Sleep 7–8 hours to focus.</div>
-        <div class="tip">✅ Break tasks into small steps.</div>
-        <div class="tip">📵 Avoid multitasking.</div>
+        <div class="tip">🕒 Use Pomodoro Technique: 25min study, 5min break.</div>
+        <div class="tip">💤 Sleep 7–8 hours for focus & memory.</div>
+        <div class="tip">✅ Break tasks into small steps to avoid procrastination.</div>
+        <div class="tip">📵 Avoid multitasking while coding.</div>
+        <div class="tip">🍎 Healthy snacks & hydration boost energy.</div>
     </div>
 </div>
 
 <script>
-// 10 topics with explanation & sample code
-const topics = [
-{title:"HTML Introduction", explanation:"HTML is HyperText Markup Language used to structure web pages.", code:"<!DOCTYPE html>\n<html>\n  <head></head>\n  <body></body>\n</html>"},
-{title:"Headings", explanation:"Headings define titles using h1-h6.", code:"<h1>Main Title</h1>"},
-{title:"Paragraphs", explanation:"Paragraphs are defined using &lt;p&gt; tag.", code:"<p>This is a paragraph.</p>"},
-{title:"Links", explanation:"Links use &lt;a&gt; tag with href attribute.", code:'<a href="https://example.com">Visit</a>'},
-{title:"Images", explanation:"Images use &lt;img&gt; tag with src attribute.", code:'<img src="image.jpg" alt="Sample">'}, 
-{title:"CSS Basics", explanation:"CSS styles HTML elements.", code:"p { color: blue; }"},
-{title:"Box Model", explanation:"Content, padding, border, margin make the box model.", code:"div { padding:10px; border:1px solid #000; margin:5px; }"},
-{title:"Flexbox", explanation:"Flexible box layout using display:flex.", code:"div { display:flex; justify-content:center; }"},
-{title:"JavaScript Introduction", explanation:"JavaScript adds interactivity to web pages.", code:"console.log('Hello World');"},
-{title:"DOM Manipulation", explanation:"Change HTML elements using JS.", code:"document.getElementById('id').textContent='Hello';"}
+// Topics arrays
+const htmlTopics=[
+"HTML Introduction","HTML Basic Structure","Headings","Paragraphs","Links","Images","Lists","Tables","Forms","Buttons",
+"Semantic HTML","Audio/Video","Iframes","Meta Tags & SEO","HTML5 Elements"
+];
+const cssTopics=[
+"CSS Introduction","Selectors","Colors & Background","Fonts & Text","Box Model","Display","Positioning",
+"Flexbox","Grid Layout","Pseudo-classes","Pseudo-elements","Transitions & Animations","Media Queries","CSS Variables","Advanced Selectors"
+];
+const jsTopics=[
+"JS Introduction","Variables","Data Types","Operators","Conditionals","Loops","Functions","Arrow Functions",
+"DOM Manipulation","Event Listeners","Form Validation","Array Methods","Objects & Properties","JSON",
+"LocalStorage/SessionStorage","Fetch API","Error Handling","Timers","ES6 Modules","Debugging"
 ];
 
-// Render Tutorials
+// Render tutorials
 const tutorialList=document.getElementById('tutorial-list');
-topics.forEach((t,index)=>{
+[...htmlTopics,...cssTopics,...jsTopics].forEach((topic,index)=>{
     const div=document.createElement('div');
-    div.innerHTML=`<h3>${index+1}. ${t.title}</h3>
-    <p><strong>Meaning:</strong> ${t.explanation}</p>
-    <pre>${t.code}</pre>`;
+    div.innerHTML=`<h3>${index+1}. ${topic}</h3>
+    <pre>// Sample code for ${topic}</pre>`;
     tutorialList.appendChild(div);
 });
 
-// Render Practice
+// Render practice exercises
 const practiceList=document.getElementById('practice-list');
-topics.forEach((t,index)=>{
+[...htmlTopics,...cssTopics,...jsTopics].forEach((topic,index)=>{
     const div=document.createElement('div');
-    div.innerHTML=`<h3>Practice ${index+1}: ${t.title}</h3>
-    <textarea id="practice${index}" rows="3" placeholder="Try ${t.title}..."></textarea>
-    <button class="check-answer" onclick="showAnswer(${index})">Check Answer</button>
-    <span class="correct-answer" id="answer${index}"></span>`;
+    div.innerHTML=`<h3>Practice ${index+1}: ${topic}</h3>
+    <textarea id="practice${index}" rows="3" placeholder="Try ${topic}..."></textarea>
+    <button onclick="checkPractice('practice${index}')">Check Answer</button>
+    <p id="feedback${index}"></p>`;
     practiceList.appendChild(div);
 });
 
-// Show correct answer
-function showAnswer(index){
-    document.getElementById(`answer${index}`).textContent = topics[index].code;
-}
-
-// Tabs
+// Tabs functionality
 const tabs=document.querySelectorAll('.tab');
 const sections=document.querySelectorAll('.section');
 tabs.forEach(tab=>{
@@ -146,25 +168,38 @@ tabs.forEach(tab=>{
     });
 });
 
-// Quiz
+// Practice check
+function checkPractice(id){
+    const input=document.getElementById(id).value.trim();
+    let feedback=document.getElementById('feedback'+id.replace('practice',''));
+    if(input.length>0){
+        feedback.textContent="✅ Input received!";
+    } else {
+        feedback.textContent="❌ Please write something!";
+    }
+}
+
+// Quiz check
 function checkQuiz(button,correct){
     const feedback=document.getElementById('quiz-feedback');
     if(correct){
         feedback.textContent="✅ Correct!";
-        button.style.background="#4e73df"; button.style.color="#fff";
+        button.style.background="#4e73df";
+        button.style.color="#fff";
     } else {
         feedback.textContent="❌ Try again!";
         button.style.background="#f5c6cb";
     }
 }
 
-// Progress
+// Progress Tracker
 let progress=0;
 function updateProgress(){
     progress+=16.66;
     if(progress>100) progress=100;
     const fill=document.getElementById('progress-fill');
-    fill.style.width=progress+"%"; fill.textContent=Math.round(progress)+"%";
+    fill.style.width=progress+"%";
+    fill.textContent=Math.round(progress)+"%";
 }
 </script>
 
