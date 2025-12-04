@@ -1,49 +1,51 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mini LMS Dashboard</title>
+<title>Enhanced LMS Dashboard</title>
 <style>
-    /* Reset & basic styles */
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
-    body { background: #f4f4f9; color: #333; }
-    h2 { margin-bottom: 10px; color: #222; }
-    p { margin-bottom: 10px; }
+/* Reset & basic styles */
+* { box-sizing: border-box; margin:0; padding:0; font-family:'Segoe UI', sans-serif;}
+body { background:#f4f4f9; color:#333;}
+h1,h2 { margin-bottom:15px; color:#222;}
+p { margin-bottom:10px; }
 
-    /* Container */
-    .container { width: 90%; max-width: 1200px; margin: 30px auto; }
+/* Container */
+.container { width:90%; max-width:1200px; margin:30px auto; }
 
-    /* Tabs */
-    .tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-    .tab { padding: 10px 20px; background: #fff; border-radius: 8px; cursor: pointer; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
-    .tab.active { background: #4e73df; color: #fff; }
+/* Tabs */
+.tabs { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;}
+.tab { padding:10px 20px; background:#fff; border-radius:8px; cursor:pointer; box-shadow:0 2px 5px rgba(0,0,0,0.1); transition:0.3s;}
+.tab.active { background:#4e73df; color:#fff; }
 
-    /* Section content */
-    .section { display: none; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
-    .section.active { display: block; }
+/* Section content */
+.section { display:none; background:#fff; padding:20px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.05); margin-bottom:20px; }
+.section.active { display:block; }
 
-    /* Code blocks */
-    pre { background: #f0f0f0; padding: 10px; border-radius: 5px; overflow-x: auto; }
+/* Code blocks */
+pre { background:#f0f0f0; padding:10px; border-radius:5px; overflow-x:auto; }
 
-    /* Quiz */
-    .quiz-question { margin-bottom: 15px; }
-    .quiz-options button { margin-right: 10px; margin-bottom: 5px; padding: 8px 12px; border: none; border-radius: 5px; cursor: pointer; transition: 0.3s; }
-    .quiz-options button:hover { background: #ddd; }
+/* Practice */
+textarea { width:100%; margin-bottom:10px; padding:8px; border-radius:5px; border:1px solid #ccc; }
 
-    /* Progress Tracker */
-    .progress-bar { background: #ddd; border-radius: 10px; overflow: hidden; height: 20px; margin-top: 10px; }
-    .progress-fill { height: 100%; width: 0%; background: #4e73df; text-align: center; color: #fff; line-height: 20px; transition: width 0.5s; }
+/* Quiz */
+.quiz-question { margin-bottom:15px; }
+.quiz-options button { margin-right:10px; margin-bottom:5px; padding:8px 12px; border:none; border-radius:5px; cursor:pointer; transition:0.3s; }
+.quiz-options button:hover { background:#ddd; }
 
-    /* Tips & Guides */
-    .tip { background: #eef0ff; padding: 10px 15px; border-radius: 8px; margin-bottom: 10px; }
+/* Progress Tracker */
+.progress-bar { background:#ddd; border-radius:10px; overflow:hidden; height:20px; margin-top:10px; }
+.progress-fill { height:100%; width:0%; background:#4e73df; text-align:center; color:#fff; line-height:20px; transition: width 0.5s; }
+
+/* Tips & Guides */
+.tip { background:#eef0ff; padding:10px 15px; border-radius:8px; margin-bottom:10px; }
 </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Mini LMS Dashboard</h1>
+    <h1>Enhanced LMS Dashboard</h1>
 
     <div class="tabs">
         <div class="tab active" data-target="tutorials">Tutorials</div>
@@ -57,47 +59,100 @@
     <!-- Tutorials -->
     <div class="section active" id="tutorials">
         <h2>Tutorials</h2>
-        <p>Learn how to use loops in Python:</p>
+        <h3>1. Variables & Data Types (Python)</h3>
         <pre>
-for i in range(5):
-    print("Hello World", i)
+# Numbers, Strings, Boolean
+x = 5
+name = "Alice"
+is_student = True
+print(x, name, is_student)
+        </pre>
+
+        <h3>2. Loops (JavaScript)</h3>
+        <pre>
+for(let i=1; i<=5; i++){
+    console.log("Number:", i);
+}
+        </pre>
+
+        <h3>3. Functions (Python)</h3>
+        <pre>
+def square(n):
+    return n * n
+
+print(square(4))
+        </pre>
+
+        <h3>4. Conditional Statements (Python)</h3>
+        <pre>
+age = 18
+if age >= 18:
+    print("Adult")
+else:
+    print("Minor")
+        </pre>
+
+        <h3>5. Arrays & Objects (JavaScript)</h3>
+        <pre>
+let fruits = ["apple","banana","cherry"];
+let person = {name:"Bob", age:25};
+console.log(fruits, person);
         </pre>
     </div>
 
     <!-- Practice Exercises -->
     <div class="section" id="practice">
         <h2>Practice Exercises</h2>
-        <p>Write a function that returns the square of a number.</p>
-        <textarea id="practice-input" rows="4" style="width:100%; margin-bottom:10px;"></textarea>
-        <button onclick="checkPractice()">Check Answer</button>
-        <p id="practice-feedback"></p>
+        <h3>1. Square Function (Python)</h3>
+        <textarea id="practice1" rows="4" placeholder="Write a function to return square of a number"></textarea>
+        <button onclick="checkPractice('practice1')">Check Answer</button>
+        <p id="feedback1"></p>
+
+        <h3>2. Print Even Numbers (Python)</h3>
+        <textarea id="practice2" rows="4" placeholder="Write a loop to print even numbers 1-10"></textarea>
+        <button onclick="checkPractice('practice2')">Check Answer</button>
+        <p id="feedback2"></p>
     </div>
 
     <!-- Lab Assignments -->
     <div class="section" id="labs">
         <h2>Lab Assignments</h2>
-        <p>Download the starter code:</p>
-        <a href="#" download="lab1-starter.py">Download Lab 1 Starter File</a>
+        <p>Download starter files:</p>
+        <ul>
+            <li><a href="#" download="lab1-starter.py">Lab 1 Starter File</a></li>
+            <li><a href="#" download="lab2-starter.py">Lab 2 Starter File</a></li>
+            <li><a href="#" download="lab3-starter.py">Lab 3 Starter File</a></li>
+        </ul>
     </div>
 
     <!-- Quizzes -->
     <div class="section" id="quizzes">
-        <h2>Quiz: Python Basics</h2>
+        <h2>Quiz: Python & JS Basics</h2>
         <div class="quiz-question">
             <p>1. Which of these is a valid Python variable?</p>
             <div class="quiz-options">
-                <button onclick="checkQuiz(this, true)">my_var</button>
-                <button onclick="checkQuiz(this, false)">2ndVar</button>
-                <button onclick="checkQuiz(this, false)">my-var</button>
+                <button onclick="checkQuiz(this,true)">my_var</button>
+                <button onclick="checkQuiz(this,false)">2ndVar</button>
+                <button onclick="checkQuiz(this,false)">my-var</button>
             </div>
         </div>
+
+        <div class="quiz-question">
+            <p>2. What does this JS code print? <br> console.log(2 + '2');</p>
+            <div class="quiz-options">
+                <button onclick="checkQuiz(this,false)">4</button>
+                <button onclick="checkQuiz(this,true)">22</button>
+                <button onclick="checkQuiz(this,false)">Error</button>
+            </div>
+        </div>
+
         <p id="quiz-feedback"></p>
     </div>
 
     <!-- Progress Tracker -->
     <div class="section" id="progress">
         <h2>Progress Tracker</h2>
-        <p>Complete sections to fill your progress bar:</p>
+        <p>Track your completion per section:</p>
         <div class="progress-bar">
             <div class="progress-fill" id="progress-fill">0%</div>
         </div>
@@ -107,60 +162,64 @@ for i in range(5):
     <!-- Tips & Guides -->
     <div class="section" id="tips">
         <h2>Tips & Guides</h2>
-        <div class="tip">🕒 Manage your time: Use a schedule to balance study and rest.</div>
-        <div class="tip">💤 Sleep well: 7-8 hours improves memory and focus.</div>
-        <div class="tip">✅ Avoid procrastination: Break tasks into small, manageable steps.</div>
+        <div class="tip">🕒 Use Pomodoro Technique: Study 25 mins, break 5 mins.</div>
+        <div class="tip">💤 Sleep 7–8 hours to improve memory & focus.</div>
+        <div class="tip">✅ Break big tasks into small steps to avoid procrastination.</div>
+        <div class="tip">📵 Avoid multitasking while coding/studying.</div>
+        <div class="tip">🍎 Eat healthy snacks & drink water for energy.</div>
     </div>
 </div>
 
 <script>
-    // Tab functionality
-    const tabs = document.querySelectorAll('.tab');
-    const sections = document.querySelectorAll('.section');
+// Tab functionality
+const tabs = document.querySelectorAll('.tab');
+const sections = document.querySelectorAll('.section');
 
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            tabs.forEach(t => t.classList.remove('active'));
-            sections.forEach(s => s.classList.remove('active'));
-
-            tab.classList.add('active');
-            document.getElementById(tab.dataset.target).classList.add('active');
-        });
+tabs.forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+        tabs.forEach(t=>t.classList.remove('active'));
+        sections.forEach(s=>s.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.target).classList.add('active');
     });
+});
 
-    // Practice Exercise Feedback
-    function checkPractice() {
-        const input = document.getElementById('practice-input').value.trim();
-        const feedback = document.getElementById('practice-feedback');
-        if(input.includes("return") && input.includes("*")) {
-            feedback.textContent = "✅ Looks correct! You are on the right track.";
-        } else {
-            feedback.textContent = "❌ Check your function syntax. Remember to use 'return' and multiply.";
-        }
-    }
+// Practice Exercise Feedback
+function checkPractice(id){
+    const input = document.getElementById(id).value.trim().toLowerCase();
+    let feedback;
+    if(id==='practice1') feedback=document.getElementById('feedback1');
+    else feedback=document.getElementById('feedback2');
 
-    // Quiz feedback
-    function checkQuiz(button, correct) {
-        const feedback = document.getElementById('quiz-feedback');
-        if(correct) {
-            feedback.textContent = "✅ Correct!";
-            button.style.background = "#4e73df";
-            button.style.color = "#fff";
-        } else {
-            feedback.textContent = "❌ Try again!";
-            button.style.background = "#f5c6cb";
-        }
+    if(input.includes("return") && input.includes("*") && (id==='practice1' || id==='practice2')){
+        feedback.textContent="✅ Looks correct!";
+    } else {
+        feedback.textContent="❌ Check your syntax. Use 'return' and proper loop/multiplication.";
     }
+}
 
-    // Progress Tracker
-    let progress = 0;
-    function updateProgress() {
-        progress += 16.66; // 6 sections ~16.66% each
-        if(progress > 100) progress = 100;
-        const fill = document.getElementById('progress-fill');
-        fill.style.width = progress + "%";
-        fill.textContent = Math.round(progress) + "%";
+// Quiz feedback
+function checkQuiz(button, correct){
+    const feedback = document.getElementById('quiz-feedback');
+    if(correct){
+        feedback.textContent="✅ Correct!";
+        button.style.background="#4e73df";
+        button.style.color="#fff";
+    } else {
+        feedback.textContent="❌ Try again!";
+        button.style.background="#f5c6cb";
     }
+}
+
+// Progress Tracker
+let progress = 0;
+function updateProgress(){
+    progress += 16.66; // 6 sections ~16.66% each
+    if(progress > 100) progress=100;
+    const fill=document.getElementById('progress-fill');
+    fill.style.width=progress+"%";
+    fill.textContent=Math.round(progress)+"%";
+}
 </script>
 
 </body>
