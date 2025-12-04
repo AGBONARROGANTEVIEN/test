@@ -1,165 +1,166 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Web-Based Study Guide System</title>
+<title>Mini LMS Dashboard</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f4f6f9;
-  }
+    /* Reset & basic styles */
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+    body { background: #f4f4f9; color: #333; }
+    h2 { margin-bottom: 10px; color: #222; }
+    p { margin-bottom: 10px; }
 
-  header {
-    background-color: #1f3c88;
-    color: white;
-    padding: 20px;
-    text-align: center;
-  }
+    /* Container */
+    .container { width: 90%; max-width: 1200px; margin: 30px auto; }
 
-  nav {
-    display: flex;
-    justify-content: center;
-    background-color: #2a4da0;
-  }
+    /* Tabs */
+    .tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+    .tab { padding: 10px 20px; background: #fff; border-radius: 8px; cursor: pointer; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
+    .tab.active { background: #4e73df; color: #fff; }
 
-  nav button {
-    background-color: #2a4da0;
-    color: white;
-    border: none;
-    padding: 15px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 0 5px;
-    border-bottom: 3px solid transparent;
-  }
+    /* Section content */
+    .section { display: none; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
+    .section.active { display: block; }
 
-  nav button.active, nav button:hover {
-    border-bottom: 3px solid #f0ad4e;
-  }
+    /* Code blocks */
+    pre { background: #f0f0f0; padding: 10px; border-radius: 5px; overflow-x: auto; }
 
-  main {
-    padding: 30px;
-    max-width: 900px;
-    margin: auto;
-    background-color: white;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    margin-top: 20px;
-    border-radius: 8px;
-  }
+    /* Quiz */
+    .quiz-question { margin-bottom: 15px; }
+    .quiz-options button { margin-right: 10px; margin-bottom: 5px; padding: 8px 12px; border: none; border-radius: 5px; cursor: pointer; transition: 0.3s; }
+    .quiz-options button:hover { background: #ddd; }
 
-  h2 {
-    color: #1f3c88;
-  }
+    /* Progress Tracker */
+    .progress-bar { background: #ddd; border-radius: 10px; overflow: hidden; height: 20px; margin-top: 10px; }
+    .progress-fill { height: 100%; width: 0%; background: #4e73df; text-align: center; color: #fff; line-height: 20px; transition: width 0.5s; }
 
-  ul {
-    margin-top: 10px;
-    padding-left: 20px;
-  }
-
-  li {
-    margin: 5px 0;
-  }
-
-  .hidden {
-    display: none;
-  }
+    /* Tips & Guides */
+    .tip { background: #eef0ff; padding: 10px 15px; border-radius: 8px; margin-bottom: 10px; }
 </style>
 </head>
 <body>
 
-<header>
-  <h1>Web-Based Study Guide System</h1>
-  <p>For Computer Programming 1 Lab</p>
-</header>
+<div class="container">
+    <h1>Mini LMS Dashboard</h1>
 
-<nav>
-  <button class="tab-btn active" onclick="showTab('dashboard')">Dashboard</button>
-  <button class="tab-btn" onclick="showTab('tutorials')">Tutorials</button>
-  <button class="tab-btn" onclick="showTab('practice')">Practice Exercises</button>
-  <button class="tab-btn" onclick="showTab('lab')">Lab Assignments</button>
-  <button class="tab-btn" onclick="showTab('quizzes')">Quizzes</button>
-  <button class="tab-btn" onclick="showTab('progress')">Progress Tracker</button>
-  <button class="tab-btn" onclick="showTab('tips')">Tips & Guides</button>
-</nav>
+    <div class="tabs">
+        <div class="tab active" data-target="tutorials">Tutorials</div>
+        <div class="tab" data-target="practice">Practice Exercises</div>
+        <div class="tab" data-target="labs">Lab Assignments</div>
+        <div class="tab" data-target="quizzes">Quizzes</div>
+        <div class="tab" data-target="progress">Progress Tracker</div>
+        <div class="tab" data-target="tips">Tips & Guides</div>
+    </div>
 
-<main>
-  <div id="dashboard">
-    <h2>Dashboard</h2>
-    <ul>
-      <li>Welcome message</li>
-      <li>Quick links</li>
-      <li>Notifications</li>
-      <li>Motivational messages</li>
-    </ul>
-  </div>
+    <!-- Tutorials -->
+    <div class="section active" id="tutorials">
+        <h2>Tutorials</h2>
+        <p>Learn how to use loops in Python:</p>
+        <pre>
+for i in range(5):
+    print("Hello World", i)
+        </pre>
+    </div>
 
-  <div id="tutorials" class="hidden">
-    <h2>Tutorials</h2>
-    <ul>
-      <li>Programming topics</li>
-      <li>Step-by-step instructions</li>
-      <li>Sample code</li>
-      <li><strong>Download:</strong> <a href="#">Tutorials</a></li>
-    </ul>
-  </div>
+    <!-- Practice Exercises -->
+    <div class="section" id="practice">
+        <h2>Practice Exercises</h2>
+        <p>Write a function that returns the square of a number.</p>
+        <textarea id="practice-input" rows="4" style="width:100%; margin-bottom:10px;"></textarea>
+        <button onclick="checkPractice()">Check Answer</button>
+        <p id="practice-feedback"></p>
+    </div>
 
-  <div id="practice" class="hidden">
-    <h2>Practice Exercises</h2>
-    <ul>
-      <li>Interactive coding</li>
-      <li>Auto-feedback</li>
-      <li>Difficulty levels</li>
-      <li><strong>Download:</strong> <a href="#">Exercises</a></li>
-    </ul>
-  </div>
+    <!-- Lab Assignments -->
+    <div class="section" id="labs">
+        <h2>Lab Assignments</h2>
+        <p>Download the starter code:</p>
+        <a href="#" download="lab1-starter.py">Download Lab 1 Starter File</a>
+    </div>
 
-  <div id="lab" class="hidden">
-    <h2>Lab Assignments Repository</h2>
-    <ul>
-      <li>Past assignments</li>
-      <li>Solutions</li>
-      <li><strong>Download:</strong> <a href="#">Guides</a></li>
-    </ul>
-  </div>
+    <!-- Quizzes -->
+    <div class="section" id="quizzes">
+        <h2>Quiz: Python Basics</h2>
+        <div class="quiz-question">
+            <p>1. Which of these is a valid Python variable?</p>
+            <div class="quiz-options">
+                <button onclick="checkQuiz(this, true)">my_var</button>
+                <button onclick="checkQuiz(this, false)">2ndVar</button>
+                <button onclick="checkQuiz(this, false)">my-var</button>
+            </div>
+        </div>
+        <p id="quiz-feedback"></p>
+    </div>
 
-  <div id="quizzes" class="hidden">
-    <h2>Quizzes</h2>
-    <ul>
-      <li>Multiple-choice</li>
-      <li>Coding quizzes</li>
-    </ul>
-  </div>
+    <!-- Progress Tracker -->
+    <div class="section" id="progress">
+        <h2>Progress Tracker</h2>
+        <p>Complete sections to fill your progress bar:</p>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill">0%</div>
+        </div>
+        <button onclick="updateProgress()">Mark Current Section Complete</button>
+    </div>
 
-  <div id="progress" class="hidden">
-    <h2>Progress Tracker</h2>
-    <ul>
-      <li>Completion status</li>
-      <li>Monthly milestones</li>
-    </ul>
-  </div>
-
-  <div id="tips" class="hidden">
-    <h2>Tips & Guides</h2>
-    <ul>
-      <li>Time management</li>
-      <li>Reducing procrastination</li>
-      <li>Sleep hygiene</li>
-    </ul>
-  </div>
-</main>
+    <!-- Tips & Guides -->
+    <div class="section" id="tips">
+        <h2>Tips & Guides</h2>
+        <div class="tip">🕒 Manage your time: Use a schedule to balance study and rest.</div>
+        <div class="tip">💤 Sleep well: 7-8 hours improves memory and focus.</div>
+        <div class="tip">✅ Avoid procrastination: Break tasks into small, manageable steps.</div>
+    </div>
+</div>
 
 <script>
-  function showTab(tabId) {
-    const tabs = document.querySelectorAll('main > div');
-    tabs.forEach(tab => tab.classList.add('hidden'));
-    document.getElementById(tabId).classList.remove('hidden');
+    // Tab functionality
+    const tabs = document.querySelectorAll('.tab');
+    const sections = document.querySelectorAll('.section');
 
-    const buttons = document.querySelectorAll('nav button');
-    buttons.forEach(btn => btn.classList.remove('active'));
-    document.querySelector(`button[onclick="showTab('${tabId}')"]`).classList.add('active');
-  }
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            sections.forEach(s => s.classList.remove('active'));
+
+            tab.classList.add('active');
+            document.getElementById(tab.dataset.target).classList.add('active');
+        });
+    });
+
+    // Practice Exercise Feedback
+    function checkPractice() {
+        const input = document.getElementById('practice-input').value.trim();
+        const feedback = document.getElementById('practice-feedback');
+        if(input.includes("return") && input.includes("*")) {
+            feedback.textContent = "✅ Looks correct! You are on the right track.";
+        } else {
+            feedback.textContent = "❌ Check your function syntax. Remember to use 'return' and multiply.";
+        }
+    }
+
+    // Quiz feedback
+    function checkQuiz(button, correct) {
+        const feedback = document.getElementById('quiz-feedback');
+        if(correct) {
+            feedback.textContent = "✅ Correct!";
+            button.style.background = "#4e73df";
+            button.style.color = "#fff";
+        } else {
+            feedback.textContent = "❌ Try again!";
+            button.style.background = "#f5c6cb";
+        }
+    }
+
+    // Progress Tracker
+    let progress = 0;
+    function updateProgress() {
+        progress += 16.66; // 6 sections ~16.66% each
+        if(progress > 100) progress = 100;
+        const fill = document.getElementById('progress-fill');
+        fill.style.width = progress + "%";
+        fill.textContent = Math.round(progress) + "%";
+    }
 </script>
 
 </body>
