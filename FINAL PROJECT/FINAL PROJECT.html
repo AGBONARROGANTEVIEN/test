@@ -216,50 +216,38 @@ console.log(greet('Student'));</pre>
     function openModal(name){
       const mapping = {
         login: `
-          <div style=\"display:flex;justify-content:space-between;align-items:center\"> <h2>Login</h2><button class='close' onclick='closeModal(event)'>✕</button></div>
-          <p style=\"color:var(--muted)\">Use any credentials for demo.</p>
-          <div style=\"margin-top:12px;display:flex;gap:8px;flex-direction:column\"> 
-            <input id=\"u\" placeholder=\"Username\" style=\"padding:8px;border-radius:8px;border:1px solid #e6eefc\"> 
-            <input id=\"p\" type=\"password\" placeholder=\"Password\" style=\"padding:8px;border-radius:8px;border:1px solid #e6eefc\"> 
-            <button class=\"btn\" onclick=\"doLogin()\">Sign in</button>
+          <div style="display:flex;justify-content:space-between;align-items:center"> <h2>Login</h2><button class='close' onclick='closeModal(event)'>✕</button></div>
+          <p style="color:var(--muted)">Use any credentials for demo.</p>
+          <div style="margin-top:12px;display:flex;gap:8px;flex-direction:column"> 
+            <input id="u" placeholder="Username" style="padding:8px;border-radius:8px;border:1px solid #e6eefc"> 
+            <input id="p" type="password" placeholder="Password" style="padding:8px;border-radius:8px;border:1px solid #e6eefc"> 
+            <button class="btn" onclick="doLogin()">Sign in</button>
           </div>
         `,
         tutorials: `
-          <div style=\"display:flex;justify-content:space-between;align-items:center\"> <h2>Tutorials</h2><button class='close' onclick='closeModal(event)'>✕</button></div>
-          <p style=\"color:var(--muted)\">Select a tutorial to start learning.</p>
-          <ul style=\"margin-top:12px;padding-left:18px\">
-            <li><button class=\"btn\" style=\"background:#0ea5e9;margin-top:6px\" onclick=\"alert('Open: Variables & Data Types')\">Variables & Data Types</button></li>
-            <li><button class=\"btn\" style=\"background:#f59e0b;margin-top:6px\" onclick=\"alert('Open: Control Flow')\">Control Flow</button></li>
-            <li><button class=\"btn\" style=\"background:#06b6d4;margin-top:6px\" onclick=\"alert('Open: Functions')\">Functions</button></li>
+          <div style="display:flex;justify-content:space-between;align-items:center"> <h2>Tutorials (Selected Topics)</h2><button class='close' onclick='closeModal(event)'>✕</button></div>
+          <p style="color:var(--muted)">Below are major programming topics (inspired by many online references). Click a topic to open a short tutorial and examples.</p>
+          <ul style="margin-top:12px;padding-left:18px;max-height:360px;overflow:auto">
+            <li><button class="btn" style="margin-top:6px" onclick="openTopic('HTML')">HTML — Structure & Semantic Tags</button></li>
+            <li><button class="btn" style="margin-top:6px" onclick="openTopic('CSS')">CSS — Selectors, Box Model, Flexbox & Grid</button></li>
+            <li><button class="btn" style="margin-top:6px" onclick="openTopic('JavaScript')">JavaScript — Basics to DOM & ES6+</button></li>
+            <li><button class="btn" style="margin-top:6px" onclick="openTopic('Python')">Python — Syntax, Data Structures, OOP</button></li>
+            <li><button class="btn" style="margin-top:6px" onclick="openTopic('Java')">Java — OOP, Collections, Exceptions</button></li>
+            <li><button class="btn" style="margin-top:6px" onclick="openTopic('C')">C — Pointers, Memory, Structs</button></li>
+            <li><button class="btn" style="margin-top:6px" onclick="openTopic('C++')">C++ — OOP, STL, RAII</button></li>
+            <li><button class="btn" style="margin-top:6px" onclick="openTopic('CSharp')">C# — .NET Basics</button></li>
+            <li><button class="btn" style="margin-top:6px" onclick="openTopic('PHP')">PHP — Server-side Scripting</button></li>
+            <li><button class="btn" style="margin-top:6px" onclick="openTopic('SQL')">SQL — Queries, Joins, Indexes</button></li>
+            <li><button class="btn" style="margin-top:6px" onclick="openTopic('Node')">Node.js — Backend JavaScript</button></li>
+            <li><button class="btn" style="margin-top:6px" onclick="openTopic('React')">React — Components & Hooks</button></li>
+            <li><button class="btn" style="margin-top:6px" onclick="openTopic('Git')">Git — Version Control Basics</button></li>
+            <li><button class="btn" style="margin-top:6px" onclick="openTopic('Docker')">Docker — Containers Basics</button></li>
+            <li><button class="btn" style="margin-top:6px" onclick="openTopic('Algorithms')">Algorithms & Data Structures</button></li>
           </ul>
         `,
         practice: `
-          <div style=\"display:flex;justify-content:space-between;align-items:center\"> <h2>Practice Exercises</h2><button class='close' onclick='closeModal(event)'>✕</button></div>
-          <p style=\"color:var(--muted)\">Solve short coding tasks. Submit to see feedback.</p>
-          <textarea id=\"practiceArea\" placeholder=\"Write JS code here...\" style=\"width:100%;height:140px;margin-top:8px;border-radius:8px;border:1px solid #eef2ff;padding:8px\"></textarea>
-          <div style=\"margin-top:8px\"><button class=\"btn\" onclick=\"runPractice()\">Run</button> <span id=\"practiceOut\" style=\"margin-left:10px;color:var(--muted)\"></span></div>
-        `,
-        quizzes: `
-          <div style=\"display:flex;justify-content:space-between;align-items:center\"> <h2>Quiz: Basics</h2><button class='close' onclick='closeModal(event)'>✕</button></div>
-          <p style=\"color:var(--muted)\">Choose the correct answer.</p>
-          <div style=\"margin-top:10px\"> 
-            <div><strong>1. Which operator is used for strict equality in JS?</strong></div>
-            <div style=\"margin-top:8px\"><button class=\"btn\" onclick=\"answer('A')\">A) =</button> <button class=\"btn\" style=\"background:#10b981;margin-left:8px\" onclick=\"answer('B')\">B) ==</button> <button class=\"btn\" style=\"background:#ef4444;margin-left:8px\" onclick=\"answer('C')\">C) ===</button></div>
-          </div>
-        `,
-        tips: `
-          <div style=\"display:flex;justify-content:space-between;align-items:center\"> <h2>Tips & Guides</h2><button class='close' onclick='closeModal(event)'>✕</button></div>
-          <div style=\"margin-top:10px;color:var(--muted)\">Use short focused study sessions, plan weekly goals, and practice active recall. See sleep tips below.</div>
-        `,
-        labs: `
-          <div style=\"display:flex;justify-content:space-between;align-items:center\"> <h2>Lab Assignments</h2><button class='close' onclick='closeModal(event)'>✕</button></div>
-          <ol style=\"margin-top:12px;color:var(--muted)\"><li>Lab 1 — Hello World</li><li>Lab 2 — Input & Output</li><li>Lab 3 — Arrays</li></ol>
-        `,
-        forum: `
-          <div style=\"display:flex;justify-content:space-between;align-items:center\"> <h2>Discussion Forum</h2><button class='close' onclick='closeModal(event)'>✕</button></div>
-          <div style=\"margin-top:8px;color:var(--muted)\">This is a placeholder for a forum. You can integrate Discourse, Firebase, or simple comments later.</div>
-        `
-      };
+          <div style="display:flex;justify-content:space-between;align-items:center"> <h2>Hard Practice Exercises</h2><button class='close' onclick='closeModal(event)'>✕</button></div>
+          <p style="color:var(--muted)">These exercises are intentionally challenging — meant for strong students. Each problem includes a "Show answer" button that reveals hints and the solution.</p>
 
       modalBox.innerHTML = mapping[name] || '<h2>Not found</h2>';
       modalBackdrop.style.display = 'flex';
