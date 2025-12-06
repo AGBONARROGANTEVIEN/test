@@ -92,17 +92,77 @@ footer{text-align:center;margin-top:40px;color:#666;padding:20px;}
 
 <!-- Quizzes -->
 <div class="section" id="quizzes">
-<h2>Quiz</h2>
-<div class="quiz-question">
-<p>1. What tag defines a hyperlink?</p>
-<div class="quiz-options">
-<button onclick="checkQuiz(this,true)"><a></button>
-<button onclick="checkQuiz(this,false)">p</button>
-<button onclick="checkQuiz(this,false)">head</button>
-</div>
-</div>
+<h2>Quizzes (Mixed: Multiple Choice + Identification)</h2>
+<div id="quiz-container"></div>
 <p id="quiz-feedback"></p>
 </div>
+
+<script>
+const quizItems = [
+// Multiple Choice
+{q:"1. Which tag is used for a paragraph?", type:"mc", options:["<p>","<div>","<span>"], answer:"<p>"},
+{q:"2. CSS stands for?", type:"mc", options:["Cascading Style Sheets","Creative Syntax System","Color Styling System"], answer:"Cascading Style Sheets"},
+{q:"3. Inside which HTML element do we put JavaScript?", type:"mc", options:["<js>","<javascript>","<script>"], answer:"<script>"},
+{q:"4. Which CSS property changes text color?", type:"mc", options:["font-color","text-style","color"], answer:"color"},
+{q:"5. Which symbol starts a comment in JavaScript?", type:"mc", options:["//","**","##"], answer:"//"},
+
+// Identification
+{q:"6. HTML stands for ______.", type:"id", answer:"HyperText Markup Language"},
+{q:"7. CSS property to change background color: ______.", type:"id", answer:"background-color"},
+{q:"8. JS function used to output message to console: ______.", type:"id", answer:"console.log"},
+{q:"9. Attribute used for images to show description: ______.", type:"id", answer:"alt"},
+{q:"10. What do you call a clickable link? ______.", type:"id", answer:"anchor"},
+
+// More Mixed
+{q:"11. Which tag creates a list?", type:"mc", options:["<ul>","<li>","<ol>"], answer:"<ul>"},
+{q:"12. CSS property for text size?", type:"mc", options:["text-size","font-size","size"], answer:"font-size"},
+{q:"13. The keyword to declare variable in JS: ______.", type:"id", answer:"let"},
+{q:"14. HTML tag for images: ______.", type:"id", answer:"img"},
+{q:"15. JS operator for addition: ______.", type:"id", answer:"+"},
+{q:"16. Which CSS layout makes rows/columns?", type:"mc", options:["Flexbox","Align","Padding"], answer:"Flexbox"},
+{q:"17. JS loop that repeats until false?", type:"mc", options:["for","repeat","cycle"], answer:"for"},
+{q:"18. What HTML tag creates a link?", type:"id", answer:"a"},
+{q:"19. CSS property to center text: ______.", type:"id", answer:"text-align"},
+{q:"20. JS method to select an element by ID: ______.", type:"id", answer:"document.getElementById"}
+];
+
+// Render Quiz
+const quizContainer = document.getElementById('quiz-container');
+quizItems.forEach((item,i)=>{
+ let div=document.createElement('div');
+ div.className='quiz-item';
+ if(item.type==='mc'){
+   div.innerHTML=`<p>${item.q}</p>${item.options.map(op=>`<button onclick=\"checkQuizAns(this,'${op}','${item.answer}')\">${op}</button>`).join('')}`;
+ }
+ else{
+   div.innerHTML=`<p>${item.q}</p><input type='text' id='id${i}' placeholder='Type answer...' onblur=\"checkId(${i},'${item.answer}')\"><p id='idfb${i}'></p>`;
+ }
+ quizContainer.appendChild(div);
+});
+
+function checkQuizAns(btn,choice,correct){
+ const fb=document.getElementById('quiz-feedback');
+ if(choice===correct){
+   fb.textContent="✔ Correct!";
+   btn.style.background='#4e73df'; btn.style.color='#fff';
+ } else {
+   fb.textContent="✘ Incorrect. Correct answer: " + correct;
+   btn.style.background='#f4b7b7';
+ }
+}
+
+function checkId(i,correct){
+ let val=document.getElementById('id'+i).value.trim();
+ let fb=document.getElementById('idfb'+i);
+ if(val.toLowerCase()===correct.toLowerCase()){
+   fb.textContent="✔ Correct!";
+   fb.style.color='green';
+ } else {
+   fb.textContent=`✘ Incorrect. Correct answer: ${correct}`;
+   fb.style.color='red';
+ }
+}
+</script>
 
 <!-- Progress -->
 <div class="section" id="progress">
@@ -135,9 +195,9 @@ footer{text-align:center;margin-top:40px;color:#666;padding:20px;}
 <footer>Web Development LMS © 2025</footer>
 
 <script>
-const htmlTopics=["HTML Intro","Tags","Links","Images","Tables","Forms"];
-const cssTopics=["CSS Intro","Colors","Flexbox","Grid","Animations"];
-const jsTopics=["JS Intro","Variables","Functions","DOM","Events"];
+const htmlTopics=["HTML Intro","HTML Tags","Paragraphs","Headings","Images","Links","Lists","Tables","Forms","Inputs","Media Tags","Semantic HTML","Iframes","Attributes","HTML5 APIs","Canvas","SVG","Meta Tags","SEO Basics","Best Practices"];
+const cssTopics=["CSS Intro","Selectors","Colors","Backgrounds","Borders","Margins & Padding","Fonts","Text Styling","Box Model","Display","Positioning","Flexbox","Grid","Animations","Transitions","Variables","Pseudo-classes","Pseudo-elements","Media Queries","Responsive Design"];
+const jsTopics=["JavaScript Intro","Variables","Data Types","Operators","Conditionals","Loops","Functions","Arrays","Objects","Events","DOM","Event Listeners","JSON","LocalStorage","Fetch API","Error Handling","ES6+ Features","Timers","Modules","Debugging"];
 
 const tutorialList=document.getElementById('tutorial-list');
 [...htmlTopics,...cssTopics,...jsTopics].forEach((topic,i)=>{
