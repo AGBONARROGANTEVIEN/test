@@ -5,91 +5,94 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Web-Based Study Guide System</title>
   <style>
-    * { box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+    * { box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
     body { margin: 0; background: #f2f4f7; color: #333; }
 
     header {
-      background: linear-gradient(135deg,#4caf50,#2e7d32);
+      background: #4caf50;
       color: white;
-      padding: 40px 20px;
+      padding: 35px 20px;
       text-align: center;
     }
-    header h1 { margin: 0; font-size: 36px; }
+    header h1 { margin: 0; font-size: 34px; }
 
     nav {
-      background: #1b5e20;
+      background: #2e7d32;
       display: flex;
       justify-content: center;
-      gap: 30px;
-      padding: 14px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      gap: 25px;
+      padding: 12px;
     }
-    nav a { color: #fff; text-decoration: none; font-weight: 600; }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-    main { max-width: 1200px; margin: auto; padding: 30px 20px; }
-    section { display: none; animation: fade 0.4s ease; }
+    main { max-width: 1100px; margin: auto; padding: 30px 20px; }
+    section { display: none; }
     section.active { display: block; }
 
-    @keyframes fade { from {opacity:0;} to {opacity:1;} }
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 25px; }
     .card {
       background: #fff;
       padding: 25px;
-      border-radius: 14px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     h2 { text-align: center; margin-bottom: 10px; }
-    h3 { color: #2e7d32; margin-top: 0; }
+    h3 { color: #4caf50; }
 
-    .badge {
-      display: inline-block;
-      background: #e8f5e9;
-      color: #2e7d32;
-      padding: 4px 10px;
+    .progress-box {
+      background: #e0e0e0;
       border-radius: 20px;
-      font-size: 12px;
-      margin-bottom: 8px;
+      overflow: hidden;
+      margin-top: 10px;
     }
-
-    .progress-wrap { margin-top: 10px; background: #ddd; border-radius: 20px; overflow: hidden; }
-    .progress { height: 18px; width: 0%; background: #4caf50; text-align:center; color:#fff; font-size:12px; }
+    .progress-bar {
+      background: #4caf50;
+      height: 20px;
+      width: 0%;
+      text-align: center;
+      color: white;
+      font-size: 12px;
+    }
 
     button {
       background: #4caf50;
       color: white;
       border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
+      padding: 10px 15px;
+      border-radius: 5px;
       cursor: pointer;
       margin-top: 10px;
-      font-weight: 600;
     }
-
-    details { margin-top: 10px; }
-    summary { cursor: pointer; font-weight: 600; }
 
     footer {
-      background: #1b5e20;
+      background: #2e7d32;
       color: white;
       text-align: center;
-      padding: 16px;
-      margin-top: 50px;
+      padding: 15px;
+      margin-top: 40px;
     }
 
+    /* Login */
     .login-box {
-      max-width: 420px;
-      margin: 100px auto;
+      max-width: 400px;
+      margin: 80px auto;
       background: white;
-      padding: 35px;
-      border-radius: 15px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-      text-align: center;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
-    input, textarea { width: 100%; padding: 10px; margin-top: 8px; border-radius: 6px; border:1px solid #ccc; }
+    input { width: 100%; padding: 10px; margin: 8px 0; }
   </style>
 </head>
 <body>
@@ -119,31 +122,21 @@
 <main>
 
 <section id="home" class="active">
-  <h2>Dashboard</h2>
-  <div class="grid">
-
+  <h2>Welcome, <span id="user"></span></h2>
+  <div class="card-container">
     <div class="card">
-      <span class="badge">Learning Progress</span>
-      <h3>Overall Completion</h3>
-      <div class="progress-wrap">
-        <div class="progress" id="progressBar">0%</div>
+      <h3>Study Progress</h3>
+      <div class="progress-box">
+        <div class="progress-bar" id="progressBar">0%</div>
       </div>
-      <button onclick="increaseProgress()">Mark Task as Done</button>
+      <button onclick="increaseProgress()">Complete Task</button>
     </div>
 
     <div class="card">
-      <span class="badge">Study Behavior</span>
-      <h3>Procrastination Status</h3>
-      <p id="status">Needs Improvement</p>
-      <p>This indicator updates based on task completion.</p>
+      <h3>Procrastination Monitor</h3>
+      <p>Track task completion consistency.</p>
+      <p>Status: <strong id="status">Needs Improvement</strong></p>
     </div>
-
-    <div class="card">
-      <span class="badge">Today’s Tip</span>
-      <h3>Study Reminder</h3>
-      <p>Start early. Small progress today reduces stress tomorrow.</p>
-    </div>
-
   </div>
 </section>
 
