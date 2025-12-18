@@ -3,61 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Web-Based Study Guide</title>
+  <title>Web-Based Study Guide System</title>
   <style>
     * { box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
-    body { margin: 0; background: #f4f6f7; color: #333; }
+    body { margin: 0; background: #f2f4f7; color: #333; }
 
-    /* Header */
     header {
       background: #4caf50;
       color: white;
-      padding: 40px 20px;
+      padding: 35px 20px;
       text-align: center;
     }
-    header h1 { margin: 0; font-size: 36px; }
-    header p { margin-top: 10px; font-size: 16px; }
+    header h1 { margin: 0; font-size: 34px; }
 
-    /* Navigation */
     nav {
       background: #2e7d32;
       display: flex;
       justify-content: center;
-      gap: 30px;
-      padding: 12px 0;
+      gap: 25px;
+      padding: 12px;
     }
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
+      cursor: pointer;
     }
-    nav a:hover { text-decoration: underline; }
 
-    /* Main */
-    main { padding: 40px 20px; max-width: 1100px; margin: auto; }
+    main { max-width: 1100px; margin: auto; padding: 30px 20px; }
     section { display: none; }
     section.active { display: block; }
 
-    h2 { text-align: center; margin-bottom: 15px; }
-    .subtitle { text-align: center; margin-bottom: 40px; }
-
-    /* Cards */
-    .cards {
+    .card-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 20px;
     }
-    .card {
-      background: white;
-      padding: 25px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    .card h3 { color: #4caf50; }
 
-    /* Lists */
-    ul { line-height: 1.8; }
+    .card {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 { text-align: center; margin-bottom: 10px; }
+    h3 { color: #4caf50; }
+
+    .progress-box {
+      background: #e0e0e0;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+    .progress-bar {
+      background: #4caf50;
+      height: 20px;
+      width: 0%;
+      text-align: center;
+      color: white;
+      font-size: 12px;
+    }
+
+    button {
+      background: #4caf50;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
 
     footer {
       background: #2e7d32;
@@ -66,98 +82,137 @@
       padding: 15px;
       margin-top: 40px;
     }
+
+    /* Login */
+    .login-box {
+      max-width: 400px;
+      margin: 80px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    input { width: 100%; padding: 10px; margin: 8px 0; }
   </style>
 </head>
 <body>
 
+<!-- LOGIN PAGE -->
+<div id="loginPage" class="login-box">
+  <h2>Student Login</h2>
+  <input type="text" id="studentName" placeholder="Enter your name" />
+  <button onclick="login()">Login</button>
+</div>
+
+<!-- SYSTEM -->
+<div id="system" style="display:none;">
 <header>
   <h1>Web-Based Study Guide</h1>
   <p>Enhancing Learning and Reducing Procrastination</p>
 </header>
 
 <nav>
-  <a href="#" onclick="showSection('home')">Home</a>
-  <a href="#" onclick="showSection('lessons')">Lessons</a>
-  <a href="#" onclick="showSection('activities')">Activities</a>
-  <a href="#" onclick="showSection('assessment')">Assessment</a>
-  <a href="#" onclick="showSection('profile')">Profile</a>
+  <a onclick="showSection('home')">Home</a>
+  <a onclick="showSection('lessons')">Lessons</a>
+  <a onclick="showSection('activities')">Activities</a>
+  <a onclick="showSection('assessment')">Assessment</a>
+  <a onclick="showSection('profile')">Profile</a>
 </nav>
 
 <main>
 
-  <!-- HOME -->
-  <section id="home" class="active">
-    <h2>Welcome, Student!</h2>
-    <p class="subtitle">Access organized lessons, guided activities, and assessments to improve learning and reduce procrastination.</p>
-
-    <div class="cards">
-      <div class="card">
-        <h3>Lessons</h3>
-        <p>Browse organized programming lessons with step-by-step guidance.</p>
+<section id="home" class="active">
+  <h2>Welcome, <span id="user"></span></h2>
+  <div class="card-container">
+    <div class="card">
+      <h3>Study Progress</h3>
+      <div class="progress-box">
+        <div class="progress-bar" id="progressBar">0%</div>
       </div>
-      <div class="card">
-        <h3>Activities</h3>
-        <p>Practice interactive tasks to reinforce learning.</p>
-      </div>
-      <div class="card">
-        <h3>Assessment</h3>
-        <p>Take quizzes and monitor your academic progress.</p>
-      </div>
+      <button onclick="increaseProgress()">Complete Task</button>
     </div>
-  </section>
 
-  <!-- LESSONS -->
-  <section id="lessons">
-    <h2>Lessons</h2>
-    <ul>
-      <li><strong>Lesson 1:</strong> Introduction to Programming</li>
-      <li><strong>Lesson 2:</strong> Algorithms, Flowcharts, and Pseudocode</li>
-      <li><strong>Lesson 3:</strong> Variables and Data Types</li>
-      <li><strong>Lesson 4:</strong> Input and Output Statements</li>
-    </ul>
-  </section>
+    <div class="card">
+      <h3>Procrastination Monitor</h3>
+      <p>Track task completion consistency.</p>
+      <p>Status: <strong id="status">Needs Improvement</strong></p>
+    </div>
+  </div>
+</section>
 
-  <!-- ACTIVITIES -->
-  <section id="activities">
-    <h2>Activities</h2>
-    <ul>
-      <li>Activity 1: Reflection on Procrastination</li>
-      <li>Activity 2: Create a Flowchart</li>
-      <li>Activity 3: Simple Coding Exercises</li>
-    </ul>
-  </section>
+<section id="lessons">
+  <h2>Lessons</h2>
+  <div class="card">
+    <p><strong>Lesson 1:</strong> Introduction to Programming</p>
+    <p><strong>Lesson 2:</strong> Algorithms and Flowcharts</p>
+    <p><strong>Lesson 3:</strong> Variables and Data Types</p>
+  </div>
+</section>
 
-  <!-- ASSESSMENT -->
-  <section id="assessment">
-    <h2>Assessment</h2>
-    <ul>
-      <li>Quiz 1: Introduction to Programming</li>
-      <li>Quiz 2: Algorithms and Logic</li>
-      <li>Self-Assessment: Procrastination Checklist</li>
-    </ul>
-  </section>
+<section id="activities">
+  <h2>Activities</h2>
+  <div class="card">
+    <p>✔ Reflection Activity</p>
+    <p>✔ Flowchart Creation</p>
+    <p>✔ Coding Practice</p>
+  </div>
+</section>
 
-  <!-- PROFILE -->
-  <section id="profile">
-    <h2>Student Profile</h2>
-    <ul>
-      <li>Name: ____________________</li>
-      <li>Course: Computer Programming 1</li>
-      <li>Progress: Lessons and Activities Completed</li>
-    </ul>
-  </section>
+<section id="assessment">
+  <h2>Quick Quiz</h2>
+  <div class="card">
+    <p>What is programming?</p>
+    <button onclick="alert('Correct!')">Giving instructions to a computer</button>
+    <button onclick="alert('Incorrect')">Playing games</button>
+  </div>
+</section>
+
+<section id="profile">
+  <h2>Student Profile</h2>
+  <div class="card">
+    <p>Name: <span id="profileName"></span></p>
+    <p>Course: Computer Programming 1</p>
+    <p>Progress Level: <span id="level">Beginner</span></p>
+  </div>
+</section>
 
 </main>
 
 <footer>
   <p>&copy; 2025 Web-Based Study Guide System</p>
 </footer>
+</div>
 
 <script>
-  function showSection(sectionId) {
-    const sections = document.querySelectorAll('main section');
-    sections.forEach(sec => sec.classList.remove('active'));
-    document.getElementById(sectionId).classList.add('active');
+  let progress = 0;
+
+  function login() {
+    const name = document.getElementById('studentName').value;
+    if(name === '') return alert('Enter your name');
+    document.getElementById('user').innerText = name;
+    document.getElementById('profileName').innerText = name;
+    document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('system').style.display = 'block';
+  }
+
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  function increaseProgress() {
+    if(progress < 100) progress += 20;
+    document.getElementById('progressBar').style.width = progress + '%';
+    document.getElementById('progressBar').innerText = progress + '%';
+
+    if(progress >= 60) {
+      document.getElementById('status').innerText = 'Improving';
+      document.getElementById('level').innerText = 'Intermediate';
+    }
+    if(progress === 100) {
+      document.getElementById('status').innerText = 'Excellent';
+      document.getElementById('level').innerText = 'Advanced';
+    }
   }
 </script>
 
